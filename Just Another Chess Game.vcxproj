@@ -18,6 +18,9 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -72,8 +75,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)\Libraries\include;C:\Users\Yo\Documents\01_UPM\Sem_3_2\Infor\Just Another Chess Game\Just Another Chess Game\Libraries\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)\Libraries\lib;C:\Users\Yo\Documents\01_UPM\Sem_3_2\Infor\Just Another Chess Game\Just Another Chess Game\Libraries\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)\Libraries\include;C:\Users\rroca\Documents\UNI_PROGRAMAS\II_TRABAJO\GitHub\Just-Another-Chess-Game\lib;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\Libraries\lib;C:\Users\rroca\Documents\UNI_PROGRAMAS\II_TRABAJO\GitHub\Just-Another-Chess-Game\lib;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)bin\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -82,8 +86,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)\Libraries\include;C:\Users\Yo\Documents\01_UPM\Sem_3_2\Infor\Just Another Chess Game\Just Another Chess Game\Libraries\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)\Libraries\lib;C:\Users\Yo\Documents\01_UPM\Sem_3_2\Infor\Just Another Chess Game\Just Another Chess Game\Libraries\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)\Libraries\include;C:\Users\rroca\Documents\UNI_PROGRAMAS\II_TRABAJO\GitHub\Just-Another-Chess-Game\lib;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\Libraries\lib;C:\Users\rroca\Documents\UNI_PROGRAMAS\II_TRABAJO\GitHub\Just-Another-Chess-Game\lib;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)bin\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -96,11 +101,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\rroca\Documents\UNI_PROGRAMAS\II_TRABAJO\GitHub\Just-Another-Chess-Game\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\rroca\Documents\UNI_PROGRAMAS\II_TRABAJO\GitHub\Just-Another-Chess-Game\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -126,11 +133,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\rroca\Documents\UNI_PROGRAMAS\II_TRABAJO\GitHub\Just-Another-Chess-Game\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\rroca\Documents\UNI_PROGRAMAS\II_TRABAJO\GitHub\Just-Another-Chess-Game\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -150,10 +159,6 @@
       <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="src\gl.c" />
-    <ClCompile Include="src\main.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
