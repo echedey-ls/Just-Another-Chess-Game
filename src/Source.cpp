@@ -1,4 +1,3 @@
-
 #include "freeglut.h"
 #include <math.h>
 #include "ETSIDI.h"
