@@ -15,8 +15,8 @@ struct Mundo
 	float z_ojo;
 };
 
-Mundo mundo = { 0,20,40 };
-Sprite* sprite;
+Mundo mundo = { 0,20,80 };
+Sprite* sprite1, *sprite2, *sprite3;
 SpriteSequence* animacion;
 SpriteSequence* explosion;
 
@@ -55,9 +55,10 @@ int main(int argc, char* argv[])
 	glutTimerFunc(25, OnTimer, 0);//le decimos que dentro de 25ms llame 1 vez a la funcion OnTimer()
 	glutKeyboardFunc(OnKeyboardDown);
 
-	sprite = new Sprite("imagenes/peon_r2d2.png", 0.05, 0.05, 10, 10);
-	animacion = new SpriteSequence("imagenes/reina.png", 7, 1, 200, true, 2, 2, 5, 5);
-	explosion = new SpriteSequence("imagenes/explosion_43FR.png", 10, 4, 25, true, -2, 2, 5, 5);
+	sprite1 = new Sprite("imagenes/r2d2.png", 0.05, 0.05, 5, 5);
+	sprite2 = new Sprite("imagenes/reina.png", 0.05, 0.05, 5, 5);
+	sprite3 = new Sprite("imagenes/tablero.png", 0.05, 0.05, 38, 38);
+
 
 
 	glutMainLoop();
@@ -81,6 +82,7 @@ void OnDraw(void)
 //aqui es donde hay que poner el código de dibujo
 
 //dibujo del suelo
+	/*
 	glDisable(GL_LIGHTING);
 	glBegin(GL_POLYGON);
 	glColor3ub(255, 0, 0);
@@ -90,24 +92,33 @@ void OnDraw(void)
 	glVertex3f(5.0f, 0, 5.0f);
 	glVertex3f(5.0f, 0, -5.0f);
 	glEnd();
-	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHTING);*/
+
+	
+
+	sprite3->draw();
 
 
-	glTranslated(0, 5, 0);
-	sprite->draw();
-	glTranslated(0, -5, 0);
-	glTranslated(0, 0, -2);
-	animacion->draw();
-	explosion->draw();
-	glPushMatrix();
 
+	glTranslated(2.5,-16 , 0.05);
+	sprite1->draw();
+	glTranslated(4.5, -0.5, 0);
+	sprite2->draw();
+	glTranslated(-2.5, 16, -0.05);
+
+
+
+	/*
 	setTextColor(1, 0, 0);
 	glTranslated(-10, 0, 0);
 	print("OLEEEE FUNCIONAAAAA  :))))))))", "fuentes/Bitwise.ttf", 15);
 	setTextColor(1, 1, 0, 0.5);
 	glTranslated(5, 5, 1);
 	print("hola wenaaas", "fuentes/Bitwise.ttf");
-	glPopMatrix();
+	glPopMatrix();*/
+
+
+
 	//no borrar esta linea ni poner nada despues
 	glutSwapBuffers();
 }
@@ -127,15 +138,18 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 void OnTimer(int value)
 {
 	//poner aqui el código de animacion
+	/*
 	float dist = sqrt(mundo.x_ojo * mundo.x_ojo + mundo.z_ojo * mundo.z_ojo);
 	float ang = atan2(mundo.z_ojo, mundo.x_ojo);
 	ang += 0.05f;
 	mundo.x_ojo = dist * cos(ang);
 	mundo.z_ojo = dist * sin(ang);
+	*/
 
-	//Mueve(&esfera2);
+
+	/*
 	animacion->loop();
-	explosion->loop();
+	explosion->loop();*/
 
 
 	//no borrar estas lineas
