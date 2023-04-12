@@ -3,7 +3,7 @@
 #include <math.h>
 #include "ETSIDI.h"
 #include <iostream>
-#include "Mundo.h"
+#include "src/Mundo.h"
 
 Mundo mundo;
 

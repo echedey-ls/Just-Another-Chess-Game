@@ -1,0 +1,5 @@
+﻿  Tablero.cpp
+C:\Users\marce\Downloads\Just-Another-Chess-Game-main(1)\Just-Another-Chess-Game-main\src\Tablero.cpp(9,65): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\marce\Downloads\Just-Another-Chess-Game-main(1)\Just-Another-Chess-Game-main\src\Tablero.cpp(10,66): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\marce\Downloads\Just-Another-Chess-Game-main(1)\Just-Another-Chess-Game-main\src\Tablero.cpp(11,70): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+  Just Another Chess Game.vcxproj -> C:\Users\marce\Downloads\Just-Another-Chess-Game-main(1)\Just-Another-Chess-Game-main\bin\Just Another Chess Game.exe

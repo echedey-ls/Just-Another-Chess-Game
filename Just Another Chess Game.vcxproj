@@ -19,13 +19,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Mundo.cpp" />
     <ClCompile Include="src\Piezas.cpp" />
-    <ClCompile Include="src\Source.cpp" />
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="src\Tablero.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\ETSIDI.h" />
     <ClInclude Include="lib\freeglut.h" />
+    <ClInclude Include="src\Mundo.h" />
     <ClInclude Include="src\Piezas.h" />
+    <ClInclude Include="src\Tablero.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\ETSIDI.lib" />
