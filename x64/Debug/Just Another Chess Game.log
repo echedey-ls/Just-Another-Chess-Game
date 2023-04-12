@@ -1,0 +1,5 @@
+﻿  Source.cpp
+C:\Users\marce\Downloads\Just-Another-Chess-Game-Rama-tropecientos-noseque\Just-Another-Chess-Game-Rama-tropecientos-noseque\Source.cpp(58,61): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\marce\Downloads\Just-Another-Chess-Game-Rama-tropecientos-noseque\Just-Another-Chess-Game-Rama-tropecientos-noseque\Source.cpp(59,62): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\marce\Downloads\Just-Another-Chess-Game-Rama-tropecientos-noseque\Just-Another-Chess-Game-Rama-tropecientos-noseque\Source.cpp(60,66): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+  Just Another Chess Game.vcxproj -> C:\Users\marce\Downloads\Just-Another-Chess-Game-Rama-tropecientos-noseque\Just-Another-Chess-Game-Rama-tropecientos-noseque\bin\Just Another Chess Game.exe
