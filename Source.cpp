@@ -1,15 +1,11 @@
 
 #include "freeglut.h"
 #include <math.h>
-#include "ETSIDI.h"
 #include <iostream>
 #include "src/Mundo.h"
 
 Mundo mundo;
 
-//OGLFT::Monochrome* monochrome;
-//TTF::Font *font;
-//TTF::Triangulator2DI triangulatorA, triangulatorB;
 //declaraciones de funciones
 
 //los callback, funciones que seran llamadas automaticamente por la glut
@@ -57,32 +53,6 @@ void OnDraw(void)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	mundo.creador();
-
-//aqui es donde hay que poner el código de dibujo
-
-//dibujo del suelo
-	/*
-	glDisable(GL_LIGHTING);
-	glBegin(GL_POLYGON);
-	glColor3ub(255, 0, 0);
-	glVertex3f(-5.0f, 0, -5.0f);
-	glVertex3f(-5.0f, 0, 5.0f);
-	glColor3ub(255, 255, 0);
-	glVertex3f(5.0f, 0, 5.0f);
-	glVertex3f(5.0f, 0, -5.0f);
-	glEnd();
-	glEnable(GL_LIGHTING);*/
-
-	/*
-	setTextColor(1, 0, 0);
-	glTranslated(-10, 0, 0);
-	print("OLEEEE FUNCIONAAAAA  :))))))))", "fuentes/Bitwise.ttf", 15);
-	setTextColor(1, 1, 0, 0.5);
-	glTranslated(5, 5, 1);
-	print("hola wenaaas", "fuentes/Bitwise.ttf");
-	glPopMatrix();*/
-
-
 
 	//no borrar esta linea ni poner nada despues
 	glutSwapBuffers();
