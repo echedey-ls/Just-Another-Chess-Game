@@ -1,22 +1,8 @@
 #pragma once
 
-#include <iostream>
-using namespace std;
-
-//structura de la posicion
-struct Posicion
+class pieza
 {
-	unsigned char x, y;
-};
-
-class Piezas
-{
+public:
 	enum color { blancas, negras };
-	enum tipo{rey, reina, alfil, torre, caballo, peon};
-
-	Posicion pos;
-
-	
-
+	enum tipo { rey, reina, alfil, torre, caballo, peon };
 };
-

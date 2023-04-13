@@ -3,9 +3,9 @@
 #include <math.h>
 #include <iostream>
 #include "src/Mundo.h"
-
+#include "src/Reina.h"
 Mundo mundo;
-
+Reina reina;
 //declaraciones de funciones
 
 //los callback, funciones que seran llamadas automaticamente por la glut
@@ -62,7 +62,11 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 	//poner aqui el código de teclado
 
 	if (key == '1')
+	{
 		play("sonidos/Bala.mp3");
+		reina.mueve();
+	}
+	
 	if (key == '2')
 		playMusica("sonidos/JasonMraz93Milles.mp3");
 	if (key == '3')
@@ -85,7 +89,6 @@ void OnTimer(int value)
 	/*
 	animacion->loop();
 	explosion->loop();*/
-
 
 	//no borrar estas lineas
 	glutTimerFunc(25, OnTimer, 0);

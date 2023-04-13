@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Reina.cpp" />
     <ClCompile Include="src\Mundo.cpp" />
     <ClCompile Include="src\Piezas.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -27,6 +28,7 @@
   <ItemGroup>
     <ClInclude Include="lib\ETSIDI.h" />
     <ClInclude Include="lib\freeglut.h" />
+    <ClInclude Include="src\Reina.h" />
     <ClInclude Include="src\Mundo.h" />
     <ClInclude Include="src\Piezas.h" />
     <ClInclude Include="src\Tablero.h" />
