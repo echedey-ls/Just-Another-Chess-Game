@@ -12,6 +12,8 @@
     <ClInclude Include="src\Piezas.h" />
     <ClInclude Include="src\Mundo.h" />
     <ClInclude Include="src\Tablero.h" />
+    <ClInclude Include="src\Posicion.h" />
+    <ClInclude Include="src\Estilos_graficos.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\ETSIDI.lib" />

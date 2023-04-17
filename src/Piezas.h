@@ -1,15 +1,7 @@
 #pragma once
 
-#include "Tablero.h"
-
-// structura de la posicion
-struct Posicion {
-	unsigned char x, y;
-	bool operator==(const Posicion &other) { return x == other.x and y == other.y; }
-	Posicion(unsigned char x_, unsigned char y_) : x{x_}, y{y_} {};
-	Posicion(Posicion&& other) noexcept : x{other.x}, y{other.y} {};
-
-};
+#include "Posicion.h"
+#include "Estilos_graficos.h"
 
 // Par de enumeraciones con los valores que pueden tomar las piezas
 enum Color {

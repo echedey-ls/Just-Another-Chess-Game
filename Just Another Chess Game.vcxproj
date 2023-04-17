@@ -27,8 +27,10 @@
   <ItemGroup>
     <ClInclude Include="lib\ETSIDI.h" />
     <ClInclude Include="lib\freeglut.h" />
+    <ClInclude Include="src\Estilos_graficos.h" />
     <ClInclude Include="src\Mundo.h" />
     <ClInclude Include="src\Piezas.h" />
+    <ClInclude Include="src\Posicion.h" />
     <ClInclude Include="src\Tablero.h" />
   </ItemGroup>
   <ItemGroup>

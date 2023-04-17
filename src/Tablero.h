@@ -5,15 +5,11 @@
 
 #include "ETSIDI.h"
 #include "Piezas.h"
+#include "Posicion.h"
+#include "Estilos_graficos.h"
 
 using namespace ETSIDI;
 using ETSIDI::getTexture;
-
-enum Estilo_grafico {
-	no_definido,
-	clasico,
-	stars_wars
-};
 
 class Tablero
 {
