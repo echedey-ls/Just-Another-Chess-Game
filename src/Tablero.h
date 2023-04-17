@@ -9,10 +9,16 @@
 using namespace ETSIDI;
 using ETSIDI::getTexture;
 
+enum Estilo_grafico {
+	no_definido,
+	clasico,
+	stars_wars
+};
+
 class Tablero
 {
 	std::vector<Pieza> piezas;
-
+	Estilo_grafico estilo;
 
 public:
 	Tablero(); // Inicializa tablero con sus piezas distribuidas en un juego normal

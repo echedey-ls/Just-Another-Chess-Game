@@ -9,7 +9,7 @@ using ETSIDI::getTexture;
 * Las blancas estarán en las dos primeras filas (0 & 1)
 * Las negras estarán en las dos últimas filas (6 & 7)
 */
-Tablero::Tablero()
+Tablero::Tablero() : estilo(clasico)
 {
 	piezas.reserve(32); // # Piezas en juego clásico
 
