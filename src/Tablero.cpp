@@ -50,6 +50,16 @@ Tablero::Tablero() : estilo(clasico)
 	piezas.emplace_back(negra, rey, 4, 7 );
 }
 
+/**
+* Devuelve puntero a la pieza en determinada posición
+* Si no hay, devuelve nullptr
+*/
+Pieza* Tablero::obtener_pieza_en(Posicion p)
+{
+	for (auto& pieza : piezas) if (pieza.get_posicion() == p) return &pieza;
+	return nullptr;
+}
+
 void Tablero::creador()
 {
 	sprite1 = new Sprite("imagenes/r2d2.png", 0.05f, 0.05f, 5, 5);
