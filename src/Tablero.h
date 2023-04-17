@@ -23,5 +23,7 @@ public:
 	Sprite* sprite1, * sprite2, * sprite3;
 	SpriteSequence* animacion;
 	SpriteSequence* explosion;
+
+	Pieza* obtener_pieza_en(Posicion p);
 };
 

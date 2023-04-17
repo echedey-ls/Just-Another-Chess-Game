@@ -17,5 +17,5 @@ class Pieza {
 
 public:
 	Pieza(Color c, Tipo t, unsigned char x, unsigned char y) : color{c}, tipo{t}, pos{x, y} {};
-	virtual void ilustrar(Estilo_grafico estilo);
+	/*virtual*/ void ilustrar(Estilo_grafico estilo);
 };

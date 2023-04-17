@@ -59,10 +59,5 @@ void Tablero::creador()
 
 void Tablero::dibuja()
 {
-	sprite3->draw();
-	glTranslated(2.5, -16, 0.05);
-	sprite1->draw();
-	glTranslated(4.5, -0.5, 0);
-	sprite2->draw();
-	glTranslated(-2.5, 16, -0.05);
+	for (auto& pieza : piezas) pieza.ilustrar(estilo);
 }
