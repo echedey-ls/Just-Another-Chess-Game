@@ -6,9 +6,9 @@ using ETSIDI::getTexture;
 
 void Tablero::creador()
 {
-	sprite1 = new Sprite("imagenes/r2d2.png", 0.05, 0.05, 5, 5);
-	sprite2 = new Sprite("imagenes/reina.png", 0.05, 0.05, 5, 5);
-	sprite3 = new Sprite("imagenes/tablero.png", 0.05, 0.05, 38, 38);
+	sprite1 = new Sprite("imagenes/r2d2.png", 0.05f, 0.05f, 5, 5);
+	sprite2 = new Sprite("imagenes/reina.png", 0.05f, 0.05f, 5, 5);
+	sprite3 = new Sprite("imagenes/tablero.png", 0.05f, 0.05f, 38, 38);
 }
 
 void Tablero::dibuja()
