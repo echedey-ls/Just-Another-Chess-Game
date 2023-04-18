@@ -6,6 +6,7 @@
     <ClCompile Include="src\Tablero.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="src\Reina.cpp" />
+    <ClCompile Include="src\Torre.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\ETSIDI.h" />
@@ -14,6 +15,7 @@
     <ClInclude Include="src\Mundo.h" />
     <ClInclude Include="src\Tablero.h" />
     <ClInclude Include="src\Reina.h" />
+    <ClInclude Include="src\Torre.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\ETSIDI.lib" />
