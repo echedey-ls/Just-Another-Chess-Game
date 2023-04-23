@@ -4,15 +4,14 @@
 
 void Mundo::inicializa()
 {
-	x_ojo = 0;
-	y_ojo = 20;
-	z_ojo = 80;
+	x_ojo = 32;
+	y_ojo = 32;
+	z_ojo = 100;
 }
 void Mundo::creador()
 {
 	gluLookAt(x_ojo, y_ojo, z_ojo,  // posicion del ojo
-		0.0, 0, 0.0,      // hacia que punto mira  (0,0,0) 
+		x_ojo, y_ojo, 0,      // hacia que punto mira  (0,0,0) 
 		0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y)
-	tablero.creador();
 	tablero.dibuja();
 }

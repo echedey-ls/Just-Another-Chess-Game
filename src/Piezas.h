@@ -19,4 +19,5 @@ public:
 	Pieza(Color c, Tipo t, unsigned char x, unsigned char y) : color{c}, tipo{t}, pos{x, y} {};
 	Posicion get_posicion() { return { pos.x, pos.y }; }
 	/*virtual*/ void ilustrar(Estilo_grafico estilo);
+	virtual ~Pieza() {}
 };

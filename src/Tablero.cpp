@@ -9,8 +9,17 @@ using ETSIDI::getTexture;
 * Las blancas estarán en las dos primeras filas (0 & 1)
 * Las negras estarán en las dos últimas filas (6 & 7)
 */
+
+
+
 Tablero::Tablero() : estilo(clasico)
 {
+
+	tablero.setPos(32, 32);
+	dibuja();
+
+
+
 	piezas.reserve(32); // # Piezas en juego clásico
 
 	// TODO: ACTUALIZAR CON LAS CLASES HEREDADAS
@@ -60,14 +69,10 @@ Pieza* Tablero::obtener_pieza_en(Posicion p)
 	return nullptr;
 }
 
-void Tablero::creador()
-{
-	sprite1 = new Sprite("imagenes/r2d2.png", 0.05f, 0.05f, 5, 5);
-	sprite2 = new Sprite("imagenes/reina.png", 0.05f, 0.05f, 5, 5);
-	sprite3 = new Sprite("imagenes/tablero.png", 0.05f, 0.05f, 38, 38);
-}
+
 
 void Tablero::dibuja()
 {
 	for (auto& pieza : piezas) pieza.ilustrar(estilo);
+	tablero.draw();
 }
