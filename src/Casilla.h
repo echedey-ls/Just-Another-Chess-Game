@@ -18,5 +18,6 @@ public:
 	Casilla(Pieza* pieza_ptr) : Casilla() { pieza = pieza_ptr; }
 	void setPieza(Pieza* pieza_ptr) { pieza = pieza_ptr; }
 	Pieza* getPieza() { return pieza; }
+	void ilustrar();
 };
 
