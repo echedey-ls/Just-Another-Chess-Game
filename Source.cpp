@@ -86,6 +86,7 @@ void OnTimer(int value)
 	animacion->loop();
 	explosion->loop();*/
 
+	//Hola esto es paula_cambio
 
 	//no borrar estas lineas
 	glutTimerFunc(25, OnTimer, 0);
