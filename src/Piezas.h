@@ -2,24 +2,39 @@
 
 #include "Posicion.h"
 #include "Estilos_graficos.h"
-#include "Mascara_tablero.h"
+
+#include "ETSIDI.h"
 
 // Par de enumeraciones con los valores que pueden tomar las piezas
 enum Color {
 	blanca,
 	negra,
 };
-enum Tipo { rey, reina, alfil, torre, caballo, peon };
+
+enum Tipo { desconocido, rey, reina, alfil, torre, caballo, peon };
 
 class Pieza {
+protected:
 	Color color;
-	Tipo tipo;
-	Posicion pos;
+	Tipo tipo = desconocido; // Es redundante si se crean clases especializadas, pero lo usamos en esta para cargar gráficos homogéneamente
+	Estilo_grafico estilo_actual;
+
+	ETSIDI::Sprite* sprite_ptr = nullptr;
 
 public:
-	Pieza(Color c, Tipo t, unsigned char x, unsigned char y) : color{c}, tipo{t}, pos{x, y} {};
-	Posicion get_posicion() { return { pos.x, pos.y }; }
-	/*virtual*/ void ilustrar(Estilo_grafico estilo);
-	void mover_a(Posicion p);
-	virtual void calcular_movimientos_posibles(Mascara_tablero& destino);
+	Pieza(Color c, Estilo_grafico s) : color{ c }, estilo_actual{ s } {};
+	Pieza(const Pieza& other) : color{ other.color }, estilo_actual{ other.estilo_actual } {};
+	~Pieza() { delete sprite_ptr; };
+
+	/** No hay forma de cambiar el archivo que representa un sprite, así que para
+	* cambiarlo, habrá que eliminarlo y crearlo de nuevo.
+	*/
+	void cambiar_estilo(Estilo_grafico estilo);
+	/** Usa tipo, color y estilo_actual para cargar la imagen correspondiente
+	*/
+	void cargar_sprite();
+
+	Color get_color() const { return color; };
+	Tipo get_tipo() const { return tipo; };
+	void ilustrar(); // En función del tipo, color y estilo_actual
 };
