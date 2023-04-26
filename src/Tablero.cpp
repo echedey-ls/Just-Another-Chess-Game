@@ -1,6 +1,8 @@
 #include "Tablero.h"
 #include "ETSIDI.h"
 
+#include "piezas/Peon.h"
+
 using namespace ETSIDI;
 using ETSIDI::getTexture;
 
@@ -11,63 +13,71 @@ using ETSIDI::getTexture;
 */
 Tablero::Tablero() : estilo(clasico)
 {
-	piezas.reserve(32); // # Piezas en juego clásico
-
-	// TODO: ACTUALIZAR CON LAS CLASES HEREDADAS
-	// TODO: OPTIMIZAR ALGORITMO
-	//Peones
-	for (unsigned char i = 0; i < 8; i++) {
-		piezas.emplace_back(blanca, peon, i, 1 );
-		piezas.emplace_back(blanca, peon, i, 6 );
-	}
-	//Torres
-	piezas.emplace_back(blanca, torre, 0, 0 );
-	piezas.emplace_back(blanca, torre, 7, 0 );
-
-	piezas.emplace_back(negra, torre, 0, 7 );
-	piezas.emplace_back(negra, torre, 7, 7 );
-
-	//Caballos
-	piezas.emplace_back(blanca, caballo, 1, 0 );
-	piezas.emplace_back(blanca, caballo, 6, 0 );
-
-	piezas.emplace_back(negra, caballo, 1, 7 );
-	piezas.emplace_back(negra, caballo, 6, 7 );
-
-	//Alfiles
-	piezas.emplace_back(blanca, alfil, 2, 0 );
-	piezas.emplace_back(blanca, alfil, 5, 0 );
-
-	piezas.emplace_back(negra, alfil, 2, 7 );
-	piezas.emplace_back(negra, alfil, 5, 7 );
-
-	//Reinas
-	piezas.emplace_back(blanca, reina, 3, 0 );
-	piezas.emplace_back(negra, reina, 3, 7 );
-
-	//Reyes
-	piezas.emplace_back(blanca, rey, 4, 0 );
-	piezas.emplace_back(negra, rey, 4, 7 );
+	creador();
 }
 
 /**
 * Devuelve puntero a la pieza en determinada posición
 * Si no hay, devuelve nullptr
 */
-Pieza* Tablero::obtener_pieza_en(Posicion p)
-{
-	for (auto& pieza : piezas) if (pieza.get_posicion() == p) return &pieza;
-	return nullptr;
+inline
+Pieza* Tablero::obtener_pieza_en(const Posicion& p) {
+	return casillas[p.x][p.y].getPieza();
 }
 
-void Tablero::creador()
-{
-	sprite1 = new Sprite("imagenes/r2d2.png", 0.05f, 0.05f, 5, 5);
-	sprite2 = new Sprite("imagenes/reina.png", 0.05f, 0.05f, 5, 5);
-	sprite3 = new Sprite("imagenes/tablero.png", 0.05f, 0.05f, 38, 38);
+void Tablero::creador() {
+	Peon* peones_wh[8], * peones_bk[8];
+	for (size_t i = 0; i < 8; ++i) {
+		peones_wh[i] = new Peon(blanca, clasico);
+		casillas[i][1].setPieza(peones_wh[i]);
+		peones_bk[i] = new Peon(negra, clasico);
+		casillas[i][6].setPieza(peones_bk[i]);
+	}
 }
 
 void Tablero::dibuja()
 {
-	for (auto& pieza : piezas) pieza.ilustrar(estilo);
+	// Dibujar el tablero
+
+	// Dibujar todas las piezas que hay en el tablero
+	for (auto& casilla_fila : casillas)
+		for (auto& casilla : casilla_fila)
+			;//casilla.ilustrar();
+}
+
+void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
+	Pieza* pza = eliminar_pieza(origen);
+	if(pza) casillas[destino.x][destino.y].setPieza(pza);
+}
+
+Pieza* Tablero::eliminar_pieza(const Posicion& p)
+{
+	Pieza* pza = casillas[p.x][p.y].getPieza();
+	casillas[p.x][p.y].setPieza(nullptr);
+	return pza;
+}
+
+void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& resultado) {
+	Pieza* pza_p = obtener_pieza_en(p);
+	if (!pza_p) return; // No existe pieza (es puntero nullptr)
+	switch (pza_p->get_tipo())
+	{
+	case peon:
+		for (char x = -1; x <= 1; x++) { // Loop para calcular posiciones que comprobaremos
+			Posicion a_revisar = { p.x + x, p.y + (pza_p->get_color() == blanca ? 1 : -1) }; // El sentido de avance depende del color
+			if (es_posicion_valida(a_revisar)) {
+				Pieza* otra_pieza = obtener_pieza_en(a_revisar);
+				if (!otra_pieza) { // No existe pieza en la posicion que estamos revisando
+					resultado(a_revisar) = si_movible;
+				}
+				else if (pza_p->get_color() != otra_pieza->get_color()) { // Es pieza del equipo contrario
+					resultado(a_revisar) = atacable;
+				}
+			}
+			/** TODO: check atacable en passant y primer movimiento de dos casillas **/
+		}
+		break;
+	default:
+		break;
+	}
 }
