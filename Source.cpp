@@ -64,7 +64,7 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 	if (key == '1')
 	{
 		play("sonidos/Bala.mp3");
-		reina.mueve();
+		mundo.actualiza();
 	}
 	
 	if (key == '2')

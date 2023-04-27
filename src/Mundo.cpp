@@ -16,3 +16,7 @@ void Mundo::creador()
 	tablero.creador();
 	tablero.dibuja();
 }
+void Mundo::actualiza()
+{
+	tablero.actualiza();
+}

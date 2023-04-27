@@ -20,3 +20,7 @@ void Tablero::dibuja()
 	glTranslated(4.5, -0.5, 0);
 	reina.dibuja();
 }
+void Tablero::actualiza()
+{
+	reina.mueve();
+}

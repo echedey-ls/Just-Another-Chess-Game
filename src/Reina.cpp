@@ -7,14 +7,20 @@ using ETSIDI::getTexture;
 
 void Reina::creador()
 {
-	sprite = new Sprite("imagenes/reina.png", 0.05, 0.05, 5, 5);
+	setPos(0.5, 0.5);
 }
 void Reina::dibuja()
 {
-	sprite->draw();
-	glTranslated(-2.5, 16, -0.05);
+	reinaSprite = new Sprite("imagenes/reina.png", pos.x, pos.y, 5, 5);
+	reinaSprite->draw();
+}
+void Reina::setPos(int x, int y)
+{
+	pos.x = x;
+	pos.y = y;
 }
 void Reina::mueve()
 {
-	glTranslated(5, 5, -0.05);
+	setPos(2, 2);
+	dibuja();
 }

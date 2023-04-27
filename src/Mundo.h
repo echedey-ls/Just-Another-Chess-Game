@@ -5,6 +5,7 @@ class Mundo
 public:
 	void inicializa();
 	void creador();
+	void actualiza();
 
 	Tablero tablero;
 

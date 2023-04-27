@@ -7,12 +7,12 @@ using ETSIDI::getTexture;
 class Reina
 {
 public:
-	float x;
-	float y;
-	Sprite* sprite;
+	Vector2D pos;
+	Sprite* reinaSprite;
 	SpriteSequence* animacion;
 	void creador();
 	void dibuja();
+	void setPos(int x, int y);
 	void mueve();
 };
 
