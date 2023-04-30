@@ -1,5 +1,6 @@
 #pragma once
 #include "Tablero.h"
+#include "Mascara_tablero.h"
 class Mundo
 {
 public:
