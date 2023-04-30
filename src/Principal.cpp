@@ -2,7 +2,8 @@
 #include "freeglut.h"
 #include <math.h>
 #include <iostream>
-#include "src/Mundo.h"
+#include "Mundo.h"
+#include "ETSIDI.h"
 
 Mundo mundo;
 
@@ -52,7 +53,7 @@ void OnDraw(void)
 	//Para definir el punto de vista
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	mundo.creador();
+	mundo.dibuja();
 
 	//no borrar esta linea ni poner nada despues
 	glutSwapBuffers();
@@ -62,11 +63,11 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 	//poner aqui el código de teclado
 
 	if (key == '1')
-		play("sonidos/Bala.mp3");
+		ETSIDI::play("sonidos/Bala.mp3");
 	if (key == '2')
-		playMusica("sonidos/JasonMraz93Milles.mp3");
+		ETSIDI::playMusica("sonidos/JasonMraz93Milles.mp3");
 	if (key == '3')
-		stopMusica();
+		ETSIDI::stopMusica();
 	glutPostRedisplay();
 }
 

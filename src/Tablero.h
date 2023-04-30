@@ -13,7 +13,7 @@ class Tablero
 
 public:
 	Tablero(); // Inicializa tablero con sus piezas distribuidas en un juego normal
-	void creador();
+	void inicializa();
 	void dibuja();
 
 	/* Necesario para acceder a las piezas del tablero

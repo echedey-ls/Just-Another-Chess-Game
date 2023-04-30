@@ -24,7 +24,7 @@
     <ClCompile Include="src\piezas\Peon.cpp" />
     <ClCompile Include="src\Mundo.cpp" />
     <ClCompile Include="src\Piezas.cpp" />
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="src\Principal.cpp" />
     <ClCompile Include="src\Tablero.cpp" />
   </ItemGroup>
   <ItemGroup>
