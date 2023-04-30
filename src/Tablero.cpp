@@ -1,21 +1,23 @@
 #include "Tablero.h"
 #include "ETSIDI.h"
+//#include "freeglut.h"
 
 #include "piezas/Peon.h"
 
+using ETSIDI::getTexture;
 
 /**
 * Inicializa el tablero con las piezas de normal
 * Las blancas estarán en las dos primeras filas (0 & 1)
 * Las negras estarán en las dos últimas filas (6 & 7)
 */
+
+
+
 Tablero::Tablero() : estilo(clasico)
 {
 	inicializa();
 	
-	ETSIDI::Sprite Tablero("imagenes/tablero.png", 0, 0, 64, 64);
-	void draw();
-	//Tablero.setTexture("imagenes/tablero.png");
 }
 
 /**
@@ -40,6 +42,8 @@ void Tablero::inicializa() {
 void Tablero::dibuja()
 {
 	// Dibujar el tablero
+	ETSIDI::Sprite tablero("imagenes/tablero.png", 0.05, 0.05, 38, 38);
+	tablero.draw();
 
 	// Dibujar todas las piezas que hay en el tablero
 	for (auto& casilla_fila : casillas)
