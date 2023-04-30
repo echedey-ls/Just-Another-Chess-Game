@@ -12,7 +12,7 @@
 Tablero::Tablero() : estilo(clasico)
 {
 	inicializa();
-	ETSIDI::play("ventana");
+	
 	ETSIDI::Sprite Tablero("imagenes/tablero.png", 0, 0, 64, 64);
 	void draw();
 	//Tablero.setTexture("imagenes/tablero.png");
