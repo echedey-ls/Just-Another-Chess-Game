@@ -3,8 +3,6 @@
 
 #include "piezas/Peon.h"
 
-using namespace ETSIDI;
-using ETSIDI::getTexture;
 
 /**
 * Inicializa el tablero con las piezas de normal
@@ -14,6 +12,10 @@ using ETSIDI::getTexture;
 Tablero::Tablero() : estilo(clasico)
 {
 	inicializa();
+	ETSIDI::play("ventana");
+	ETSIDI::Sprite Tablero("imagenes/tablero.png", 0, 0, 64, 64);
+	void draw();
+	//Tablero.setTexture("imagenes/tablero.png");
 }
 
 /**
