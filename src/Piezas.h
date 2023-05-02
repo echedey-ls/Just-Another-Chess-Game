@@ -8,7 +8,7 @@
 // Par de enumeraciones con los valores que pueden tomar las piezas
 enum Color {
 	blanca,
-	negra,
+	negra
 };
 
 enum Tipo { desconocido, rey, reina, alfil, torre, caballo, peon };
@@ -20,6 +20,7 @@ protected:
 	Estilo_grafico estilo_actual;
 
 	ETSIDI::Sprite* sprite_ptr = nullptr;
+	ETSIDI:: Sprite* 
 
 public:
 	Pieza(Color c, Estilo_grafico s) : color{ c }, estilo_actual{ s } {};
@@ -36,5 +37,9 @@ public:
 
 	Color get_color() const { return color; };
 	Tipo get_tipo() const { return tipo; };
-	void ilustrar(); // En función del tipo, color y estilo_actual
+	void ilustrar(Posicion p); // En función del tipo, color y estilo_actual
+
+
+
+
 };

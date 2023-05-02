@@ -16,6 +16,8 @@ public:
 	void creador();
 	void dibuja();
 
+	Sprite tablero{ "imagenes/tablero.png",0,0,64,64 };//, 0.05, 0.05, 38, 38 
+
 	/* Necesario para acceder a las piezas del tablero
 	* y computar movimientos posibles
 	*/
