@@ -2,8 +2,8 @@
 #include "freeglut.h"
 #include <math.h>
 #include <iostream>
-#include "src/Mundo.h"
-#include "src/Reina.h"
+#include "Mundo.h"
+#include "Reina.h"
 Mundo mundo;
 Reina reina;
 //declaraciones de funciones
@@ -63,7 +63,7 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 
 	if (key == '1')
 	{
-		play("sonidos/Bala.mp3");
+		//play("sonidos/Bala.mp3");
 		mundo.actualiza();
 	}
 	

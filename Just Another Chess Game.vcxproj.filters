@@ -4,9 +4,9 @@
     <ClCompile Include="src\Piezas.cpp" />
     <ClCompile Include="src\Mundo.cpp" />
     <ClCompile Include="src\Tablero.cpp" />
-    <ClCompile Include="Source.cpp" />
     <ClCompile Include="src\Reina.cpp" />
     <ClCompile Include="src\Torre.cpp" />
+    <ClCompile Include="src\Principal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\ETSIDI.h" />

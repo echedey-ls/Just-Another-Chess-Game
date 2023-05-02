@@ -11,7 +11,7 @@ void Reina::creador()
 }
 void Reina::dibuja()
 {
-	reinaSprite = new Sprite("imagenes/reina.png", pos.x, pos.y, 5, 5);
+	reinaSprite = new Sprite("imagenes/reina.png", 0.5, 0.5, 5, 5);
 	reinaSprite->draw();
 }
 void Reina::setPos(int x, int y)
@@ -21,6 +21,7 @@ void Reina::setPos(int x, int y)
 }
 void Reina::mueve()
 {
-	setPos(2, 2);
-	dibuja();
+	reinaSprite->setPos(2, 2);
+	reinaSprite->draw();
+	//dibuja();
 }
