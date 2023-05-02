@@ -1,10 +1,11 @@
 #pragma once
 #include "Tablero.h"
+#include "Mascara_tablero.h"
 class Mundo
 {
 public:
 	void inicializa();
-	void creador();
+	void dibuja();
 
 	Tablero tablero;
 

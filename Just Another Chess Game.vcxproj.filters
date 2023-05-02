@@ -4,7 +4,10 @@
     <ClCompile Include="src\Piezas.cpp" />
     <ClCompile Include="src\Mundo.cpp" />
     <ClCompile Include="src\Tablero.cpp" />
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="src\Mascara_tablero.cpp" />
+    <ClCompile Include="src\piezas\Peon.cpp" />
+    <ClCompile Include="src\Casilla.cpp" />
+    <ClCompile Include="src\Principal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\ETSIDI.h" />
@@ -12,6 +15,11 @@
     <ClInclude Include="src\Piezas.h" />
     <ClInclude Include="src\Mundo.h" />
     <ClInclude Include="src\Tablero.h" />
+    <ClInclude Include="src\Posicion.h" />
+    <ClInclude Include="src\Estilos_graficos.h" />
+    <ClInclude Include="src\Mascara_tablero.h" />
+    <ClInclude Include="src\piezas\Peon.h" />
+    <ClInclude Include="src\Casilla.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\ETSIDI.lib" />
