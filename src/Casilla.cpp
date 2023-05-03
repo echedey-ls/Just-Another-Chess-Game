@@ -1,6 +1,6 @@
 #include "Casilla.h"
 
-int Casilla::casillas_counter = 0;
+char Casilla::casillas_counter = 0;
 
 void Casilla::ilustrar() {
 	//Posicion p = getPosicion();

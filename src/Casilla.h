@@ -3,7 +3,7 @@
 #include "Piezas.h"
 
 class Casilla {
-	static int casillas_counter;
+	static char casillas_counter;
 	Pieza* pieza;
 	Posicion pos;
 public:

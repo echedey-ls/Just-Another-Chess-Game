@@ -37,14 +37,13 @@ void Tablero::inicializa() {
 
 void Tablero::dibuja()
 {
-	// Dibujar el tablero
-	tablero.setPos(32, 32);
-	tablero.draw();
-
 	// Dibujar todas las piezas que hay en el tablero
 	for (auto& casilla_fila : casillas)
 		for (auto& casilla : casilla_fila)
 			casilla.ilustrar();
+	// Dibujar el tablero
+	tablero.setPos(32, 32);
+	tablero.draw();
 }
 
 void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
