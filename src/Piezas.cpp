@@ -7,7 +7,7 @@ using namespace ETSIDI;
 
 void Pieza::ilustrar(Posicion p) {
 	// imprimir sprite tal cual
-	sprite_ptr->setPos(4.0f + (8 * p.y), 4.0f + (8 * p.x)); //HAY QUE VER COMO SOLUCIONAR QUE SE PUEDA PONER p.x EN X Y p.y EN Y
+	sprite_ptr->setPos(4.0f + (8 * p.x), 4.0f + (8 * p.y));
 	sprite_ptr->draw();
 }
 

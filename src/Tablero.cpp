@@ -32,24 +32,19 @@ void Tablero::inicializa() {
 	Peon* peones_wh[8], * peones_bk[8];
 	for (size_t i = 0; i < 8; ++i) {
 		peones_wh[i] = new Peon(blanca, clasico);
-		casillas[i][1].setPieza(peones_wh[i]);
+		casillas[1][i].setPieza(peones_wh[i]);
 		peones_bk[i] = new Peon(negra, clasico);
-		casillas[i][6].setPieza(peones_bk[i]);
+		casillas[6][i].setPieza(peones_bk[i]);
 	}
 }
 
 void Tablero::dibuja()
 {
-	//Poner coordenadas
+	/*//Poner coordenadas
 	char caracter = 'A';
 	glColor3f(1.0f, 1.0f, 1.0f);
 	glRasterPos2f(40, 40); // posici�n del car�cter
-	glutBitmapCharacter(GLUT_BITMAP_8_BY_13, 'A');
-	
-
-	// Dibujar el tablero
-	ETSIDI::Sprite tablero("imagenes/tablero.png", 0.05, 0.05, 38, 38);
-	tablero.draw();
+	glutBitmapCharacter(GLUT_BITMAP_8_BY_13, 'A');*/
 
 	// Dibujar todas las piezas que hay en el tablero
 	for (auto& casilla_fila : casillas)
@@ -62,13 +57,13 @@ void Tablero::dibuja()
 
 void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 	Pieza* pza = eliminar_pieza(origen);
-	if(pza) casillas[destino.x][destino.y].setPieza(pza);
+	if(pza) casillas[destino.y][destino.x].setPieza(pza);
 }
 
 Pieza* Tablero::eliminar_pieza(const Posicion& p)
 {
-	Pieza* pza = casillas[p.x][p.y].getPieza();
-	casillas[p.x][p.y].setPieza(nullptr);
+	Pieza* pza = casillas[p.y][p.x].getPieza();
+	casillas[p.y][p.x].setPieza(nullptr);
 	return pza;
 }
 

@@ -9,7 +9,7 @@ using namespace ETSIDI;
 
 class Tablero
 {
-	Casilla casillas[8][8];
+	Casilla casillas[8][8]; // se acceden como casillas[Y][X]
 	Estilo_grafico estilo;
 
 public:
