@@ -3,7 +3,7 @@
 // structura de la posicion
 class Posicion {
 public:
-	int x, y;
+	char x, y;
 	bool operator==(const Posicion& other) { return (x == other.x && y == other.y); }
 	Posicion operator= (const Posicion& other) { x = other.x, y = other.y; return *this; }
 	Posicion(char x_, char y_) : x{ x_ }, y{ y_ } {};

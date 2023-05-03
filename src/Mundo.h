@@ -5,7 +5,7 @@ class Mundo
 {
 public:
 	void inicializa();
-	void creador();
+	void dibuja();
 
 	Tablero tablero;
 

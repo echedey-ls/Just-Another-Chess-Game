@@ -5,6 +5,7 @@
 #include "Mascara_tablero.h"
 
 #include "ETSIDI.h"
+using namespace ETSIDI;
 
 class Tablero
 {
@@ -13,7 +14,7 @@ class Tablero
 
 public:
 	Tablero(); // Inicializa tablero con sus piezas distribuidas en un juego normal
-	void creador();
+	void inicializa();
 	void dibuja();
 
 	Sprite tablero{ "imagenes/tablero.png",0,0,64,64 };//, 0.05, 0.05, 38, 38 

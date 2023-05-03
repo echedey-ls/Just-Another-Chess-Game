@@ -7,7 +7,7 @@ void Casilla::ilustrar() {
 	//pieza->cargar_sprite();
 	if (pieza != nullptr) pieza->ilustrar(pos);
 	
-	//PINTAR BASE DE ALGUN COLOR 
+	//PINTAR BASE DE ALGUN COLOR ------------------> pendiente!!!
 	//(1) BORDE AMARILLO -- casilla seleccionada
 	//(2) RELLENO AMARILLO -- posibles movimientos
 	//(3) BORDE ROJO -- casilla donde comer

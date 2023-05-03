@@ -13,7 +13,7 @@ using ETSIDI::getTexture;
 */
 Tablero::Tablero() : estilo(clasico)
 {
-	creador();
+	inicializa();
 }
 
 /**
@@ -25,7 +25,7 @@ Pieza* Tablero::obtener_pieza_en(const Posicion& p) {
 	return casillas[p.x][p.y].getPieza();
 }
 
-void Tablero::creador() {
+void Tablero::inicializa() {
 	Peon* peones_wh[8], * peones_bk[8];
 	for (size_t i = 0; i < 8; ++i) {
 		peones_wh[i] = new Peon(blanca, clasico);

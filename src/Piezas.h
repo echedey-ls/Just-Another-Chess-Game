@@ -20,7 +20,7 @@ protected:
 	Estilo_grafico estilo_actual;
 
 	ETSIDI::Sprite* sprite_ptr = nullptr;
-	ETSIDI:: Sprite* 
+
 
 public:
 	Pieza(Color c, Estilo_grafico s) : color{ c }, estilo_actual{ s } {};
