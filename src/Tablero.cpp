@@ -1,10 +1,10 @@
 #include "Tablero.h"
 #include "ETSIDI.h"
-//#include "freeglut.h"
+#include "freeglut.h"
 
 #include "piezas/Peon.h"
 
-using ETSIDI::getTexture;
+
 
 /**
 * Inicializa el tablero con las piezas de normal
@@ -41,6 +41,13 @@ void Tablero::inicializa() {
 
 void Tablero::dibuja()
 {
+	//Poner coordenadas
+	char caracter = 'A';
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glRasterPos2f(40, 40); // posición del carácter
+	glutBitmapCharacter(GLUT_BITMAP_8_BY_13, 'A');
+	
+
 	// Dibujar el tablero
 	ETSIDI::Sprite tablero("imagenes/tablero.png", 0.05, 0.05, 38, 38);
 	tablero.draw();
