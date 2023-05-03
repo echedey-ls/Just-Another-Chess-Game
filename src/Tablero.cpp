@@ -25,7 +25,7 @@ Tablero::Tablero() : estilo(clasico)
 */
 inline
 Pieza* Tablero::obtener_pieza_en(const Posicion& p) {
-	return casillas[p.x][p.y].getPieza();
+	return casilla(p).getPieza();
 }
 
 void Tablero::inicializa() {
@@ -62,7 +62,7 @@ void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 
 Pieza* Tablero::eliminar_pieza(const Posicion& p)
 {
-	Pieza* pza = casillas[p.y][p.x].getPieza();
+	Pieza* pza = obtener_pieza_en(p);
 	casilla(p).setPieza(nullptr);
 	return pza;
 }
