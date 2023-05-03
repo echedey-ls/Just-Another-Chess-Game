@@ -12,6 +12,10 @@ class Tablero
 	Casilla casillas[8][8]; // se acceden como casillas[Y][X]
 	Estilo_grafico estilo;
 
+	// Utilidades para acceder a las casillas legiblemente (X, Y) o (Posicion)
+	Casilla& casilla(char x, char y) { return casillas[y][x]; }
+	Casilla& casilla(const Posicion& p) { return casilla(p.x, p.y); }
+
 public:
 	Tablero(); // Inicializa tablero con sus piezas distribuidas en un juego normal
 	void inicializa();

@@ -32,9 +32,9 @@ void Tablero::inicializa() {
 	Peon* peones_wh[8], * peones_bk[8];
 	for (size_t i = 0; i < 8; ++i) {
 		peones_wh[i] = new Peon(blanca, clasico);
-		casillas[1][i].setPieza(peones_wh[i]);
+		casilla(i, 1).setPieza(peones_wh[i]);
 		peones_bk[i] = new Peon(negra, clasico);
-		casillas[6][i].setPieza(peones_bk[i]);
+		casilla(i, 6).setPieza(peones_bk[i]);
 	}
 }
 
@@ -57,13 +57,13 @@ void Tablero::dibuja()
 
 void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 	Pieza* pza = eliminar_pieza(origen);
-	if(pza) casillas[destino.y][destino.x].setPieza(pza);
+	if (pza) casilla(destino).setPieza(pza);
 }
 
 Pieza* Tablero::eliminar_pieza(const Posicion& p)
 {
 	Pieza* pza = casillas[p.y][p.x].getPieza();
-	casillas[p.y][p.x].setPieza(nullptr);
+	casilla(p).setPieza(nullptr);
 	return pza;
 }
 
