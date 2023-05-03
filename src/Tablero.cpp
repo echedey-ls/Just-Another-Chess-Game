@@ -8,8 +8,8 @@
 
 /**
 * Inicializa el tablero con las piezas de normal
-* Las blancas estarán en las dos primeras filas (0 & 1)
-* Las negras estarán en las dos últimas filas (6 & 7)
+* Las blancas estarï¿½n en las dos primeras filas (0 & 1)
+* Las negras estarï¿½n en las dos ï¿½ltimas filas (6 & 7)
 */
 
 
@@ -17,11 +17,10 @@
 Tablero::Tablero() : estilo(clasico)
 {
 	inicializa();
-	
 }
 
 /**
-* Devuelve puntero a la pieza en determinada posición
+* Devuelve puntero a la pieza en determinada posiciï¿½n
 * Si no hay, devuelve nullptr
 */
 inline
@@ -44,7 +43,7 @@ void Tablero::dibuja()
 	//Poner coordenadas
 	char caracter = 'A';
 	glColor3f(1.0f, 1.0f, 1.0f);
-	glRasterPos2f(40, 40); // posición del carácter
+	glRasterPos2f(40, 40); // posiciï¿½n del carï¿½cter
 	glutBitmapCharacter(GLUT_BITMAP_8_BY_13, 'A');
 	
 
@@ -55,7 +54,10 @@ void Tablero::dibuja()
 	// Dibujar todas las piezas que hay en el tablero
 	for (auto& casilla_fila : casillas)
 		for (auto& casilla : casilla_fila)
-			;//casilla.ilustrar();
+			casilla.ilustrar();
+	// Dibujar el tablero
+	tablero.setPos(32, 32);
+	tablero.draw();
 }
 
 void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
