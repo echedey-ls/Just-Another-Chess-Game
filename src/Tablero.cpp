@@ -1,15 +1,15 @@
 #include "Tablero.h"
 #include "ETSIDI.h"
-//#include "freeglut.h"
+#include "freeglut.h"
 
 #include "piezas/Peon.h"
 
-using ETSIDI::getTexture;
+
 
 /**
 * Inicializa el tablero con las piezas de normal
-* Las blancas estarán en las dos primeras filas (0 & 1)
-* Las negras estarán en las dos últimas filas (6 & 7)
+* Las blancas estarï¿½n en las dos primeras filas (0 & 1)
+* Las negras estarï¿½n en las dos ï¿½ltimas filas (6 & 7)
 */
 
 
@@ -17,49 +17,53 @@ using ETSIDI::getTexture;
 Tablero::Tablero() : estilo(clasico)
 {
 	inicializa();
-	
 }
 
 /**
-* Devuelve puntero a la pieza en determinada posición
+* Devuelve puntero a la pieza en determinada posiciï¿½n
 * Si no hay, devuelve nullptr
 */
 inline
 Pieza* Tablero::obtener_pieza_en(const Posicion& p) {
-	return casillas[p.x][p.y].getPieza();
+	return casilla(p).getPieza();
 }
 
 void Tablero::inicializa() {
 	Peon* peones_wh[8], * peones_bk[8];
 	for (size_t i = 0; i < 8; ++i) {
 		peones_wh[i] = new Peon(blanca, clasico);
-		casillas[i][1].setPieza(peones_wh[i]);
+		casilla(i, 1).setPieza(peones_wh[i]);
 		peones_bk[i] = new Peon(negra, clasico);
-		casillas[i][6].setPieza(peones_bk[i]);
+		casilla(i, 6).setPieza(peones_bk[i]);
 	}
 }
 
 void Tablero::dibuja()
 {
-	// Dibujar el tablero
-	ETSIDI::Sprite tablero("imagenes/tablero.png", 0.05, 0.05, 38, 38);
-	tablero.draw();
+	/*//Poner coordenadas
+	char caracter = 'A';
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glRasterPos2f(40, 40); // posiciï¿½n del carï¿½cter
+	glutBitmapCharacter(GLUT_BITMAP_8_BY_13, 'A');*/
 
 	// Dibujar todas las piezas que hay en el tablero
 	for (auto& casilla_fila : casillas)
 		for (auto& casilla : casilla_fila)
-			;//casilla.ilustrar();
+			casilla.ilustrar();
+	// Dibujar el tablero
+	tablero.setPos(32, 32);
+	tablero.draw();
 }
 
 void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 	Pieza* pza = eliminar_pieza(origen);
-	if(pza) casillas[destino.x][destino.y].setPieza(pza);
+	if (pza) casilla(destino).setPieza(pza);
 }
 
 Pieza* Tablero::eliminar_pieza(const Posicion& p)
 {
-	Pieza* pza = casillas[p.x][p.y].getPieza();
-	casillas[p.x][p.y].setPieza(nullptr);
+	Pieza* pza = obtener_pieza_en(p);
+	casilla(p).setPieza(nullptr);
 	return pza;
 }
 

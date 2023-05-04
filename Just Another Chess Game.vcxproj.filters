@@ -30,5 +30,45 @@
     <None Include=".gitignore" />
     <None Include="CHANGELOG.md" />
     <None Include="README.md" />
+    <None Include="bin\ETSIDI.dll" />
+    <None Include="bin\fmodL.dll" />
+    <None Include="bin\freeglut.dll" />
+    <None Include="bin\Just Another Chess Game.exe" />
+    <None Include="bin\Just Another Chess Game.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bin\imagenes\alfil_b.png" />
+    <Image Include="bin\imagenes\c_alfil_b.png" />
+    <Image Include="bin\imagenes\c_alfil_n.png" />
+    <Image Include="bin\imagenes\c_caballo_b.png" />
+    <Image Include="bin\imagenes\c_caballo_n.png" />
+    <Image Include="bin\imagenes\c_peon_b.png" />
+    <Image Include="bin\imagenes\c_peon_n.png" />
+    <Image Include="bin\imagenes\c_reina_b.png" />
+    <Image Include="bin\imagenes\c_reina_n.png" />
+    <Image Include="bin\imagenes\c_rey_b.png" />
+    <Image Include="bin\imagenes\c_rey_n.png" />
+    <Image Include="bin\imagenes\c_torre_b.png" />
+    <Image Include="bin\imagenes\c_torre_n.png" />
+    <Image Include="bin\imagenes\sw_alfil_b.png" />
+    <Image Include="bin\imagenes\sw_alfil_n.png" />
+    <Image Include="bin\imagenes\sw_caballo_b.png" />
+    <Image Include="bin\imagenes\sw_caballo_n.png" />
+    <Image Include="bin\imagenes\sw_peon_b.png" />
+    <Image Include="bin\imagenes\sw_peon_n.png" />
+    <Image Include="bin\imagenes\sw_reina_b.png" />
+    <Image Include="bin\imagenes\sw_reina_n.png" />
+    <Image Include="bin\imagenes\sw_rey_b.png" />
+    <Image Include="bin\imagenes\sw_rey_n.png" />
+    <Image Include="bin\imagenes\sw_torre_b.png" />
+    <Image Include="bin\imagenes\sw_torre_n.png" />
+    <Image Include="bin\imagenes\tablero.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="bin\fuentes\Bitwise.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="bin\sonidos\Bala.mp3" />
+    <Media Include="bin\sonidos\JasonMraz93Milles.mp3" />
   </ItemGroup>
 </Project>
