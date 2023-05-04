@@ -1,6 +1,8 @@
 #include "Piezas.h"
 #include "ETSIDI.h"
 #include"piezas/Peon.h"
+#include "piezas/Torre.h"
+#include "piezas/Alfil.h"
 #include <string>
 
 using namespace ETSIDI;
