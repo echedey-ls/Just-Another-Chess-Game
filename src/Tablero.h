@@ -16,6 +16,8 @@ class Tablero
 	Casilla& casilla(char x, char y) { return casillas[y][x]; }
 	Casilla& casilla(const Posicion& p) { return casilla(p.x, p.y); }
 
+	//Posicion limite;
+
 public:
 	Tablero(); // Inicializa tablero con sus piezas distribuidas en un juego normal
 	void inicializa();
@@ -33,5 +35,7 @@ public:
 
 	// Lo que realmente calcula los movimientos
 	void calculadora_movimientos(const Posicion& p, Mascara_tablero& resultado);
+
+	//Posicion* setLimite();
 };
 

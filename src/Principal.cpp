@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Mundo.h"
 #include "ETSIDI.h"
+#include "Posicion.h"
 
 Mundo mundo;
 
@@ -14,6 +15,7 @@ Mundo mundo;
 void OnDraw(void); //esta funcion sera llamada para dibujar
 void OnTimer(int value); //esta funcion sera llamada cuando transcurra una temporizacion
 void OnKeyboardDown(unsigned char key, int x, int y); //cuando se pulse una tecla	
+void mouse(int button, int state, int x, int y); //devuelve la clase posicion??
 
 int main(int argc, char* argv[])
 {
@@ -36,6 +38,7 @@ int main(int argc, char* argv[])
 	glutDisplayFunc(OnDraw);
 	glutTimerFunc(25, OnTimer, 0);//le decimos que dentro de 25ms llame 1 vez a la funcion OnTimer()
 	glutKeyboardFunc(OnKeyboardDown);
+	glutMouseFunc(mouse); //llama a la función del ratón
 
 	mundo.inicializa();
 
@@ -68,6 +71,38 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 	if (key == '3')
 		ETSIDI::stopMusica();
 	glutPostRedisplay();
+}
+
+void mouse(int button, int state, int x, int y) {
+
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+		cout << "posicion del raton1: (" << x << "," << y << ")" << endl;
+		//cout << "posicion del raton2: (" << (x - 274) / 65 << "," << (y - 74) / 65 << ")" << endl;
+		
+		// ancho (x):  137 en cada borde   274, 65 cada cuadrado
+		// alto (y): 37 en cada borde  74 , 65 cada cuadrado
+		//cuadrado de 65x65
+		// tamaño del tablero: 525x525
+		//pantalla 800x600
+
+		if (x > 137 && x < (137 + 525) && y>37 && y < (37 + 525)) {
+			cout << "estoy dentro del tablero" << endl;
+		}
+		else
+			cout << "estoy fuera del tablero" << endl;
+
+		float x_ = ( (float)x - 137 )/525;
+		float y_ = ((float)y - 37) /525;
+
+		int fila = (int)(x_ * 65);
+		int columna = (int)(y_ * 65);
+
+		/*float x_ = (x - 274) / 525;
+		float y_ = (y - 74) / 525;*/
+		
+		//Calcular el cuadrante
+		cout << "posicion del nuevo: (" << fila << "," << columna << ")" << endl;
+	}
 }
 
 void OnTimer(int value)
