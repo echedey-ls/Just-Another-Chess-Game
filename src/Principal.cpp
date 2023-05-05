@@ -90,18 +90,15 @@ void mouse(int button, int state, int x, int y) {
 		}
 		else
 			cout << "estoy fuera del tablero" << endl;
-
-		float x_ = ( (float)x - 137 )/525;
-		float y_ = ((float)y - 37) /525;
-
-		int fila = (int)(x_ * 65);
-		int columna = (int)(y_ * 65);
-
-		/*float x_ = (x - 274) / 525;
-		float y_ = (y - 74) / 525;*/
 		
 		//Calcular el cuadrante
-		cout << "posicion del nuevo: (" << fila << "," << columna << ")" << endl;
+
+		char x_casilla, y_casilla;
+
+		x_casilla = static_cast<char>((x - 137) / 65);
+		y_casilla = static_cast<char>((563 - y) / 65);
+
+		cout << "posicion del nuevo: (" << (int)x_casilla <<"," << (int)y_casilla << ")" << endl;
 	}
 }
 
