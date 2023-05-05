@@ -8,6 +8,7 @@ void Mundo::inicializa()
 	y_ojo = 32;
 	z_ojo = 100;
 
+	menu_inicio.estado = Menu_Inicio::select_void;
 	tablero.inicializa();
 }
 void Mundo::dibuja()
@@ -16,5 +17,8 @@ void Mundo::dibuja()
 		x_ojo,y_ojo,0.0,      // hacia que punto mira  (0,0,0) 
 		0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y)
 
+
+	// Esto es guarro, hay que hacer un entorno de elección (enum o algo así)
+	menu_inicio.dibuja();
 	tablero.dibuja();
 }
