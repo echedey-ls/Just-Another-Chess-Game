@@ -8,6 +8,7 @@
     <ClCompile Include="src\piezas\Peon.cpp" />
     <ClCompile Include="src\Casilla.cpp" />
     <ClCompile Include="src\Principal.cpp" />
+    <ClCompile Include="src\letras_tablero.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\ETSIDI.h" />
@@ -20,6 +21,7 @@
     <ClInclude Include="src\Mascara_tablero.h" />
     <ClInclude Include="src\piezas\Peon.h" />
     <ClInclude Include="src\Casilla.h" />
+    <ClInclude Include="src\letras_tablero.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\ETSIDI.lib" />

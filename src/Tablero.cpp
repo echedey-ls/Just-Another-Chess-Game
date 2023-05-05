@@ -3,6 +3,7 @@
 #include "freeglut.h"
 
 #include "piezas/Peon.h"
+#include "letras_tablero.h"
 
 
 
@@ -53,6 +54,12 @@ void Tablero::dibuja()
 	// Dibujar el tablero
 	tablero.setPos(32, 32);
 	tablero.draw();
+
+	//Dibuja letras tablero
+	letras_tablero cadena;
+	cadena.cadena_letras();
+	cadena.cadena_numeros();
+	
 }
 
 void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
