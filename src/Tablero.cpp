@@ -19,6 +19,12 @@ Tablero::Tablero() : estilo(clasico)
 	inicializa();
 }
 
+Tablero::~Tablero() {
+	for (auto& casilla_fila : casillas)
+		for (auto& casilla : casilla_fila)
+			delete casilla.getPieza();
+}
+
 /**
 * Devuelve puntero a la pieza en determinada posici�n
 * Si no hay, devuelve nullptr
@@ -29,12 +35,12 @@ Pieza* Tablero::obtener_pieza_en(const Posicion& p) {
 }
 
 void Tablero::inicializa() {
-	Peon* peones_wh[8], * peones_bk[8];
-	for (size_t i = 0; i < 8; ++i) {
-		peones_wh[i] = new Peon(blanca, clasico);
-		casilla(i, 1).setPieza(peones_wh[i]);
-		peones_bk[i] = new Peon(negra, clasico);
-		casilla(i, 6).setPieza(peones_bk[i]);
+	tablero.setPos(32, 32);
+	/* Piezas */
+	// Peones
+	for (char i = 0; i < 8; ++i) {
+		casilla(i, 1).setPieza(new Peon(blanca, clasico));
+		casilla(i, 6).setPieza(new Peon(negra, clasico));
 	}
 
 	//mover_pieza({ 4,1 }, { 7,2 });   la función mover_pieza está en tablero.h, y lo que se les pasan como argumentos es la clase posicion (vector2D en la practica)
@@ -42,18 +48,11 @@ void Tablero::inicializa() {
 
 void Tablero::dibuja()
 {
-	/*//Poner coordenadas
-	char caracter = 'A';
-	glColor3f(1.0f, 1.0f, 1.0f);
-	glRasterPos2f(40, 40); // posici�n del car�cter
-	glutBitmapCharacter(GLUT_BITMAP_8_BY_13, 'A');*/
-
 	// Dibujar todas las piezas que hay en el tablero
 	for (auto& casilla_fila : casillas)
 		for (auto& casilla : casilla_fila)
 			casilla.ilustrar();
 	// Dibujar el tablero
-	tablero.setPos(32, 32);
 	tablero.draw();
 
 	//Dibuja letras tablero
@@ -64,11 +63,11 @@ void Tablero::dibuja()
 }
 
 void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
-	Pieza* pza = eliminar_pieza(origen);
+	Pieza* pza = quitar_pieza(origen);
 	if (pza) casilla(destino).setPieza(pza);
 }
 
-Pieza* Tablero::eliminar_pieza(const Posicion& p)
+Pieza* Tablero::quitar_pieza(const Posicion& p)
 {
 	Pieza* pza = obtener_pieza_en(p);
 	casilla(p).setPieza(nullptr);
