@@ -9,6 +9,8 @@
     <ClCompile Include="src\Casilla.cpp" />
     <ClCompile Include="src\Principal.cpp" />
     <ClCompile Include="src\letras_tablero.cpp" />
+    <ClCompile Include="src\piezas\Torre.cpp" />
+    <ClCompile Include="src\piezas\Alfil.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\ETSIDI.h" />
@@ -22,6 +24,8 @@
     <ClInclude Include="src\piezas\Peon.h" />
     <ClInclude Include="src\Casilla.h" />
     <ClInclude Include="src\letras_tablero.h" />
+    <ClInclude Include="src\piezas\Torre.h" />
+    <ClInclude Include="src\piezas\Alfil.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\ETSIDI.lib" />

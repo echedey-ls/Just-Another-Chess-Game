@@ -6,7 +6,6 @@
 #include "letras_tablero.h"
 
 
-
 /**
 * Inicializa el tablero con las piezas de normal
 * Las blancas estar�n en las dos primeras filas (0 & 1)
@@ -37,6 +36,8 @@ void Tablero::inicializa() {
 		peones_bk[i] = new Peon(negra, clasico);
 		casilla(i, 6).setPieza(peones_bk[i]);
 	}
+
+	//mover_pieza({ 4,1 }, { 7,2 });   la función mover_pieza está en tablero.h, y lo que se les pasan como argumentos es la clase posicion (vector2D en la practica)
 }
 
 void Tablero::dibuja()
@@ -98,3 +99,10 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 		break;
 	}
 }
+
+/*Posicion* Tablero::setLimite() {
+
+	const Posicion& mi_limite = { 0,0 };
+
+
+}*/
