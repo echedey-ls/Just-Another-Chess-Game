@@ -18,3 +18,8 @@ void Mundo::dibuja()
 
 	tablero.dibuja();
 }
+
+void Mundo::ilumina_casilla() {
+
+	tablero.ilumina();
+}

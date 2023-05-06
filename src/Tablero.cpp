@@ -7,8 +7,8 @@
 
 /**
 * Inicializa el tablero con las piezas de normal
-* Las blancas estar�n en las dos primeras filas (0 & 1)
-* Las negras estar�n en las dos �ltimas filas (6 & 7)
+* Las blancas estaran en las dos primeras filas (0 & 1)
+* Las negras estaran en las dos ultimas filas (6 & 7)
 */
 
 
@@ -19,7 +19,7 @@ Tablero::Tablero() : estilo(clasico)
 }
 
 /**
-* Devuelve puntero a la pieza en determinada posici�n
+* Devuelve puntero a la pieza en determinada posicion
 * Si no hay, devuelve nullptr
 */
 inline
@@ -36,7 +36,7 @@ void Tablero::inicializa() {
 		casilla(i, 6).setPieza(peones_bk[i]);
 	}
 
-	//mover_pieza({ 4,1 }, { 7,2 });   la función mover_pieza está en tablero.h, y lo que se les pasan como argumentos es la clase posicion (vector2D en la practica)
+	//mover_pieza({ 4,1 }, { 7,2 });   la función mover_pieza está en tablero.h, y lo que se les pasan como argumentos es de la clase posicion 
 }
 
 void Tablero::dibuja()
@@ -93,9 +93,31 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 	}
 }
 
-/*Posicion* Tablero::setLimite() {
+void Tablero::ilumina() {
 
-	const Posicion& mi_limite = { 0,0 };
+	/*glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	// Given the coordinates
+	gluOrtho2D(0.0, 800.0,
+		0.0, 600.0); */
 
 
-}*/
+	glPushMatrix();
+	/*glTranslatef(posicion.x, posicion.y, 0);
+	glRotatef(30, 1, 1, 1);
+	glColor3f(rand() / (float)RAND_MAX, rand() / (float)RAND_MAX,
+		rand() / (float)RAND_MAX);//color aleatorio
+	glutSolidCube(lado);
+	glPopMatrix();*/
+
+	
+	glColor3ub(255, 0, 0);
+	glBegin(GL_POLYGON);
+	glVertex3f(-5.0f, -5.0f, 1); // top left
+	glVertex3f(-5.0f, 5.0f, 1); // top right 
+	glVertex3f(5.0f, 5.0f, 1); // bottom right
+	glVertex3f(5.0f, -5.0f, 1); // bottom left
+	glEnd();
+	glFlush();
+}

@@ -6,6 +6,7 @@ class Mundo
 public:
 	void inicializa();
 	void dibuja();
+	void ilumina_casilla();
 
 	Tablero tablero;
 
