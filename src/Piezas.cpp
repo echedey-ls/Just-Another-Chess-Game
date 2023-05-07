@@ -16,8 +16,8 @@ void Pieza::ilustrar(Posicion p) {
 void Pieza::cambiar_estilo(Estilo_grafico estilo) {
 	// *elimina* y vuelve a cargar el sprite, con el nuevo tema gráfico (si es distinto del anterior)
 	// y actualiza el estilo de la instancia
-	if (estilo != estilo_actual) {
-		estilo = estilo_actual;
+	if (estilo_actual != estilo) {
+		estilo_actual = estilo;
 		cargar_sprite();
 	}
 }
