@@ -94,28 +94,8 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 }
 
 void mouse(int button, int state, int x, int y) {
-	// Usamos gluUnProject para trabajar con coordenadas del mundo en vez de gráficas
-	// Copia sin remordimientos de http://nehe.gamedev.net/article/using_gluunproject/16013/index.html
-	GLint viewport[4];
-	GLdouble modelview[16];
-	GLdouble projection[16];
-	GLfloat winX, winY, winZ;
-	GLdouble posX, posY, posZ;
-
-	glGetDoublev(GL_MODELVIEW_MATRIX, modelview);
-	glGetDoublev(GL_PROJECTION_MATRIX, projection);
-	glGetIntegerv(GL_VIEWPORT, viewport);
-
-	winX = (float)x;
-	winY = (float)viewport[3] - (float)y;
-	// Queremos la coordenada del plano con z = 0.0
-	// Así que obviamos obtener la profundidad de renderizado, y dejamos la que nos devolvería
-	//glReadPixels(x, int(winY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &winZ);
-	gluUnProject(winX, winY, 1.0, modelview, projection, viewport, &posX, &posY, &posZ);
-
-	cout << "Posición en coordenadas del mundo x, y, z: " << posX << ", " << posY << ", " << posZ << endl;
-
 	mundo.mouse(button, state, x, y);
+
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
 		cout << "posicion del raton1: (" << x << "," << y << ")" << endl;
 		//cout << "posicion del raton2: (" << (x - 274) / 65 << "," << (y - 74) / 65 << ")" << endl;

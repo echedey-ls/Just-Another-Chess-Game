@@ -34,6 +34,33 @@ Tablero::~Tablero() {
 * Devuelve puntero a la pieza en determinada posici n
 * Si no hay, devuelve nullptr
 */
+Estilo_grafico Tablero::siguiente_estilo() {
+	switch (estilo)
+	{
+	
+	case clasico:
+		estilo = stars_wars;
+		break;
+	case stars_wars:
+		estilo = clasico;
+		break;
+	case no_definido:
+	default:
+		estilo = clasico;
+		break;
+	}
+	actualizar_estilo_piezas();
+	return estilo;
+}
+
+void Tablero::actualizar_estilo_piezas() {
+	for (auto& casilla_fila : casillas)
+		for (auto& casilla : casilla_fila) {
+			auto pieza = casilla.getPieza();
+			if (pieza) pieza->cambiar_estilo(estilo);
+		}
+}
+
 inline
 Pieza* Tablero::obtener_pieza_en(const Posicion& p) {
 	return casilla(p).getPieza();

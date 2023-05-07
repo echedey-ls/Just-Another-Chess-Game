@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\interfaz_usuario\BotonUI.cpp" />
+    <ClCompile Include="src\Interfaz_Partida.cpp" />
     <ClCompile Include="src\Casilla.cpp" />
     <ClCompile Include="src\letras_tablero.cpp" />
     <ClCompile Include="src\Mascara_tablero.cpp" />
@@ -35,6 +37,8 @@
     <ClCompile Include="src\Tablero.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\interfaz_usuario\BotonUI.h" />
+    <ClInclude Include="src\Interfaz_Partida.h" />
     <ClInclude Include="src\Casilla.h" />
     <ClInclude Include="lib\ETSIDI.h" />
     <ClInclude Include="lib\freeglut.h" />
