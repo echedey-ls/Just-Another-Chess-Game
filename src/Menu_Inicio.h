@@ -13,7 +13,7 @@ public:
 		select_salir,
 	} estado = select_void;
 	Menu_Inicio() {
-		logotipo = new ETSIDI::Sprite("imagenes/Logo.jpeg", 0.f, .0f, 64, 64);
+		logotipo = new ETSIDI::Sprite("imagenes/Logo.png", 0.f, .0f, 64, 64);
 	};
 	~Menu_Inicio() {
 		delete logotipo;

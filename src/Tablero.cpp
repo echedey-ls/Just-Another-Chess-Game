@@ -3,13 +3,18 @@
 #include "freeglut.h"
 
 #include "piezas/Peon.h"
+#include "piezas/Torre.h"
+#include "piezas/Caballo.h"
+#include "piezas/Alfil.h"
+#include "piezas/Reina.h"
+#include "piezas/Rey.h"
 #include "letras_tablero.h"
 
 
 /**
 * Inicializa el tablero con las piezas de normal
-* Las blancas estar�n en las dos primeras filas (0 & 1)
-* Las negras estar�n en las dos �ltimas filas (6 & 7)
+* Las blancas estar n en las dos primeras filas (0 & 1)
+* Las negras estar n en las dos  ltimas filas (6 & 7)
 */
 
 
@@ -26,7 +31,7 @@ Tablero::~Tablero() {
 }
 
 /**
-* Devuelve puntero a la pieza en determinada posici�n
+* Devuelve puntero a la pieza en determinada posici n
 * Si no hay, devuelve nullptr
 */
 inline
@@ -36,12 +41,34 @@ Pieza* Tablero::obtener_pieza_en(const Posicion& p) {
 
 void Tablero::inicializa() {
 	tablero.setPos(32, 32);
+
 	/* Piezas */
 	// Peones
 	for (char i = 0; i < 8; ++i) {
 		casilla(i, 1).setPieza(new Peon(blanca, clasico));
 		casilla(i, 6).setPieza(new Peon(negra, clasico));
 	}
+	//Torres
+	for (size_t i = 0; i < 2; i++) {
+		casilla(7 * i,0).setPieza(new Torre(blanca, clasico));
+		casilla(7 * i,7).setPieza(new Torre(negra, clasico));
+	}
+	//Caballos
+	for (size_t i = 0; i < 2; i++) {
+		casilla(i == 0 ? (7 * i + 1) : (7 * i - 1), 0).setPieza(new Caballo(blanca, clasico));
+		casilla(i == 0 ? (7 * i + 1) : (7 * i - 1), 7).setPieza(new Caballo(negra, clasico));
+	}
+	//Alfiles
+	for (size_t i = 0; i < 2; i++) {
+		casilla(i == 0 ? (7 * i + 2) : (7 * i - 2), 0).setPieza(new Alfil(blanca, clasico));
+		casilla(i == 0 ? (7 * i + 2) : (7 * i - 2), 7).setPieza(new Alfil(negra, clasico));
+	}
+	//Reinas
+	casilla(3, 0).setPieza(new Reina(blanca, clasico));
+	casilla(4, 7).setPieza(new Reina(negra, clasico));
+	//Reyes
+	casilla(4, 0).setPieza(new Rey(blanca, clasico));
+	casilla(3, 7).setPieza(new Rey(negra, clasico));
 
 	//mover_pieza({ 4,1 }, { 7,2 });   la función mover_pieza está en tablero.h, y lo que se les pasan como argumentos es la clase posicion (vector2D en la practica)
 }

@@ -3,14 +3,15 @@
 #include "../Piezas.h"
 #include "ETSIDI.h"
 
-class Alfil : virtual public Pieza
+class Rey : virtual public Pieza
 {
 	bool se_ha_movido = false;
 
 public:
 
-	Alfil(Color c, Estilo_grafico s) : Pieza(c, s) {
-		tipo = alfil;
+	Rey(Color c, Estilo_grafico s) : Pieza(c, s) {
+		tipo = rey;
 		cargar_sprite();
 	}
 };
+
