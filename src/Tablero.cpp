@@ -49,17 +49,17 @@ void Tablero::inicializa() {
 		casilla(i, 6).setPieza(new Peon(negra, clasico));
 	}
 	//Torres
-	for (size_t i = 0; i < 2; i++) {
+	for (char i = 0; i < 2; i++) {
 		casilla(7 * i,0).setPieza(new Torre(blanca, clasico));
 		casilla(7 * i,7).setPieza(new Torre(negra, clasico));
 	}
 	//Caballos
-	for (size_t i = 0; i < 2; i++) {
+	for (char i = 0; i < 2; i++) {
 		casilla(i == 0 ? (7 * i + 1) : (7 * i - 1), 0).setPieza(new Caballo(blanca, clasico));
 		casilla(i == 0 ? (7 * i + 1) : (7 * i - 1), 7).setPieza(new Caballo(negra, clasico));
 	}
 	//Alfiles
-	for (size_t i = 0; i < 2; i++) {
+	for (char i = 0; i < 2; i++) {
 		casilla(i == 0 ? (7 * i + 2) : (7 * i - 2), 0).setPieza(new Alfil(blanca, clasico));
 		casilla(i == 0 ? (7 * i + 2) : (7 * i - 2), 7).setPieza(new Alfil(negra, clasico));
 	}
