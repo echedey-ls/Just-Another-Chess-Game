@@ -7,15 +7,27 @@
 
 Mundo mundo;
 
-//declaraciones de funciones
+// Callbacks
+void OnDraw(void); // esta funcion sera llamada para dibujar
+void OnTimer(int value); // esta funcion sera llamada cuando transcurra una temporizacion
+void OnKeyboardDown(unsigned char key, int x, int y); // cuando se pulse una tecla	
+void mouse(int button, int state, int x, int y); // delega en los objetos el tratamiento de los clicks
+void reshape(GLsizei, GLsizei);
 
-//los callback, funciones que seran llamadas automaticamente por la glut
-//cuando sucedan eventos
-//NO HACE FALTA LLAMARLAS EXPLICITAMENTE
-void OnDraw(void); //esta funcion sera llamada para dibujar
-void OnTimer(int value); //esta funcion sera llamada cuando transcurra una temporizacion
-void OnKeyboardDown(unsigned char key, int x, int y); //cuando se pulse una tecla	
-void mouse(int button, int state, int x, int y); //devuelve la clase posicion??
+// Config global del entorno de OpenGL
+void initGL() {
+	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_COLOR_MATERIAL);
+	glMatrixMode(GL_PROJECTION);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearDepth(1.0f);
+	gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
+	glDepthFunc(GL_LEQUAL);    // Set the type of depth-test
+	glShadeModel(GL_SMOOTH);   // Enable smooth shading
+	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);  // Nice perspective corrections
+}
 
 int main(int argc, char* argv[])
 {
@@ -26,20 +38,14 @@ int main(int argc, char* argv[])
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutCreateWindow("Just Another Chess Game");
 
-	//habilitar luces y definir perspectiva
-	glEnable(GL_LIGHT0);
-	glEnable(GL_LIGHTING);
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_COLOR_MATERIAL);
-	glMatrixMode(GL_PROJECTION);
-	gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
-
 	//Registrar los callbacks
 	glutDisplayFunc(OnDraw);
+	glutReshapeFunc(reshape);
 	glutTimerFunc(25, OnTimer, 0);//le decimos que dentro de 25ms llame 1 vez a la funcion OnTimer()
 	glutKeyboardFunc(OnKeyboardDown);
 	glutMouseFunc(mouse); //llama a la función del ratón
 
+	initGL();
 	mundo.inicializa();
 
 	glutMainLoop();
@@ -55,6 +61,20 @@ void OnDraw(void)
 	//Para definir el punto de vista
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+
+	/*
+	// Superficie cuadrada de fondo para calcular posiciones en XY homogéneamente
+	// si se omite, la coord. Z varía mucho y los botones pueden no funcionar
+	glColor3f(0.5f, 0.0f, 0.0f);
+	glBegin(GL_QUADS);
+	constexpr GLfloat MIN_LIM = 
+		glVertex3f(0.0f, 0.0f, 0.0f);
+		glVertex3f(64.0f, 0.0f, 0.0f);
+		glVertex3f(64.0f, 64.0f, 0.0f);
+		glVertex3f(0.0f, 64.0f, 0.0f);
+	glEnd();*/
+
+	// El juego
 	mundo.dibuja();
 
 	//no borrar esta linea ni poner nada despues
@@ -74,7 +94,28 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 }
 
 void mouse(int button, int state, int x, int y) {
+	// Usamos gluUnProject para trabajar con coordenadas del mundo en vez de gráficas
+	// Copia sin remordimientos de http://nehe.gamedev.net/article/using_gluunproject/16013/index.html
+	GLint viewport[4];
+	GLdouble modelview[16];
+	GLdouble projection[16];
+	GLfloat winX, winY, winZ;
+	GLdouble posX, posY, posZ;
 
+	glGetDoublev(GL_MODELVIEW_MATRIX, modelview);
+	glGetDoublev(GL_PROJECTION_MATRIX, projection);
+	glGetIntegerv(GL_VIEWPORT, viewport);
+
+	winX = (float)x;
+	winY = (float)viewport[3] - (float)y;
+	// Queremos la coordenada del plano con z = 0.0
+	// Así que obviamos obtener la profundidad de renderizado, y dejamos la que nos devolvería
+	//glReadPixels(x, int(winY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &winZ);
+	gluUnProject(winX, winY, 1.0, modelview, projection, viewport, &posX, &posY, &posZ);
+
+	cout << "Posición en coordenadas del mundo x, y, z: " << posX << ", " << posY << ", " << posZ << endl;
+
+	mundo.mouse(button, state, x, y);
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
 		cout << "posicion del raton1: (" << x << "," << y << ")" << endl;
 		//cout << "posicion del raton2: (" << (x - 274) / 65 << "," << (y - 74) / 65 << ")" << endl;
@@ -104,22 +145,25 @@ void mouse(int button, int state, int x, int y) {
 
 void OnTimer(int value)
 {
-	//poner aqui el código de animacion
-	/*
-	float dist = sqrt(mundo.x_ojo * mundo.x_ojo + mundo.z_ojo * mundo.z_ojo);
-	float ang = atan2(mundo.z_ojo, mundo.x_ojo);
-	ang += 0.05f;
-	mundo.x_ojo = dist * cos(ang);
-	mundo.z_ojo = dist * sin(ang);
-	*/
-
-
-	/*
-	animacion->loop();
-	explosion->loop();*/
-
 
 	//no borrar estas lineas
 	glutTimerFunc(25, OnTimer, 0);
 	glutPostRedisplay();
+}
+
+// Inspirado de https://www3.ntu.edu.sg/home/ehchua/programming/opengl/CG_Examples.html
+// De alguna forma sin esto la ventana no imprime correctamente
+void reshape(GLsizei width, GLsizei height) {  // GLsizei for non-negative integer
+	// Compute aspect ratio of the new window
+	if (height == 0) height = 1;                // To prevent divide by 0
+	GLfloat aspect = (GLfloat)width / (GLfloat)height;
+
+	// Set the viewport to cover the new window
+	glViewport(0, 0, width, height);
+
+	// Set the aspect ratio of the clipping volume to match the viewport
+	glMatrixMode(GL_PROJECTION);  // To operate on the Projection matrix
+	glLoadIdentity();             // Reset
+	// Enable perspective projection with fovy, aspect, zNear and zFar
+	gluPerspective(45.0f, aspect, 0.1f, 100.0f);
 }
