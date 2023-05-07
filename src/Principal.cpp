@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
 	glutInit(&argc, argv);
 	glutInitWindowSize(800, 600);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-	glutCreateWindow("MiJuego");
+	glutCreateWindow("Just Another Chess Game");
 
 	//habilitar luces y definir perspectiva
 	glEnable(GL_LIGHT0);
