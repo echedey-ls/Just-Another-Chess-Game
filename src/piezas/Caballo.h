@@ -1,16 +1,16 @@
 #pragma once
+
 #include "../Piezas.h"
 #include "ETSIDI.h"
 
-class Peon : virtual public Pieza
+class Caballo : virtual public Pieza
 {
 	bool se_ha_movido = false;
 
 public:
 
-	Peon(Color c, Estilo_grafico s) : Pieza(c, s) {
-		tipo = peon;
+	Caballo(Color c, Estilo_grafico s) : Pieza(c, s) {
+		tipo = caballo;
 		cargar_sprite();
 	}
 };
-

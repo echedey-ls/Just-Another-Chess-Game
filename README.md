@@ -1,4 +1,7 @@
 # Just Another Chess Game-2023
+
+![Logotipo](bin/imagenes/Logo.png)
+
 ## Objetivo
 Realizar exitosamente un videojuego basado en un ajedrez personalizado que cumpla ciertos requisitos. Para ello implementaremos mínimo una máquina de estados, y trabajaremos con ciertas librerías que nos permitan trabajar con gráficos y animaciones. Todo esto nos ayudará a familiarizarnos con el entorno de programación de C++ en Visual Studio y con la Programación Orientada a Objetos.
 
@@ -14,5 +17,6 @@ Realizar exitosamente un videojuego basado en un ajedrez personalizado que cumpl
 - Echedey Luis Álvarez.
 - Marcelo Luna Díaz.
 - Raquel Roca Pereira. 
+
 
 

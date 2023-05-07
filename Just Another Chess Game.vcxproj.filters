@@ -4,10 +4,17 @@
     <ClCompile Include="src\Piezas.cpp" />
     <ClCompile Include="src\Mundo.cpp" />
     <ClCompile Include="src\Tablero.cpp" />
-    <ClCompile Include="src\Principal.cpp" />
     <ClCompile Include="src\Mascara_tablero.cpp" />
     <ClCompile Include="src\piezas\Peon.cpp" />
     <ClCompile Include="src\Casilla.cpp" />
+    <ClCompile Include="src\Principal.cpp" />
+    <ClCompile Include="src\letras_tablero.cpp" />
+    <ClCompile Include="src\piezas\Torre.cpp" />
+    <ClCompile Include="src\piezas\Alfil.cpp" />
+    <ClCompile Include="src\Menu_Inicio.cpp" />
+    <ClCompile Include="src\piezas\Caballo.cpp" />
+    <ClCompile Include="src\piezas\Reina.cpp" />
+    <ClCompile Include="src\piezas\Rey.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\ETSIDI.h" />
@@ -16,10 +23,17 @@
     <ClInclude Include="src\Mundo.h" />
     <ClInclude Include="src\Tablero.h" />
     <ClInclude Include="src\Posicion.h" />
-    <ClInclude Include="src\Estilos_graficos.h" />
     <ClInclude Include="src\Mascara_tablero.h" />
     <ClInclude Include="src\piezas\Peon.h" />
     <ClInclude Include="src\Casilla.h" />
+    <ClInclude Include="src\letras_tablero.h" />
+    <ClInclude Include="src\piezas\Torre.h" />
+    <ClInclude Include="src\piezas\Alfil.h" />
+    <ClInclude Include="src\Menu_Inicio.h" />
+    <ClInclude Include="src\Estilos_graficos.h" />
+    <ClInclude Include="src\piezas\Caballo.h" />
+    <ClInclude Include="src\piezas\Reina.h" />
+    <ClInclude Include="src\piezas\Rey.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\ETSIDI.lib" />
@@ -63,6 +77,7 @@
     <Image Include="bin\imagenes\sw_torre_b.png" />
     <Image Include="bin\imagenes\sw_torre_n.png" />
     <Image Include="bin\imagenes\tablero.png" />
+    <Image Include="bin\imagenes\Logo.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="bin\fuentes\Bitwise.ttf" />
