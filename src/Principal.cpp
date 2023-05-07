@@ -76,7 +76,7 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 void mouse(int button, int state, int x, int y) {
 
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-		cout << "posicion del raton1: (" << x << "," << y << ")" << endl;
+		//cout << "posicion del raton1: (" << x << "," << y << ")" << endl;
 		//cout << "posicion del raton2: (" << (x - 274) / 65 << "," << (y - 74) / 65 << ")" << endl;
 		
 		// ancho (x):  137 en cada borde   274, 65 cada cuadrado
@@ -86,19 +86,19 @@ void mouse(int button, int state, int x, int y) {
 		//pantalla 800x600
 
 		if (x > 137 && x < (137 + 525) && y>37 && y < (37 + 525)) {
-			cout << "estoy dentro del tablero" << endl;
+			cout << "Se encuentra dentro del tablero" << endl;
+
+			//Calcular el cuadrante la cual el usuario hace el click
+
+			char x_casilla, y_casilla;
+
+			x_casilla = static_cast<char>((x - 137) / 65);
+			y_casilla = static_cast<char>((563 - y) / 65);
+
+			cout << "Cuadrante: (" << (int)x_casilla << "," << (int)y_casilla << ")" << endl;
 		}
 		else
-			cout << "estoy fuera del tablero" << endl;
-		
-		//Calcular el cuadrante
-
-		char x_casilla, y_casilla;
-
-		x_casilla = static_cast<char>((x - 137) / 65);
-		y_casilla = static_cast<char>((563 - y) / 65);
-
-		cout << "posicion del nuevo: (" << (int)x_casilla <<"," << (int)y_casilla << ")" << endl;
+			cout << "Se encuentra fuera del tablero. Haz click detro del tablero" << endl;
 	}
 }
 
