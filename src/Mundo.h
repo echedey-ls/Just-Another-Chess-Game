@@ -1,6 +1,7 @@
 #pragma once
 #include "Tablero.h"
-#include "Mascara_tablero.h"
+#include "Menu_Inicio.h"
+
 class Mundo
 {
 public:
@@ -8,10 +9,10 @@ public:
 	void dibuja();
 	void ilumina_casilla();
 
+	Menu_Inicio menu_inicio;
 	Tablero tablero;
 
-	float x_ojo;
-	float y_ojo;
-	float z_ojo;
+	float x_ojo = 0.f;
+	float y_ojo = 0.f;
+	float z_ojo = 0.f;
 };
-

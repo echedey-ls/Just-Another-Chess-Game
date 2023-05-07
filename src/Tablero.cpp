@@ -3,6 +3,12 @@
 #include "freeglut.h"
 
 #include "piezas/Peon.h"
+#include "piezas/Torre.h"
+#include "piezas/Caballo.h"
+#include "piezas/Alfil.h"
+#include "piezas/Reina.h"
+#include "piezas/Rey.h"
+#include "letras_tablero.h"
 
 
 /**
@@ -18,6 +24,12 @@ Tablero::Tablero() : estilo(clasico)
 	inicializa();
 }
 
+Tablero::~Tablero() {
+	for (auto& casilla_fila : casillas)
+		for (auto& casilla : casilla_fila)
+			delete casilla.getPieza();
+}
+
 /**
 * Devuelve puntero a la pieza en determinada posicion
 * Si no hay, devuelve nullptr
@@ -28,40 +40,61 @@ Pieza* Tablero::obtener_pieza_en(const Posicion& p) {
 }
 
 void Tablero::inicializa() {
-	Peon* peones_wh[8], * peones_bk[8];
-	for (size_t i = 0; i < 8; ++i) {
-		peones_wh[i] = new Peon(blanca, clasico);
-		casilla(i, 1).setPieza(peones_wh[i]);
-		peones_bk[i] = new Peon(negra, clasico);
-		casilla(i, 6).setPieza(peones_bk[i]);
+	tablero.setPos(32, 32);
+
+	/* Piezas */
+	// Peones
+	for (char i = 0; i < 8; ++i) {
+		casilla(i, 1).setPieza(new Peon(blanca, clasico));
+		casilla(i, 6).setPieza(new Peon(negra, clasico));
 	}
+	//Torres
+	for (size_t i = 0; i < 2; i++) {
+		casilla(7 * i,0).setPieza(new Torre(blanca, clasico));
+		casilla(7 * i,7).setPieza(new Torre(negra, clasico));
+	}
+	//Caballos
+	for (size_t i = 0; i < 2; i++) {
+		casilla(i == 0 ? (7 * i + 1) : (7 * i - 1), 0).setPieza(new Caballo(blanca, clasico));
+		casilla(i == 0 ? (7 * i + 1) : (7 * i - 1), 7).setPieza(new Caballo(negra, clasico));
+	}
+	//Alfiles
+	for (size_t i = 0; i < 2; i++) {
+		casilla(i == 0 ? (7 * i + 2) : (7 * i - 2), 0).setPieza(new Alfil(blanca, clasico));
+		casilla(i == 0 ? (7 * i + 2) : (7 * i - 2), 7).setPieza(new Alfil(negra, clasico));
+	}
+	//Reinas
+	casilla(3, 0).setPieza(new Reina(blanca, clasico));
+	casilla(4, 7).setPieza(new Reina(negra, clasico));
+	//Reyes
+	casilla(4, 0).setPieza(new Rey(blanca, clasico));
+	casilla(3, 7).setPieza(new Rey(negra, clasico));
 
 	//mover_pieza({ 4,1 }, { 7,2 });   la función mover_pieza está en tablero.h, y lo que se les pasan como argumentos es de la clase posicion 
 }
 
 void Tablero::dibuja()
 {
-	/*//Poner coordenadas
-	char caracter = 'A';
-	glColor3f(1.0f, 1.0f, 1.0f);
-	glRasterPos2f(40, 40); // posici�n del car�cter
-	glutBitmapCharacter(GLUT_BITMAP_8_BY_13, 'A');*/
-
 	// Dibujar todas las piezas que hay en el tablero
 	for (auto& casilla_fila : casillas)
 		for (auto& casilla : casilla_fila)
 			casilla.ilustrar();
 	// Dibujar el tablero
-	tablero.setPos(32, 32);
 	tablero.draw();
+
+	//Dibuja letras tablero
+	letras_tablero cadena;
+	cadena.cadena_letras();
+	cadena.cadena_numeros();
+	
 }
 
 void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
-	Pieza* pza = eliminar_pieza(origen);
+	Pieza* pza = quitar_pieza(origen);
 	if (pza) casilla(destino).setPieza(pza);
 }
 
-Pieza* Tablero::eliminar_pieza(const Posicion& p)
+Pieza* Tablero::quitar_pieza(const Posicion& p)
 {
 	Pieza* pza = obtener_pieza_en(p);
 	casilla(p).setPieza(nullptr);

@@ -86,8 +86,8 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 void mouse(int button, int state, int x, int y) {
 
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-		//cout << "Posicion del raton1: (" << x << "," << y << ")" << endl;
-		
+		//cout << "posicion del raton1: (" << x << "," << y << ")" << endl;
+		//cout << "posicion del raton2: (" << (x - 274) / 65 << "," << (y - 74) / 65 << ")" << endl;
 		//ancho (x): 137 en cada borde   274, 65 cada cuadrado
 		//alto (y): 37 en cada borde  74 , 65 cada cuadrado
 		//cuadrado de 65x65
