@@ -3,6 +3,7 @@
 char Casilla::casillas_counter = 0;
 
 void Casilla::ilustrar() {
+
 	//Posicion p = getPosicion();
 	//pieza->cargar_sprite();
 	if (pieza != nullptr) pieza->ilustrar(pos);
@@ -16,4 +17,18 @@ void Casilla::ilustrar() {
 
 Posicion Casilla::getPosicion() {
 	return pos;
+}
+
+inline
+void Casilla::setSeleccionada(bool select) {
+
+	seleccionada = select;
+
+}
+
+inline
+bool Casilla::getSeleccionada() {
+
+	return seleccionada;
+
 }

@@ -1,11 +1,13 @@
 #pragma once
 
 #include "Piezas.h"
+#include "Estado_casilla.h"
 
 class Casilla {
 	static char casillas_counter;
 	Pieza* pieza;
 	Posicion pos;
+	bool seleccionada;
 public:
 	Casilla(void) : pieza{ nullptr }, pos{ -1, -1 } {
 		/* Incrementamos la posición de cada casilla, cada vez que se crea una.
@@ -20,5 +22,7 @@ public:
 	Pieza* getPieza() { return pieza; }
 	void ilustrar();
 	Posicion getPosicion();
+	void setSeleccionada(bool);
+	bool getSeleccionada();
 };
 
