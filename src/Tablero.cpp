@@ -34,6 +34,33 @@ Tablero::~Tablero() {
 * Devuelve puntero a la pieza en determinada posicion
 * Si no hay, devuelve nullptr
 */
+Estilo_grafico Tablero::siguiente_estilo() {
+	switch (estilo)
+	{
+	
+	case clasico:
+		estilo = stars_wars;
+		break;
+	case stars_wars:
+		estilo = clasico;
+		break;
+	case no_definido:
+	default:
+		estilo = clasico;
+		break;
+	}
+	actualizar_estilo_piezas();
+	return estilo;
+}
+
+void Tablero::actualizar_estilo_piezas() {
+	for (auto& casilla_fila : casillas)
+		for (auto& casilla : casilla_fila) {
+			auto pieza = casilla.getPieza();
+			if (pieza) pieza->cambiar_estilo(estilo);
+		}
+}
+
 inline
 Pieza* Tablero::obtener_pieza_en(const Posicion& p) {
 	return casilla(p).getPieza();
@@ -49,17 +76,17 @@ void Tablero::inicializa() {
 		casilla(i, 6).setPieza(new Peon(negra, clasico));
 	}
 	//Torres
-	for (size_t i = 0; i < 2; i++) {
+	for (char i = 0; i < 2; i++) {
 		casilla(7 * i,0).setPieza(new Torre(blanca, clasico));
 		casilla(7 * i,7).setPieza(new Torre(negra, clasico));
 	}
 	//Caballos
-	for (size_t i = 0; i < 2; i++) {
+	for (char i = 0; i < 2; i++) {
 		casilla(i == 0 ? (7 * i + 1) : (7 * i - 1), 0).setPieza(new Caballo(blanca, clasico));
 		casilla(i == 0 ? (7 * i + 1) : (7 * i - 1), 7).setPieza(new Caballo(negra, clasico));
 	}
 	//Alfiles
-	for (size_t i = 0; i < 2; i++) {
+	for (char i = 0; i < 2; i++) {
 		casilla(i == 0 ? (7 * i + 2) : (7 * i - 2), 0).setPieza(new Alfil(blanca, clasico));
 		casilla(i == 0 ? (7 * i + 2) : (7 * i - 2), 7).setPieza(new Alfil(negra, clasico));
 	}
@@ -75,18 +102,18 @@ void Tablero::inicializa() {
 
 void Tablero::dibuja()
 {
+	// Dibujar el tablero
+	tablero.draw();
+
 	// Dibujar todas las piezas que hay en el tablero
 	for (auto& casilla_fila : casillas)
 		for (auto& casilla : casilla_fila)
 			casilla.ilustrar();
-	// Dibujar el tablero
-	tablero.draw();
 
 	//Dibuja letras tablero
 	letras_tablero cadena;
 	cadena.cadena_letras();
 	cadena.cadena_numeros();
-	
 }
 
 void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {

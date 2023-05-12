@@ -23,7 +23,10 @@ public:
 
 
 	void inicializa();
+	// Funciones gráficas
 	void dibuja();
+	Estilo_grafico siguiente_estilo();
+	void actualizar_estilo_piezas();
 
 	Sprite tablero{ "imagenes/tablero.png",0,0,64,64 };//, 0.05, 0.05, 38, 38 
 

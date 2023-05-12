@@ -2,6 +2,8 @@
 #include "Tablero.h"
 #include "freeglut.h"
 
+#include <iostream>
+
 void Mundo::inicializa()
 {
 	x_ojo = 32;
@@ -18,12 +20,33 @@ void Mundo::dibuja()
 		0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y)
 
 
-	// Esto es guarro, hay que hacer un entorno de elección (enum o algo así)
-	menu_inicio.dibuja();
+	// Esto es guarro, hay que hacer una máquina de estados (mediante enum o algo así)
+	//menu_inicio.dibuja();
 	tablero.dibuja();
+	gui_partida.dibuja();
 }
 
-void Mundo::ilumina_casilla() {
+void Mundo::mouse(int button, int state, int x, int y) {
+	// Usamos gluUnProject para trabajar con coordenadas del mundo en vez de gráficas
+	// Copia sin remordimientos de http://nehe.gamedev.net/article/using_gluunproject/16013/index.html
+	GLint viewport[4];
+	GLdouble modelview[16];
+	GLdouble projection[16];
+	GLfloat winX, winY; //, winZ;
+	GLdouble posX, posY, posZ;
 
-	tablero.ilumina();
+	glGetDoublev(GL_MODELVIEW_MATRIX, modelview);
+	glGetDoublev(GL_PROJECTION_MATRIX, projection);
+	glGetIntegerv(GL_VIEWPORT, viewport);
+
+	winX = (float)x;
+	winY = (float)viewport[3] - (float)y;
+	// Queremos la coordenada del plano con z = 0.0
+	// Así que obviamos obtener la profundidad de renderizado, y dejamos la que nos devolvería
+	//glReadPixels(x, int(winY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &winZ);
+	gluUnProject(winX, winY, 1.0, modelview, projection, viewport, &posX, &posY, &posZ);
+
+	if(state == GLUT_UP)
+		std::cout << "Posición en coordenadas del mundo x, y, z: " << posX << ", " << posY << ", " << posZ << std::endl;
+	gui_partida.mouse(button, state, posX, posY);
 }
