@@ -41,6 +41,6 @@ public:
 	// Lo que realmente calcula los movimientos
 	void calculadora_movimientos(const Posicion& p, Mascara_tablero& resultado);
 
-	void ilumina(); //quiero que se ilumine al hacer click sobre la casilla
+	//void ilumina(); //quiero que se ilumine al hacer click sobre la casilla
 };
 

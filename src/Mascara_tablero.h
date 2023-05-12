@@ -3,6 +3,7 @@
 #include <array>
 
 #include "Posicion.h"
+#include "Estado_casilla.h"
 
 /** Esta clase consiste en una herramienta para traducir información relativa a casillas:
 * A dónde se puede mover una pieza
@@ -25,13 +26,6 @@
 
 constexpr char LADO_MASCARA = 8; // Será igual al lado del tablero
 
-enum Disponibilidad_casilla {
-	sin_calcular = 0,
-	no_movible,
-	si_movible,
-	atacable,
-	prohibida
-};
 
 // A priori lo dejo todo público, pues el type-checking de C++ ya avisará de errores simples en el uso del array.
 struct Mascara_tablero {

@@ -37,6 +37,7 @@
     <ClCompile Include="src\Tablero.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Estado_casilla.h" />
     <ClInclude Include="src\interfaz_usuario\BotonUI.h" />
     <ClInclude Include="src\Interfaz_Partida.h" />
     <ClInclude Include="src\Casilla.h" />

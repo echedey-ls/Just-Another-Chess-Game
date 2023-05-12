@@ -16,6 +16,7 @@
     <ClCompile Include="src\piezas\Reina.cpp" />
     <ClCompile Include="src\piezas\Rey.cpp" />
     <ClCompile Include="src\Interfaz_Partida.cpp" />
+    <ClCompile Include="src\interfaz_usuario\BotonUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\ETSIDI.h" />
@@ -36,6 +37,8 @@
     <ClInclude Include="src\piezas\Reina.h" />
     <ClInclude Include="src\piezas\Rey.h" />
     <ClInclude Include="src\Interfaz_Partida.h" />
+    <ClInclude Include="src\interfaz_usuario\BotonUI.h" />
+    <ClInclude Include="src\Estado_casilla.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\ETSIDI.lib" />

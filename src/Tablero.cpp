@@ -153,14 +153,14 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 	}
 }
 
-void Tablero::ilumina() {
+/*void Tablero::ilumina() {
 
 	/*glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
 	// Given the coordinates
 	gluOrtho2D(0.0, 800.0,
-		0.0, 600.0); */
+		0.0, 600.0); 
 
 
 	glPushMatrix();
@@ -169,7 +169,7 @@ void Tablero::ilumina() {
 	glColor3f(rand() / (float)RAND_MAX, rand() / (float)RAND_MAX,
 		rand() / (float)RAND_MAX);//color aleatorio
 	glutSolidCube(lado);
-	glPopMatrix();*/
+	glPopMatrix();
 
 	
 	glColor3ub(255, 0, 0);
@@ -180,4 +180,4 @@ void Tablero::ilumina() {
 	glVertex3f(5.0f, -5.0f, 1); // bottom left
 	glEnd();
 	glFlush();
-}
+} */
