@@ -6,6 +6,7 @@
 #include "Posicion.h"
 
 Mundo mundo;
+bool mouse_si_no = false;
 
 // Callbacks
 void OnDraw(void); // esta funcion sera llamada para dibujar
@@ -67,7 +68,7 @@ void OnDraw(void)
 	// si se omite, la coord. Z varía mucho y los botones pueden no funcionar
 	glColor3f(0.5f, 0.0f, 0.0f);
 	glBegin(GL_QUADS);
-	constexpr GLfloat MIN_LIM = 
+	constexpr GLfloat MIN_LIM =
 		glVertex3f(0.0f, 0.0f, 0.0f);
 		glVertex3f(64.0f, 0.0f, 0.0f);
 		glVertex3f(64.0f, 64.0f, 0.0f);
@@ -80,6 +81,7 @@ void OnDraw(void)
 	//no borrar esta linea ni poner nada despues
 	glutSwapBuffers();
 }
+
 void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 {
 	//poner aqui el código de teclado
@@ -90,37 +92,16 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 		ETSIDI::playMusica("sonidos/JasonMraz93Milles.mp3");
 	if (key == '3')
 		ETSIDI::stopMusica();
+
+	if (key == 'e')
+		glutHideWindow();  //para ocultar del programa
+
 	glutPostRedisplay();
 }
 
 void mouse(int button, int state, int x, int y) {
 	mundo.mouse(button, state, x, y);
 
-	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-		//cout << "posicion del raton1: (" << x << "," << y << ")" << endl;
-		//cout << "posicion del raton2: (" << (x - 274) / 65 << "," << (y - 74) / 65 << ")" << endl;
-		
-		// ancho (x):  137 en cada borde   274, 65 cada cuadrado
-		// alto (y): 37 en cada borde  74 , 65 cada cuadrado
-		//cuadrado de 65x65
-		// tamaño del tablero: 525x525
-		//pantalla 800x600
-
-		if (x > 137 && x < (137 + 525) && y>37 && y < (37 + 525)) {
-			cout << "Se encuentra dentro del tablero" << endl;
-
-			//Calcular el cuadrante la cual el usuario hace el click
-
-			char x_casilla, y_casilla;
-
-			x_casilla = static_cast<char>((x - 137) / 65);
-			y_casilla = static_cast<char>((563 - y) / 65);
-
-			cout << "Cuadrante: (" << (int)x_casilla << "," << (int)y_casilla << ")" << endl;
-		}
-		else
-			cout << "Se encuentra fuera del tablero. Haz click detro del tablero" << endl;
-	}
 }
 
 void OnTimer(int value)
