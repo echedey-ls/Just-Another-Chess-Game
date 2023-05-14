@@ -12,5 +12,6 @@ public:
 		tipo = peon;
 		cargar_sprite();
 	}
+
 };
 

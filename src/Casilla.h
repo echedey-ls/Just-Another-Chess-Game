@@ -6,6 +6,8 @@ class Casilla {
 	static char casillas_counter;
 	Pieza* pieza;
 	Posicion pos;
+	bool primer_mov = false;
+
 public:
 	Casilla(void) : pieza{ nullptr }, pos{ -1, -1 } {
 		/* Incrementamos la posición de cada casilla, cada vez que se crea una.
@@ -20,5 +22,10 @@ public:
 	Pieza* getPieza() { return pieza; }
 	void ilustrar();
 	Posicion getPosicion();
+
+
+	void primer_mov_hecho();
+	bool get_primer_mov();
+	void set_primer_mov(bool mov1);
 };
 

@@ -135,19 +135,48 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 	{
 	case peon:
 	{
-		for (char x = -1; x <= 1; x++) { // Loop para calcular posiciones que comprobaremos
-			Posicion a_revisar = { p.x + x, p.y + (pza_p->get_color() == blanca ? 1 : -1) }; // El sentido de avance depende del color
-			if (es_posicion_valida(a_revisar)) {
-				Pieza* otra_pieza = obtener_pieza_en(a_revisar);
-				if (!otra_pieza) { // No existe pieza en la posicion que estamos revisando
-					resultado(a_revisar) = si_movible;
+		if (casilla(p).get_primer_mov()) { //si es el primer movimiento del peon
+			char i=0, j=0;
+			Posicion a_revisar1 = { p.x, p.y + (pza_p->get_color() == blanca ? i : -i) };
+			Posicion a_revisar2 = { p.x+j, p.y + (pza_p->get_color() == blanca ? 1 : -1) };
+			do {
+				i++;
+				if (es_posicion_valida(a_revisar1)) {
+					Pieza* otra_pieza = obtener_pieza_en(a_revisar1);
+					if (!otra_pieza) { // No existe pieza en la posicion que estamos revisando
+						resultado(a_revisar1) = si_movible;
+					}
+					else
+						resultado(a_revisar1) = no_movible;
 				}
-				else if (pza_p->get_color() != otra_pieza->get_color()) { // Es pieza del equipo contrario
-					resultado(a_revisar) = atacable;
+			}while ((resultado(a_revisar1) != no_movible)||(i<2));
+
+			for (j = -1; j <= 1; j++) {
+				if (es_posicion_valida(a_revisar2)) {
+					Pieza* otra_pieza = obtener_pieza_en(a_revisar2);
+					if ((j != 0) && (otra_pieza))
+						resultado(a_revisar2) = atacable;
+					if ((j == 0) && (!otra_pieza))
+						resultado(a_revisar2) = si_movible;
 				}
 			}
-			/** TODO: check atacable en passant y primer movimiento de dos casillas **/
+			casilla(p).primer_mov_hecho();
 		}
+		else
+		{
+			char j=0;
+			Posicion a_revisar2 = { p.x + j, p.y + (pza_p->get_color() == blanca ? 1 : -1) };
+			for (j = -1; j <= 1; j++) {
+				if (es_posicion_valida(a_revisar2)) {
+					Pieza* otra_pieza = obtener_pieza_en(a_revisar2);
+					if ((j != 0) && (otra_pieza))
+						resultado(a_revisar2) = atacable;
+					if ((j == 0) && (!otra_pieza))
+						resultado(a_revisar2) = si_movible;
+				}
+			}
+		}
+			/** TODO: check atacable en passant y primer movimiento de dos casillas **/
 		break; }
 	case torre:
 	{
@@ -155,18 +184,18 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 		Posicion v_a_revisar[4] = { { p.x + i, p.y},{ p.x - i,p.y },{ p.x, p.y + i },{ p.x,p.y - i } };
 		for (int j = 0; j < 4; j++) {
 			do {
-				for (i = 1; i <= 7; i++) {
-					if (es_posicion_valida(v_a_revisar[j])) {
-						Pieza* otra_pieza = obtener_pieza_en(v_a_revisar[j]);
-						if (!otra_pieza) { // No existe pieza en la posicion que estamos revisando
-							resultado(v_a_revisar[j]) = si_movible;
-						}
-						else if (pza_p->get_color() != otra_pieza->get_color()) { // Es pieza del equipo contrario
-							resultado(v_a_revisar[j]) = atacable;
-						}
+				i++;
+				if (es_posicion_valida(v_a_revisar[j])) {
+					Pieza* otra_pieza = obtener_pieza_en(v_a_revisar[j]);
+					if (!otra_pieza) { // No existe pieza en la posicion que estamos revisando
+						resultado(v_a_revisar[j]) = si_movible;
+					}
+					else if (pza_p->get_color() != otra_pieza->get_color()) { // Es pieza del equipo contrario
+						resultado(v_a_revisar[j]) = atacable;
 					}
 				}
-			} while (resultado(v_a_revisar[j]) != atacable);
+				
+			} while ((resultado(v_a_revisar[j]) != atacable) || (i < 7));
 		}
 		break; }
 	case caballo:
@@ -190,18 +219,17 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 		Posicion v_a_revisar[4] = { { p.x + i, p.y + i },{ p.x - i,p.y - i },{ p.x + i, p.y - i },{ p.x - i,p.y + i } };
 		for (int j = 0; j < 4; j++) {
 			do {
-				for (i = 1; i <= 7; i++) {
-					if (es_posicion_valida(v_a_revisar[j])) {
-						Pieza* otra_pieza = obtener_pieza_en(v_a_revisar[j]);
-						if (!otra_pieza) { // No existe pieza en la posicion que estamos revisando
-							resultado(v_a_revisar[j]) = si_movible;
-						}
-						else if (pza_p->get_color() != otra_pieza->get_color()) { // Es pieza del equipo contrario
-							resultado(v_a_revisar[j]) = atacable;
-						}
+				i++;
+				if (es_posicion_valida(v_a_revisar[j])) {
+					Pieza* otra_pieza = obtener_pieza_en(v_a_revisar[j]);
+					if (!otra_pieza) { // No existe pieza en la posicion que estamos revisando
+						resultado(v_a_revisar[j]) = si_movible;
+					}
+					else if (pza_p->get_color() != otra_pieza->get_color()) { // Es pieza del equipo contrario
+						resultado(v_a_revisar[j]) = atacable;
 					}
 				}
-			} while (resultado(v_a_revisar[j]) != atacable);
+			} while ((resultado(v_a_revisar[j]) != atacable)||(i<7));
 		}
 		break; }
 	case reina:
@@ -210,18 +238,17 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 		Posicion v_a_revisar[8] = { { p.x + i, p.y},{ p.x - i,p.y },{ p.x, p.y + i },{ p.x,p.y - i }, { p.x + i, p.y + i },{ p.x - i,p.y - i },{ p.x + i, p.y - i },{ p.x - i,p.y + i } };
 		for (int j = 0; j < 8; j++) {
 			do {
-				for (i = 1; i <= 7; i++) {
-					if (es_posicion_valida(v_a_revisar[j])) {
-						Pieza* otra_pieza = obtener_pieza_en(v_a_revisar[j]);
-						if (!otra_pieza) { // No existe pieza en la posicion que estamos revisando
-							resultado(v_a_revisar[j]) = si_movible;
-						}
-						else if (pza_p->get_color() != otra_pieza->get_color()) { // Es pieza del equipo contrario
-							resultado(v_a_revisar[j]) = atacable;
-						}
+				i++;
+				if (es_posicion_valida(v_a_revisar[j])) {
+					Pieza* otra_pieza = obtener_pieza_en(v_a_revisar[j]);
+					if (!otra_pieza) { // No existe pieza en la posicion que estamos revisando
+						resultado(v_a_revisar[j]) = si_movible;
+					}
+					else if (pza_p->get_color() != otra_pieza->get_color()) { // Es pieza del equipo contrario
+						resultado(v_a_revisar[j]) = atacable;
 					}
 				}
-			} while (resultado(v_a_revisar[j]) != atacable);
+			} while ((resultado(v_a_revisar[j]) != atacable)||(i<7));
 		}
 		break; }
 	case rey:
