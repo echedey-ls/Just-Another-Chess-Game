@@ -5,7 +5,7 @@ void Menu_Inicio::dibuja() {
 	if (estado == inactivo) return;
 	// Dibujar todo lo constante del menú
 	logotipo->draw();
-
+	inicio->draw();
 	// Específico del estado del mundo
 	switch (estado)
 	{

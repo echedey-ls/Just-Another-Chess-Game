@@ -4,6 +4,7 @@
 
 class Menu_Inicio {
 	ETSIDI::Sprite *logotipo;
+	ETSIDI::Sprite *inicio;
 
 public:
 	enum {
@@ -14,7 +15,9 @@ public:
 	} estado = select_void;
 	Menu_Inicio() {
 		logotipo = new ETSIDI::Sprite("imagenes/Logo.png", 0.f, .0f, 64, 64);
+		inicio = new ETSIDI::Sprite("imagenes/pantalla_inicio.png", 0.0f, 0.0f, 32, 32);
 	};
+
 	~Menu_Inicio() {
 		delete logotipo;
 	};
