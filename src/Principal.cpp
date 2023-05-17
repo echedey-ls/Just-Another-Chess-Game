@@ -13,6 +13,7 @@ void OnDraw(void); // esta funcion sera llamada para dibujar
 void OnTimer(int value); // esta funcion sera llamada cuando transcurra una temporizacion
 void OnKeyboardDown(unsigned char key, int x, int y); // cuando se pulse una tecla	
 void mouse(int button, int state, int x, int y); // delega en los objetos el tratamiento de los clicks
+void passive_mouse(int x, int y); // como la anterior, pero cuando no han habido clicks
 void reshape(GLsizei, GLsizei);
 
 // Config global del entorno de OpenGL
@@ -45,6 +46,7 @@ int main(int argc, char* argv[])
 	glutTimerFunc(25, OnTimer, 0);//le decimos que dentro de 25ms llame 1 vez a la funcion OnTimer()
 	glutKeyboardFunc(OnKeyboardDown);
 	glutMouseFunc(mouse); //llama a la función del ratón
+	glutPassiveMotionFunc(passive_mouse);
 
 	initGL();
 	mundo.inicializa();
@@ -101,7 +103,10 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 
 void mouse(int button, int state, int x, int y) {
 	mundo.mouse(button, state, x, y);
+}
 
+void passive_mouse(int x, int y) {
+	mundo.mouse(0x0004, 0x0004, x, y); // Valores fuera de rangos definidos (0x0 hasta 0x2)
 }
 
 void OnTimer(int value)

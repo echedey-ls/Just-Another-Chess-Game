@@ -22,6 +22,8 @@
     <ClCompile Include="src\interfaz_usuario\BotonUI.cpp" />
     <ClCompile Include="src\Interfaz_Partida.cpp" />
     <ClCompile Include="src\Casilla.cpp" />
+    <ClCompile Include="src\interfaz_usuario\Boton_generico.cpp" />
+    <ClCompile Include="src\interfaz_usuario\Menu_opciones_prejuego.cpp" />
     <ClCompile Include="src\letras_tablero.cpp" />
     <ClCompile Include="src\Mascara_tablero.cpp" />
     <ClCompile Include="src\piezas\Alfil.cpp" />
@@ -44,6 +46,8 @@
     <ClInclude Include="lib\ETSIDI.h" />
     <ClInclude Include="lib\freeglut.h" />
     <ClInclude Include="src\Estilos_graficos.h" />
+    <ClInclude Include="src\interfaz_usuario\Boton_generico.h" />
+    <ClInclude Include="src\interfaz_usuario\Menu_opciones_prejuego.h" />
     <ClInclude Include="src\letras_tablero.h" />
     <ClInclude Include="src\Mascara_tablero.h" />
     <ClInclude Include="src\piezas\Alfil.h" />
