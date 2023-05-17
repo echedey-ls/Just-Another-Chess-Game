@@ -22,8 +22,9 @@ void Mundo::dibuja()
 
 	// Esto es guarro, hay que hacer una máquina de estados (mediante enum o algo así)
 	//menu_inicio.dibuja();
-	tablero.dibuja();
-	gui_partida.dibuja();
+	//tablero.dibuja();
+	//gui_partida.dibuja();
+	menu_opts_prejuego.dibuja();
 }
 
 void Mundo::mouse(int button, int state, int x, int y) {
@@ -49,4 +50,5 @@ void Mundo::mouse(int button, int state, int x, int y) {
 	if(state == GLUT_UP)
 		std::cout << "Posición en coordenadas del mundo x, y, z: " << posX << ", " << posY << ", " << posZ << std::endl;
 	gui_partida.mouse(button, state, posX, posY);
+	menu_opts_prejuego.mouse(button, state, posX, posY);
 }
