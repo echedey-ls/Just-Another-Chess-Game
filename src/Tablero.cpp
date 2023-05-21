@@ -10,6 +10,8 @@
 #include "piezas/Rey.h"
 #include "letras_tablero.h"
 
+#include <iostream>
+#include <functional>
 
 /**
 * Inicializa el tablero con las piezas de normal
@@ -18,8 +20,7 @@
 */
 
 
-
-Tablero::Tablero() : estilo(clasico)
+Tablero::Tablero(): estilo(clasico), situacion(NINGUNA_CLICKEADA)
 {
 	inicializa();
 }
@@ -69,6 +70,10 @@ Pieza* Tablero::obtener_pieza_en(const Posicion& p) {
 void Tablero::inicializa() {
 	tablero.setPos(32, 32);
 
+	for (auto& casilla_fila : casillas)
+		for (auto& casilla : casilla_fila);
+			//casilla.register_on_callback(std::bind(&Tablero::Clicks, &this);
+
 	/* Piezas */
 	// Peones
 	for (char i = 0; i < 8; ++i) {
@@ -98,6 +103,7 @@ void Tablero::inicializa() {
 	casilla(3, 7).setPieza(new Rey(negra, clasico));
 
 	//mover_pieza({ 4,1 }, { 7,2 });   la función mover_pieza está en tablero.h, y lo que se les pasan como argumentos es de la clase posicion 
+
 }
 
 void Tablero::dibuja()
@@ -153,31 +159,33 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 	}
 }
 
-/*void Tablero::ilumina() {
 
-	/*glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-
-	// Given the coordinates
-	gluOrtho2D(0.0, 800.0,
-		0.0, 600.0); 
-
-
-	glPushMatrix();
-	/*glTranslatef(posicion.x, posicion.y, 0);
-	glRotatef(30, 1, 1, 1);
-	glColor3f(rand() / (float)RAND_MAX, rand() / (float)RAND_MAX,
-		rand() / (float)RAND_MAX);//color aleatorio
-	glutSolidCube(lado);
-	glPopMatrix();
-
+void Tablero::mouse(int button, int state, GLdouble x, GLdouble y) {
 	
-	glColor3ub(255, 0, 0);
-	glBegin(GL_POLYGON);
-	glVertex3f(-5.0f, -5.0f, 1); // top left
-	glVertex3f(-5.0f, 5.0f, 1); // top right 
-	glVertex3f(5.0f, 5.0f, 1); // bottom right
-	glVertex3f(5.0f, -5.0f, 1); // bottom left
-	glEnd();
-	glFlush();
-} */
+	//llamada de casilla.mouse()
+	casilla(x,y).mouse(button, state, x, y);
+}
+
+void Tablero::clicks(Posicion position)
+{
+	switch (situacion)
+	{
+		case NINGUNA_CLICKEADA:
+			primer_clickeada = position;
+			// se guarda la posición 
+			// y pasamos al siguiente estado
+		case PRIMERA_CLICKEADA:
+			casilla(0, 0).ilustrar();         //no sé cómo indicar que es el casilla actual que estamos
+			position1 = position;
+			//situacion = SEGUNDA_CLICKEADA;
+		case SEGUNDA_CLICKEADA:
+			casilla(0, 0).ilustrar();         //no sé cómo indicar que es el casilla siguiente que pinchamos/vamos
+			position2 = position;
+			mover_pieza(position1, position2);  //creo que esta mal por momento
+	//default:
+		break;
+	}
+
+	// se debe iluminar
+	// si es ninguna clickeada, se guarda en posicion la posicion clickeada, si ha sido clikeada, se llamada a la función mover piezas
+} 

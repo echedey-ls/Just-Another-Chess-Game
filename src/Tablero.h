@@ -4,6 +4,7 @@
 #include "Casilla.h"
 #include "Mascara_tablero.h"
 
+#include <functional>
 #include "ETSIDI.h"
 using namespace ETSIDI;
 
@@ -16,11 +17,17 @@ class Tablero
 	Casilla& casilla(char x, char y) { return casillas[y][x]; }
 	Casilla& casilla(const Posicion& p) { return casilla(p.x, p.y); }
 
+	//Cuando no está clickeada, se guarda la posición 
+	//Se crea una variable de tipo situacion
+	enum Situacion {NINGUNA_CLICKEADA, PRIMERA_CLICKEADA, SEGUNDA_CLICKEADA} situacion; 
+	
+	Posicion primer_clickeada{ 0,0 };
+	Posicion position1;
+	Posicion position2;
 
 public:
 	Tablero(); // Inicializa tablero con sus piezas distribuidas en un juego normal
 	~Tablero(); // Borra toda la memoria reservada
-
 
 	void inicializa();
 	// Funciones gráficas
@@ -41,6 +48,14 @@ public:
 	// Lo que realmente calcula los movimientos
 	void calculadora_movimientos(const Posicion& p, Mascara_tablero& resultado);
 
-	//void ilumina(); //quiero que se ilumine al hacer click sobre la casilla
+	//void ilumina(); 
+	//quiero que se ilumine al hacer click sobre la casilla
+
+	//Para gestionar clicks en el tablero a través del mouse
+	void mouse(int button, int state, GLdouble x, GLdouble y);
+	
+	//Gestión de clicks en función de la Posición que estás
+	void clicks(Posicion);
 };
+
 
