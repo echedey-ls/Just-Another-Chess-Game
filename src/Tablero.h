@@ -19,11 +19,11 @@ class Tablero
 
 	//Cuando no está clickeada, se guarda la posición 
 	//Se crea una variable de tipo situacion
-	enum Situacion {NINGUNA_CLICKEADA, PRIMERA_CLICKEADA, SEGUNDA_CLICKEADA} situacion; 
+	enum Situacion {NINGUNA_CLICKEADA, PRIMERA_CLICKEADA} situacion; 
+	enum Evento {PRIMER_CLICK} evento;
 	
 	Posicion primer_clickeada{ 0,0 };
-	Posicion position1;
-	Posicion position2;
+
 
 public:
 	Tablero(); // Inicializa tablero con sus piezas distribuidas en un juego normal

@@ -7,7 +7,8 @@ char Casilla::casillas_counter = 0;
 
 void Casilla::ilustrar() {
 
-	bool select; 
+
+	//bool select; 
 	//atributo para determinar si debe mostrarse la seleccion
 
 	//Posicion p = getPosicion();
@@ -44,6 +45,10 @@ void Casilla::ilustrar() {
 	glEnd();
 	glFlush();
 
+}
+
+void Casilla::no_ilustrar() {
+	ilus = false;
 }
 
 Posicion Casilla::getPosicion() {
