@@ -25,7 +25,7 @@ Tablero::Tablero(): estilo(clasico), situacion(NINGUNA_CLICKEADA)
 	inicializa();
 	for (auto& casilla_fila : casillas)
 		for (auto& casilla : casilla_fila)
-			casilla.register_on_click(std::bind(&Tablero::clicks, this));
+			casilla.register_on_click(std::bind(&Tablero::clicks, this, std::placeholders::_1));
 }
 
 Tablero::~Tablero() {
