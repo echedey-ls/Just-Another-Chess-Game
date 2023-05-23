@@ -10,6 +10,8 @@
 #include "piezas/Rey.h"
 #include "letras_tablero.h"
 
+#include <iostream>
+#include <functional>
 
 /**
 * Inicializa el tablero con las piezas de normal
@@ -18,10 +20,12 @@
 */
 
 
-
-Tablero::Tablero() : estilo(clasico)
+Tablero::Tablero(): estilo(clasico), situacion(NINGUNA_CLICKEADA)
 {
 	inicializa();
+	for (auto& casilla_fila : casillas)
+		for (auto& casilla : casilla_fila)
+			casilla.register_on_click(std::bind(&Tablero::clicks, this, std::placeholders::_1));
 }
 
 Tablero::~Tablero() {
@@ -69,6 +73,10 @@ Pieza* Tablero::obtener_pieza_en(const Posicion& p) {
 void Tablero::inicializa() {
 	tablero.setPos(32, 32);
 
+	for (auto& casilla_fila : casillas)
+		for (auto& casilla : casilla_fila);
+			//casilla.register_on_callback(std::bind(&Tablero::Clicks, &this);
+
 	/* Piezas */
 	// Peones
 	for (char i = 0; i < 8; ++i) {
@@ -98,6 +106,7 @@ void Tablero::inicializa() {
 	casilla(3, 7).setPieza(new Rey(negra, clasico));
 
 	//mover_pieza({ 4,1 }, { 7,2 });   la función mover_pieza está en tablero.h, y lo que se les pasan como argumentos es de la clase posicion 
+
 }
 
 void Tablero::dibuja()
@@ -153,31 +162,33 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 	}
 }
 
-/*void Tablero::ilumina() {
 
-	/*glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
+void Tablero::mouse(int button, int state, GLdouble x, GLdouble y) {
+	for (auto& casilla_fila : casillas)
+		for (auto& casilla : casilla_fila)
+			casilla.mouse(button, state, x, y);
 
-	// Given the coordinates
-	gluOrtho2D(0.0, 800.0,
-		0.0, 600.0); 
+	//casilla.register_on_callback(std::bind(&Tablero::Clicks, &this);
+	// FALTA LO DE ARRIBA
+}
 
+void Tablero::clicks(Posicion position)
+{
+	switch (situacion)
+	{
+	case NINGUNA_CLICKEADA: {
+		situacion = PRIMERA_CLICKEADA;
+		casilla(position).setSeleccionada(true);
+		primer_clickeada = position;
+	} break;
 
-	glPushMatrix();
-	/*glTranslatef(posicion.x, posicion.y, 0);
-	glRotatef(30, 1, 1, 1);
-	glColor3f(rand() / (float)RAND_MAX, rand() / (float)RAND_MAX,
-		rand() / (float)RAND_MAX);//color aleatorio
-	glutSolidCube(lado);
-	glPopMatrix();
+	case PRIMERA_CLICKEADA: {
+		casilla(primer_clickeada).setSeleccionada(false);
+		mover_pieza(primer_clickeada, position);
+		situacion = NINGUNA_CLICKEADA;
+	} break;
+	}
 
-	
-	glColor3ub(255, 0, 0);
-	glBegin(GL_POLYGON);
-	glVertex3f(-5.0f, -5.0f, 1); // top left
-	glVertex3f(-5.0f, 5.0f, 1); // top right 
-	glVertex3f(5.0f, 5.0f, 1); // bottom right
-	glVertex3f(5.0f, -5.0f, 1); // bottom left
-	glEnd();
-	glFlush();
-} */
+	// se debe iluminar
+	// si es ninguna clickeada, se guarda en posicion la posicion clickeada, si ha sido clikeada, se llamada a la función mover piezas
+}

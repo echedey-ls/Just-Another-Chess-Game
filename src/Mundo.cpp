@@ -13,17 +13,18 @@ void Mundo::inicializa()
 	menu_inicio.estado = Menu_Inicio::select_void;
 	tablero.inicializa();
 }
+
 void Mundo::dibuja()
 {
 	gluLookAt(x_ojo, y_ojo, z_ojo,  // posicion del ojo
-		x_ojo,y_ojo,0.0,      // hacia que punto mira  (0,0,0) 
-		0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y)
+		x_ojo,y_ojo,0.0,            // hacia que punto mira  (0,0,0) 
+		0.0, 1.0, 0.0);             // definimos hacia arriba (eje Y)
 
 
 	// Esto es guarro, hay que hacer una máquina de estados (mediante enum o algo así)
-	menu_inicio.dibuja();
-	//tablero.dibuja();
-	//gui_partida.dibuja();
+	//menu_inicio.dibuja();
+	tablero.dibuja();
+	gui_partida.dibuja();
 	//menu_opts_prejuego.dibuja();
 }
 
@@ -48,7 +49,9 @@ void Mundo::mouse(int button, int state, int x, int y) {
 	gluUnProject(winX, winY, 1.0, modelview, projection, viewport, &posX, &posY, &posZ);
 
 	if(state == GLUT_UP)
-		std::cout << "Posición en coordenadas del mundo x, y, z: " << posX << ", " << posY << ", " << posZ << std::endl;
+		std::cout << "Posicion en coordenadas del mundo x, y, z: " << posX << ", " << posY << ", " << posZ << std::endl;
 	gui_partida.mouse(button, state, posX, posY);
+
 	menu_opts_prejuego.mouse(button, state, posX, posY);
+	tablero.mouse(button, state, posX, posY);
 }

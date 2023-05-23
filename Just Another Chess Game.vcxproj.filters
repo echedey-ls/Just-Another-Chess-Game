@@ -17,6 +17,8 @@
     <ClCompile Include="src\piezas\Rey.cpp" />
     <ClCompile Include="src\Interfaz_Partida.cpp" />
     <ClCompile Include="src\interfaz_usuario\BotonUI.cpp" />
+    <ClCompile Include="src\interfaz_usuario\Boton_generico.cpp" />
+    <ClCompile Include="src\interfaz_usuario\Menu_opciones_prejuego.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\ETSIDI.h" />
@@ -39,6 +41,8 @@
     <ClInclude Include="src\Interfaz_Partida.h" />
     <ClInclude Include="src\interfaz_usuario\BotonUI.h" />
     <ClInclude Include="src\Estado_casilla.h" />
+    <ClInclude Include="src\interfaz_usuario\Boton_generico.h" />
+    <ClInclude Include="src\interfaz_usuario\Menu_opciones_prejuego.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\ETSIDI.lib" />
