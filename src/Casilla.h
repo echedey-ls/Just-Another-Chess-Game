@@ -11,8 +11,7 @@ class Casilla {
 	Pieza* pieza;
 	Posicion pos;
 	bool seleccionada;
-	bool select;
-	std::function<void()> click_callback;
+	std::function<void(Posicion)> click_callback;
 	Boton_generico btn_casilla{ 0., 0., 0., 0. };
 	bool ilus; 
 	// relacionada con la casilla ilustrar
@@ -20,7 +19,7 @@ class Casilla {
 public:
 
 
-	Casilla(void) : pieza{ nullptr }, pos{ -1, -1 }, select{ false }, ilus{true} {
+	Casilla(void) : pieza{ nullptr }, pos{ -1, -1 }, seleccionada{ false }, ilus{true} {
 		/* Incrementamos la posición de cada casilla, cada vez que se crea una.
 		* Empezamos incrementando en el eje X, una vez lleno, el Y.
 		*/
@@ -31,6 +30,9 @@ public:
 		casillas_counter++;
 		//Asignar límites de la casilla donde el botón se encuentra
 		btn_casilla.set_limits(8.f * pos.x, 8.f * pos.y, 8.f * (pos.x + 1), 8.f * (pos.y + 1));
+
+		//Callback casilla
+		btn_casilla.register_on_click(std::bind(&Casilla::mouse_on_click, this));
 
 	};
 	Casilla(Pieza* pieza_ptr) : Casilla() { pieza = pieza_ptr; }
@@ -43,7 +45,8 @@ public:
 	bool getSeleccionada();
 
 	void mouse(int button, int state, GLdouble x, GLdouble y);
-	void register_on_click(std::function<void()>func) { click_callback = func; }
+	void mouse_on_click();
+	void register_on_click(std::function<void(Posicion)>func) { click_callback = func; }
 	
 
 	//Queda pediente aún

@@ -13,6 +13,7 @@ void Mundo::inicializa()
 	menu_inicio.estado = Menu_Inicio::select_void;
 	tablero.inicializa();
 }
+
 void Mundo::dibuja()
 {
 	gluLookAt(x_ojo, y_ojo, z_ojo,  // posicion del ojo
@@ -22,9 +23,9 @@ void Mundo::dibuja()
 
 	// Esto es guarro, hay que hacer una máquina de estados (mediante enum o algo así)
 	//menu_inicio.dibuja();
-	//tablero.dibuja();
-	//gui_partida.dibuja();
-	menu_opts_prejuego.dibuja();
+	tablero.dibuja();
+	gui_partida.dibuja();
+	//menu_opts_prejuego.dibuja();
 }
 
 void Mundo::mouse(int button, int state, int x, int y) {

@@ -23,6 +23,9 @@
 Tablero::Tablero(): estilo(clasico), situacion(NINGUNA_CLICKEADA)
 {
 	inicializa();
+	for (auto& casilla_fila : casillas)
+		for (auto& casilla : casilla_fila)
+			casilla.register_on_click(std::bind(&Tablero::clicks, this));
 }
 
 Tablero::~Tablero() {
@@ -161,78 +164,29 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 
 
 void Tablero::mouse(int button, int state, GLdouble x, GLdouble y) {
-	
-	//llamada de casilla.mouse()
-	//casilla(x,y).mouse(button, state, x, y);
-
 	for (auto& casilla_fila : casillas)
 		for (auto& casilla : casilla_fila)
-			mouse(button, state, x, y);
+			casilla.mouse(button, state, x, y);
+
 	//casilla.register_on_callback(std::bind(&Tablero::Clicks, &this);
 	// FALTA LO DE ARRIBA
 }
 
-/*void Tablero::clicks(Posicion position)
-{
-	switch (situacion)
-	{
-		case NINGUNA_CLICKEADA:
-			primer_clickeada = position;
-			// se guarda la posición 
-			// y pasamos al siguiente estado
-		case PRIMERA_CLICKEADA:
-			casilla(0, 0).ilustrar();         //no sé cómo indicar que es el casilla actual que estamos
-			position1 = position;
-			//situacion = SEGUNDA_CLICKEADA;
-		case SEGUNDA_CLICKEADA:
-			casilla(0, 0).ilustrar();         //no sé cómo indicar que es el casilla siguiente que pinchamos/vamos
-			position2 = position;
-			mover_pieza(position1, position2);  //creo que esta mal por momento
-	//default:
-		break;
-	}
-
-	// se debe iluminar
-	// si es ninguna clickeada, se guarda en posicion la posicion clickeada, si ha sido clikeada, se llamada a la función mover piezas
-} */
-
-
 void Tablero::clicks(Posicion position)
 {
-	Situacion situacion= NINGUNA_CLICKEADA;
-	Evento evento = PRIMER_CLICK;
-	
-
 	switch (situacion)
 	{
-	case NINGUNA_CLICKEADA:
+	case NINGUNA_CLICKEADA: {
+		situacion = PRIMERA_CLICKEADA;
+		casilla(position).setSeleccionada(true);
+		primer_clickeada = position;
+	} break;
 
-		switch (situacion) {
-
-		case PRIMER_CLICK:
-			situacion = PRIMERA_CLICKEADA;
-			casillas[position.x][position.y].ilustrar();
-			primer_clickeada = position;
-			mover_pieza(position, position);
-			// en algún momento se recoge el lugar del destino??
-
-		default:std::cout << "Evento no válido en el estado NINGUNA_CLICKEADA." << std::endl;
-			break;
-		}
-		break;
-
-	case PRIMERA_CLICKEADA:
-		
-		switch (situacion) {
-
-		case NINGUNA_CLICKEADA:
-			situacion = NINGUNA_CLICKEADA;
-			casillas[position.x][position.y].no_ilustrar();
-
-		default:std::cout << "Evento no válido en el estado PRIMERA_CLICKEADA." << std::endl;
-			break;
-		}
-		break;
+	case PRIMERA_CLICKEADA: {
+		casilla(primer_clickeada).setSeleccionada(false);
+		mover_pieza(primer_clickeada, position);
+		situacion = NINGUNA_CLICKEADA;
+	} break;
 	}
 
 	// se debe iluminar

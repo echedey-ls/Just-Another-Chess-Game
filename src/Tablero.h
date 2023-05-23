@@ -19,8 +19,7 @@ class Tablero
 
 	//Cuando no está clickeada, se guarda la posición 
 	//Se crea una variable de tipo situacion
-	enum Situacion {NINGUNA_CLICKEADA, PRIMERA_CLICKEADA} situacion; 
-	enum Evento {PRIMER_CLICK} evento;
+	enum Situacion {NINGUNA_CLICKEADA, PRIMERA_CLICKEADA} situacion;
 	
 	Posicion primer_clickeada{ 0,0 };
 
