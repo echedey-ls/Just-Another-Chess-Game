@@ -22,8 +22,7 @@ void Casilla::ilustrar() {
 
 	if (seleccionada) {
 		glPushMatrix();
-		glTranslatef(pos.x, pos.y, 0);
-		glRotatef(0, 0, 0, 0);
+		glTranslatef(pos.x, pos.y, 0.f);
 		/*glColor3f(rand() / (float)RAND_MAX, rand() / (float)RAND_MAX,
 			rand() / (float)RAND_MAX);//color aleatorio*/
 		//glutSolidCube(8);
@@ -60,11 +59,15 @@ void Casilla::ilustrar() {
 		glVertex3f(8.f * (pos.x + 1), 8.f * (pos.y + 1), 0);  // bottom right
 		glVertex3f(8.f * (pos.x+1), 8.f * pos.y, 0);*/
 
+		constexpr float side = 8.f;
+		constexpr float offset = 0.2f;
+		float x_lo = 6.93f * pos.x + offset;
+		float y_lo = 6.93f * pos.y + offset;
 
-		glVertex3f(7.1f * pos.x, 7.1f * pos.y, 0);				// top left
-		glVertex3f(7.1f * pos.x, 7.1f * (pos.y + 1), 0);        // top right
-		glVertex3f(7.1f * (pos.x + 1), 7.1f * (pos.y + 1), 0);  // bottom right
-		glVertex3f(7.1f * (pos.x + 1), 7.1f * pos.y, 0);		// bottom left
+		glVertex3f(x_lo, y_lo + side, 0);				// top left
+		glVertex3f(x_lo + side, y_lo + side, 0);        // top right
+		glVertex3f(x_lo + side, y_lo, 0);  // bottom right
+		glVertex3f(x_lo, y_lo, 0);		// bottom left
 
 		glEnd();
 

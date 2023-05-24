@@ -4,11 +4,15 @@
 
 #include <iostream>
 
+Mundo::Mundo() : estado{started} {}
+
 void Mundo::inicializa()
 {
 	x_ojo = 32;
 	y_ojo = 32;
 	z_ojo = 100;
+
+	estado = pantalla_inicio;
 
 	menu_inicio.estado = Menu_Inicio::select_void;
 	tablero.inicializa();
@@ -48,9 +52,13 @@ void Mundo::mouse(int button, int state, int x, int y) {
 	//glReadPixels(x, int(winY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &winZ);
 	gluUnProject(winX, winY, 1.0, modelview, projection, viewport, &posX, &posY, &posZ);
 
+	GLdouble posX_r, posY_r, posZ_r;
+	gluUnProject(winX, winY, 1.0, modelview, projection, viewport, &posX_r, &posY_r, &posZ_r);
 
 	if (state == GLUT_UP) {
-		std::cout << "Posición en coordenadas del mundo x, y, z: " << posX << ", " << posY << ", " << posZ << std::endl;
+		std::cout << "R^2 (Z := 0) x = " << posX << ", y = " << posY << ", z" << posZ << std::endl;
+		std::cout << "R^3 (Z real) x = " << posX << ", y = " << posY << ", z" << posZ << std::endl;
+
 	}
 	gui_partida.mouse(button, state, posX, posY);
 

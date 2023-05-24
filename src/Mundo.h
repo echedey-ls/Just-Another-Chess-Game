@@ -11,9 +11,18 @@ class Mundo {
 	float y_ojo = 0.f;
 	float z_ojo = 0.f;
 public:
+	Mundo();
 	void inicializa();
 	void dibuja();
 	void mouse(int button, int state, int x, int y);
+
+	enum Estado {
+		started,
+		pantalla_inicio,
+		pantalla_seleccion_team,
+		juego,
+		fin_partida
+	} estado;
 
 	Menu_Inicio menu_inicio;
 	Tablero tablero;
