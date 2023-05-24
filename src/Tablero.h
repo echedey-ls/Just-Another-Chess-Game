@@ -4,6 +4,8 @@
 #include "Casilla.h"
 #include "Mascara_tablero.h"
 
+#include "interfaz_usuario/BotonUI.h"
+
 #include "ETSIDI.h"
 using namespace ETSIDI;
 

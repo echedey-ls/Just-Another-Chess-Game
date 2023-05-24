@@ -70,7 +70,7 @@ void OnDraw(void)
 	// si se omite, la coord. Z varía mucho y los botones pueden no funcionar
 	glColor3f(0.5f, 0.0f, 0.0f);
 	glBegin(GL_QUADS);
-	constexpr GLfloat MIN_LIM = 
+	constexpr GLfloat MIN_LIM =
 		glVertex3f(0.0f, 0.0f, 0.0f);
 		glVertex3f(64.0f, 0.0f, 0.0f);
 		glVertex3f(64.0f, 64.0f, 0.0f);
@@ -105,9 +105,6 @@ void mouse(int button, int state, int x, int y) {
 	mundo.mouse(button, state, x, y);
 }
 
-void passive_mouse(int x, int y) {
-	mundo.mouse(0x0004, 0x0004, x, y); // Valores fuera de rangos definidos (0x0 hasta 0x2)
-}
 
 void OnTimer(int value)
 {

@@ -47,8 +47,13 @@ void Mundo::mouse(int button, int state, int x, int y) {
 	//glReadPixels(x, int(winY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &winZ);
 	gluUnProject(winX, winY, 1.0, modelview, projection, viewport, &posX, &posY, &posZ);
 
-	if(state == GLUT_UP)
+	if (state == GLUT_UP) {
 		std::cout << "Posición en coordenadas del mundo x, y, z: " << posX << ", " << posY << ", " << posZ << std::endl;
+		if (((posX>=0.0)&&(posX<=64.0))&&((posY>=0.0)&&(posY<=64.0))) {
+			std::cout << "ESTAS DENTRO DEL TABLERO!!!!" << std::endl;
+		}
+		else
+			std::cout<< "ESTAS FUERA DEL TABLERO!!!!" << std::endl;
+	}
 	gui_partida.mouse(button, state, posX, posY);
-	menu_opts_prejuego.mouse(button, state, posX, posY);
 }

@@ -75,3 +75,5 @@ void Pieza::cargar_sprite() {
 
 	sprite_ptr = new ETSIDI::Sprite(png_path.c_str(), 0, 0, 8, 8);
 }
+
+
