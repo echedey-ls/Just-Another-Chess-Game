@@ -105,6 +105,9 @@ void mouse(int button, int state, int x, int y) {
 	mundo.mouse(button, state, x, y);
 }
 
+void passive_mouse(int x, int y) {
+	mundo.mouse(0x0004, 0x0004, x, y); // Valores fuera de rangos definidos (0x0 hasta 0x2)
+}
 
 void OnTimer(int value)
 {

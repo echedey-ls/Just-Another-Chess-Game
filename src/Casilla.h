@@ -51,9 +51,6 @@ public:
 	void primer_mov_hecho();
 	bool get_primer_mov();
 	void set_primer_mov(bool mov1);
-};
-
-
 
 	void mouse(int button, int state, GLdouble x, GLdouble y);
 	void mouse_on_click();

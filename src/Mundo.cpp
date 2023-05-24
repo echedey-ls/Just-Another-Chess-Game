@@ -50,7 +50,8 @@ void Mundo::mouse(int button, int state, int x, int y) {
 
 
 	if (state == GLUT_UP) {
-		std::cout << "Posición en coordenadas del mundo x, y, z: " << posX << ", " << posY << ", " << posZ 
+		std::cout << "Posición en coordenadas del mundo x, y, z: " << posX << ", " << posY << ", " << posZ << std::endl;
+	}
 	gui_partida.mouse(button, state, posX, posY);
 
 	menu_opts_prejuego.mouse(button, state, posX, posY);
