@@ -5,6 +5,7 @@
 #include <functional>
 
 #include "interfaz_usuario/Boton_generico.h"
+#include "Estado_casilla.h"
 
 class Casilla {
 	static char casillas_counter;
@@ -16,8 +17,10 @@ class Casilla {
 	bool ilus; 
 	// relacionada con la casilla ilustrar
 
-public:
+	Disponibilidad_casilla estado;
+	// se declara el enum como "estado"
 
+public:
 
 	Casilla(void) : pieza{ nullptr }, pos{ -1, -1 }, seleccionada{ false }, ilus{true} {
 		/* Incrementamos la posición de cada casilla, cada vez que se crea una.
