@@ -29,9 +29,8 @@ Tablero::Tablero(): estilo(clasico), situacion(NINGUNA_CLICKEADA)
 }
 
 Tablero::~Tablero() {
-	for (auto& casilla_fila : casillas)
-		for (auto& casilla : casilla_fila)
-			delete casilla.getPieza();
+	// Las piezas de las casillas se eliminan solas
+	// Eliminar resto de cosas manualmente
 }
 
 /**

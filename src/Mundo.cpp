@@ -24,12 +24,26 @@ void Mundo::dibuja()
 		x_ojo,y_ojo,0.0,            // hacia que punto mira  (0,0,0) 
 		0.0, 1.0, 0.0);             // definimos hacia arriba (eje Y)
 
-
-	// Esto es guarro, hay que hacer una máquina de estados (mediante enum o algo así)
-	//menu_inicio.dibuja();
-	tablero.dibuja();
-	gui_partida.dibuja();
-	//menu_opts_prejuego.dibuja();
+	switch (estado)
+	{
+	case Mundo::started:
+		inicializa();
+		break;
+	case Mundo::pantalla_inicio:
+		menu_inicio.dibuja();
+		break;
+	case Mundo::pantalla_seleccion_team:
+		menu_opts_prejuego.dibuja();
+		break;
+	case Mundo::juego:
+		tablero.dibuja();
+		gui_partida.dibuja();
+		break;
+	case Mundo::fin_partida:
+		break;
+	default:
+		break;
+	}
 }
 
 void Mundo::mouse(int button, int state, int x, int y) {
@@ -60,9 +74,34 @@ void Mundo::mouse(int button, int state, int x, int y) {
 		std::cout << "R^3 (Z real) x = " << posX << ", y = " << posY << ", z" << posZ << std::endl;
 
 	}
-	gui_partida.mouse(button, state, posX, posY);
 
-	menu_opts_prejuego.mouse(button, state, posX, posY);
-	tablero.mouse(button, state, posX, posY);
+	switch (estado)
+	{
+	case Mundo::started:
+		break;
+	case Mundo::pantalla_inicio:
+		menu_inicio.mouse(button, state, posX, posY);
+		break;
+	case Mundo::pantalla_seleccion_team:
+		menu_opts_prejuego.mouse(button, state, posX, posY);
+		break;
+	case Mundo::juego:
+		gui_partida.mouse(button, state, posX, posY);
+		tablero.mouse(button, state, posX, posY);
+		break;
+	case Mundo::fin_partida:
+		break;
+	default:
+		break;
+	}
+}
 
+void Mundo::callback_menu_inicio(bool jugar) {
+	if (jugar) estado = pantalla_seleccion_team;
+	else exit(0);
+}
+
+void Mundo::callback_menu_prejuego(bool color_blanco) {
+	if (color_blanco) estado = juego;
+	else estado = juego;
 }

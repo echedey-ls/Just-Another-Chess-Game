@@ -25,7 +25,7 @@ protected:
 public:
 	Pieza(Color c, Estilo_grafico s) : color{ c }, estilo_actual{ s } {};
 	Pieza(const Pieza& other) : color{ other.color }, estilo_actual{ other.estilo_actual } {};
-	~Pieza() { delete sprite_ptr; };
+	virtual ~Pieza() { delete sprite_ptr; };
 
 	/** No hay forma de cambiar el archivo que representa un sprite, así que para
 	* cambiarlo, habrá que eliminarlo y crearlo de nuevo.

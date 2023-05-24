@@ -24,8 +24,14 @@ public:
 		fin_partida
 	} estado;
 
-	Menu_Inicio menu_inicio;
+	// Callbacks para cambiar los estados desde los atributos
+	void callback_menu_inicio(bool jugar);
+	void callback_menu_prejuego(bool color_blanco);
+
+	// Clases del juego
+	Menu_Inicio menu_inicio{ std::bind(&Mundo::callback_menu_inicio, this, std::placeholders::_1) };
 	Tablero tablero;
 	Interfaz_Partida gui_partida{ std::bind(&Tablero::siguiente_estilo, &tablero) };
-	Menu_opciones_prejuego menu_opts_prejuego;
+	Menu_opciones_prejuego menu_opts_prejuego{ std::bind(&Mundo::callback_menu_prejuego, this, std::placeholders::_1) };
+
 };

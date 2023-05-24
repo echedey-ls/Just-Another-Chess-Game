@@ -49,7 +49,6 @@ int main(int argc, char* argv[])
 	glutPassiveMotionFunc(passive_mouse);
 
 	initGL();
-	mundo.inicializa();
 
 	glutMainLoop();
 
