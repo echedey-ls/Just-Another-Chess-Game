@@ -39,7 +39,7 @@ public:
 	Tipo get_tipo() const { return tipo; };
 	void ilustrar(Posicion p); // En función del tipo, color y estilo_actual
 
-
+	
 
 
 };

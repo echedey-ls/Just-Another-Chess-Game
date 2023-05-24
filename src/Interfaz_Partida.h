@@ -14,8 +14,8 @@ class Interfaz_Partida {
 	//BotonUI tablero_click{ 0.0f,0.0f,64.0f,64.0f };
 
 	//vector piezas eliminadas
-	std::vector<Pieza*> piezablanca;
-	std::vector<Pieza*> piezanegra;
+	std::vector<Pieza*> piezas_blancas;
+	std::vector<Pieza*> piezas_negras;
 
 
 public:
@@ -23,6 +23,9 @@ public:
 	~Interfaz_Partida();
 	void dibuja();
 	void mouse(int button, int state, GLdouble x, GLdouble y);
-	
+	void dibujarPiezas();
+	void add_pieza(Pieza* p_pieza);
+
+
 };
 
