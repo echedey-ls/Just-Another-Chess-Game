@@ -100,10 +100,10 @@ void Tablero::inicializa() {
 	}
 	//Reinas
 	casilla(3, 0).setPieza(new Reina(blanca, clasico));
-	casilla(4, 7).setPieza(new Reina(negra, clasico));
+	casilla(3, 7).setPieza(new Reina(negra, clasico));
 	//Reyes
 	casilla(4, 0).setPieza(new Rey(blanca, clasico));
-	casilla(3, 7).setPieza(new Rey(negra, clasico));
+	casilla(4, 7).setPieza(new Rey(negra, clasico));
 
 	//mover_pieza({ 4,1 }, { 7,2 });   la función mover_pieza está en tablero.h, y lo que se les pasan como argumentos es de la clase posicion 
 
