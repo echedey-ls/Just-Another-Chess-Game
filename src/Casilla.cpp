@@ -42,6 +42,9 @@ void Casilla::ilustrar() {
 		case prohibida:
 			glColor3ub(255, 0, 0); //rojo
 			break;
+		case comible_en_passant:
+			glColor3ub(255, 102, 255);  // pinky el más mono de todos (como yo)
+			break;
 		default:
 			break;
 		}

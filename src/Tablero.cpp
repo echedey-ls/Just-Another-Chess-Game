@@ -152,6 +152,7 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 	case peon: {
 		Peon* peon = dynamic_cast<Peon*>(pza_p);
 		for (char j = -1; j <= 1; j++) {
+			// Aquí se comprueban posiciones por delante del peon (es lo habitual)
 			Posicion a_revisar = { p.x + j, p.y + (pza_p->get_color() == blanca ? 1 : -1) };
 			if (es_posicion_valida(a_revisar)) {
 				Pieza* otra_pieza = obtener_pieza_en(a_revisar);
@@ -161,7 +162,7 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 					resultado(a_revisar) = no_movible;
 				if ((j == 0) && (!otra_pieza)) { // No hay pieza justo delante
 					resultado(a_revisar) = si_movible;
-					if (peon->estado == Peon::sin_moverse) { // Primer movimiento de dos casillas
+					if (peon->estado == Peon::sin_moverse) { // Se puede primer movimiento de dos casillas
 						Posicion a_revisar = { p.x, p.y + (pza_p->get_color() == blanca ? 2 : -2) };
 						if (es_posicion_valida(a_revisar)) {
 							Pieza* otra_pieza = obtener_pieza_en(a_revisar);
@@ -174,7 +175,19 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 				}
 			}
 		}
-			/** TODO: check atacable en passant y primer movimiento de dos casillas **/
+		// En passant
+		for (char j = -1; j <= 1; j += 2) {
+			// Posiciones laterales (en passant)
+			Posicion a_revisar = { p.x + j, p.y };
+			if (es_posicion_valida(a_revisar)) {
+				Pieza* otra_pieza = obtener_pieza_en(a_revisar);
+				Peon* otra_pieza_as_peon = dynamic_cast<Peon*>(otra_pieza);
+				if (otra_pieza_as_peon and otra_pieza_as_peon->estado == Peon::movimiento_paso_doble) {
+					resultado(a_revisar) = atacable;
+					resultado(a_revisar.x, a_revisar.y + (pza_p->get_color() == blanca ? 1 : -1) ) = comible_en_passant;
+				}
+			}
+		}
 	} break;
 	case torre:
 	{
