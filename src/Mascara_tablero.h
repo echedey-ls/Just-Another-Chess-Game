@@ -36,7 +36,7 @@ struct Mascara_tablero {
 		reset();
 	}
 	void reset();
-	Disponibilidad_casilla& operator()(unsigned char x, unsigned char y);
+	Disponibilidad_casilla& operator()(unsigned char x,unsigned char y);
 	Disponibilidad_casilla& operator()(const Posicion& p);
 };
 

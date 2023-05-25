@@ -190,23 +190,50 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 		break; }
 	case torre:
 	{
-		char i = 0;
+		/*char i = 1;
+		unsigned char px;
+		unsigned char py;
 		Posicion v_a_revisar[4] = { { p.x + i, p.y},{ p.x - i,p.y },{ p.x, p.y + i },{ p.x,p.y - i } };
 		for (int j = 0; j < 4; j++) {
 			do {
-				i++;
+				px = (unsigned char)v_a_revisar[j].x;
+				py = (unsigned char)v_a_revisar[j].y;
 				if (es_posicion_valida(v_a_revisar[j])) {
 					Pieza* otra_pieza = obtener_pieza_en(v_a_revisar[j]);
 					if (!otra_pieza) { // No existe pieza en la posicion que estamos revisando
-						resultado(v_a_revisar[j]) = si_movible;
+						resultado(px,py) = si_movible;
 					}
 					else if (pza_p->get_color() != otra_pieza->get_color()) { // Es pieza del equipo contrario
-						resultado(v_a_revisar[j]) = atacable;
+						resultado(px, py) = atacable;
 					}
 				}
-				
-			} while ((resultado(v_a_revisar[j]) != atacable) || (i < 7));
-		}
+				i++;
+			} while ((resultado(px, py) != atacable) && (i < 7));
+		}*/
+
+		unsigned char i = 1;
+		unsigned char px;
+		unsigned char py;
+		Posicion v_a_revisar[4] = { { p.x + i, p.y},{ p.x - i,p.y },{ p.x, p.y + i },{ p.x,p.y - i } };
+		//for (int j = 0; j < 4; j++) {
+			do {
+				for (int j = 0; j < 4; j++) {
+					px = (unsigned char)v_a_revisar[j].x;
+					py = (unsigned char)v_a_revisar[j].y;
+					if (es_posicion_valida(v_a_revisar[j])) {
+						Pieza* otra_pieza = obtener_pieza_en(v_a_revisar[j]);
+						if (!otra_pieza) { // No existe pieza en la posicion que estamos revisando
+							resultado(px, py) = si_movible;
+						}
+						else if (pza_p->get_color() != otra_pieza->get_color()) { // Es pieza del equipo contrario
+							resultado(px, py) = atacable;
+						}
+					}
+				}
+				i = i + 1;;
+			} while ((resultado(px, py) != atacable) && (i < 7));
+		//}
+
 		break; }
 	case caballo:
 	{
@@ -225,11 +252,10 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 		break; }
 	case alfil:
 	{
-		char i = 0;
+		char i = 1;
 		Posicion v_a_revisar[4] = { { p.x + i, p.y + i },{ p.x - i,p.y - i },{ p.x + i, p.y - i },{ p.x - i,p.y + i } };
 		for (int j = 0; j < 4; j++) {
 			do {
-				i++;
 				if (es_posicion_valida(v_a_revisar[j])) {
 					Pieza* otra_pieza = obtener_pieza_en(v_a_revisar[j]);
 					if (!otra_pieza) { // No existe pieza en la posicion que estamos revisando
@@ -239,16 +265,17 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 						resultado(v_a_revisar[j]) = atacable;
 					}
 				}
-			} while ((resultado(v_a_revisar[j]) != atacable)||(i<7));
+				i++;
+			} while ((resultado(v_a_revisar[j]) != atacable)&&(i<7));
 		}
 		break; }
 	case reina:
 	{
-		char i = 0;
+		char i = 1;
 		Posicion v_a_revisar[8] = { { p.x + i, p.y},{ p.x - i,p.y },{ p.x, p.y + i },{ p.x,p.y - i }, { p.x + i, p.y + i },{ p.x - i,p.y - i },{ p.x + i, p.y - i },{ p.x - i,p.y + i } };
 		for (int j = 0; j < 8; j++) {
 			do {
-				i++;
+				
 				if (es_posicion_valida(v_a_revisar[j])) {
 					Pieza* otra_pieza = obtener_pieza_en(v_a_revisar[j]);
 					if (!otra_pieza) { // No existe pieza en la posicion que estamos revisando
@@ -258,7 +285,8 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 						resultado(v_a_revisar[j]) = atacable;
 					}
 				}
-			} while ((resultado(v_a_revisar[j]) != atacable)||(i<7));
+				i++;
+			} while ((resultado(v_a_revisar[j]) != atacable)&&(i<7));
 		}
 		break; }
 	case rey:

@@ -12,7 +12,7 @@ void Mascara_tablero::reset()
 	*/
 }
 
-Disponibilidad_casilla& Mascara_tablero::operator()(unsigned char x, unsigned char y) {
+Disponibilidad_casilla& Mascara_tablero::operator()(unsigned char x,unsigned char y) {
 	if (x >= LADO_MASCARA or y >= LADO_MASCARA) throw 200;
 	return disponibilidades[x][y];
 }
