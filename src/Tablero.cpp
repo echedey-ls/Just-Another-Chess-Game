@@ -8,7 +8,7 @@
 #include "piezas/Alfil.h"
 #include "piezas/Reina.h"
 #include "piezas/Rey.h"
-#include "interfaz_usuario/letras_tablero.h"
+#include "interfaz_usuario/Letras_tablero.h"
 
 #include <iostream>
 #include <functional>
@@ -120,7 +120,7 @@ void Tablero::dibuja()
 			casilla.ilustrar();
 
 	//Dibuja letras tablero
-	letras_tablero cadena;
+	Letras_tablero cadena;
 	cadena.cadena_letras();
 	cadena.cadena_numeros();
 }

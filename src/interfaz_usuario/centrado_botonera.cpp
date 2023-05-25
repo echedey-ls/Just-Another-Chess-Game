@@ -1,11 +1,11 @@
-#include "centrado_botonera.h"
+#include "Centrado_botonera.h"
 
 
 //Botonera menu inicio
 	//JUGAR-> xmin=23.5, xmax=39, ymin=15.5, ymax=20
 	//SALIR-> xmin=23.5, xmax=39, ymin=9.5, ymax=14
 
-void centrado_botonera::dibuja() {
+void Centrado_botonera::dibuja() {
 	//glClear(GL_COLOR_BUFFER_BIT);
 	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	//glEnable(GL_BLEND);

@@ -1,6 +1,6 @@
-#include "letras_tablero.h"
+#include "Letras_tablero.h"
 
-void letras_tablero::cadena_letras() {
+void Letras_tablero::cadena_letras() {
 	//Cadena inferior
 	char letra = 'A';
 	float x = 80.0f;
@@ -30,7 +30,7 @@ void letras_tablero::cadena_letras() {
 	}
 }
 
-void letras_tablero::cadena_numeros() {
+void Letras_tablero::cadena_numeros() {
 	//Cadena izquierda
 	int num = '1';
 	float y = 50.0f;

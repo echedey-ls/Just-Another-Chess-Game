@@ -22,9 +22,9 @@
     <ClCompile Include="src\Casilla.cpp" />
     <ClCompile Include="src\interfaz_usuario\BotonUI.cpp" />
     <ClCompile Include="src\interfaz_usuario\Boton_generico.cpp" />
-    <ClCompile Include="src\interfaz_usuario\centrado_botonera.cpp" />
+    <ClCompile Include="src\interfaz_usuario\Centrado_botonera.cpp" />
     <ClCompile Include="src\interfaz_usuario\Interfaz_Partida.cpp" />
-    <ClCompile Include="src\interfaz_usuario\letras_tablero.cpp" />
+    <ClCompile Include="src\interfaz_usuario\Letras_tablero.cpp" />
     <ClCompile Include="src\interfaz_usuario\Menu_Inicio.cpp" />
     <ClCompile Include="src\interfaz_usuario\Menu_opciones_prejuego.cpp" />
     <ClCompile Include="src\Mascara_tablero.cpp" />
@@ -45,9 +45,9 @@
     <ClInclude Include="src\Estilos_graficos.h" />
     <ClInclude Include="src\interfaz_usuario\BotonUI.h" />
     <ClInclude Include="src\interfaz_usuario\Boton_generico.h" />
-    <ClInclude Include="src\interfaz_usuario\centrado_botonera.h" />
+    <ClInclude Include="src\interfaz_usuario\Centrado_botonera.h" />
     <ClInclude Include="src\interfaz_usuario\Interfaz_Partida.h" />
-    <ClInclude Include="src\interfaz_usuario\letras_tablero.h" />
+    <ClInclude Include="src\interfaz_usuario\Letras_tablero.h" />
     <ClInclude Include="src\interfaz_usuario\Menu_Inicio.h" />
     <ClInclude Include="src\interfaz_usuario\Menu_opciones_prejuego.h" />
     <ClInclude Include="src\Mascara_tablero.h" />

@@ -1,7 +1,7 @@
 #pragma once
 #include "freeglut.h"
 
-class letras_tablero
+class Letras_tablero
 {
 public:
 	void cadena_letras();
