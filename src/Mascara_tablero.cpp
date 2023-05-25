@@ -1,15 +1,9 @@
 #include "Mascara_tablero.h"
 
-void Mascara_tablero::reset()
-{
-	for (auto& disp_v : disponibilidades)
-		for(auto& disp : disp_v)
-			disp = sin_calcular;
-	/** Es equivalente, pero más bonito lo anterior. Sin embargo, no hay índices.
+void Mascara_tablero::reset() {
 	for (size_t i = 0; i < LADO_MASCARA; ++i)
 		for (size_t j = 0; j < LADO_MASCARA; ++j)
 			disponibilidades[i][j] = sin_calcular;
-	*/
 }
 
 Disponibilidad_casilla& Mascara_tablero::operator()(unsigned char x, unsigned char y) {

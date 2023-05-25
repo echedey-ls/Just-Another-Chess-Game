@@ -47,9 +47,11 @@ public:
 	void mover_pieza(const Posicion& origen, const Posicion& destino);
 	Pieza* quitar_pieza(const Posicion& casilla);
 
-	// Lo que realmente calcula los movimientos
-	void calculadora_movimientos(const Posicion& p, Mascara_tablero& resultado);
+	// Lo que realmente calcula movimientos
+	void calculadora_movimientos_simple(const Posicion& p, Mascara_tablero& resultado);
+	void calculadora_movimientos_completo(const Posicion& p, Mascara_tablero& resultado);
 	void calculadora_enroque(Color equipo, Mascara_tablero& msk);
+	void obtener_mascara_atacables(Color atacante, Mascara_tablero& msk);
 	void actualizar_casillas_desde_mascara(Mascara_tablero& msk);
 
 	//void ilumina(); 
