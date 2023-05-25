@@ -231,8 +231,7 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 			resultado(a_revisar) = si_movible; // Si llega hasta aquí es pq se puede
 		}
 	} break;
-	case caballo:
-	{
+	case caballo:	{
 		Posicion v_a_revisar[8] = { { p.x + 1, p.y + 2},{ p.x + 2,p.y + 1 },{ p.x + 2, p.y - 1 },{ p.x + 1,p.y - 2 }, { p.x - 1, p.y - 2 },{ p.x - 2,p.y - 1 },{ p.x - 2, p.y + 1 },{ p.x - 1,p.y + 2 } };
 		for (int j = 0; j < 8; j++) {
 			if (es_posicion_valida(v_a_revisar[j])) {
@@ -245,7 +244,7 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 				}
 			}
 		}
-		break; }
+	}	break;
 	case alfil: {
 		for (char i = 1; i <= 7; i++) { // Hacia X+Y+
 			Posicion a_revisar = { p.x + i, p.y + i};
@@ -394,7 +393,7 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 			}
 		}
 		// FALTA AJUSTAR LIMITACIONES CUANDO HAY JAQUE!!!!
-		break; }
+	} break;
 	default:
 		break;
 	}
