@@ -6,17 +6,9 @@ Interfaz_Partida::Interfaz_Partida(std::function<void()>callback_cambio_graficos
 	//tablero_click.register_on_click(callback_click_tablero);
 }
 
-Interfaz_Partida::~Interfaz_Partida() {
-	for (auto p : piezas_blancas) {
-		delete p;
-	}
-	for (auto p : piezas_negras) {
-		delete p;
-	}
-}
-
 void Interfaz_Partida::dibuja() {
 	btn_cambio_graficos.ilustra();
+	dibujarPiezas();
 }
 
 void Interfaz_Partida::mouse(int button, int state, GLdouble x, GLdouble y) {
@@ -27,19 +19,44 @@ void Interfaz_Partida::mouse(int button, int state, GLdouble x, GLdouble y) {
 
 void Interfaz_Partida::dibujarPiezas() {
 
-	glPushMatrix();
-
 	//Piezas blancas
+	int xb = 95;  
+	int yb = 68;
+	int i = 0;
+	
 	for (auto pieza : piezas_blancas) {
-        
+		glPushMatrix();
+		glTranslatef(xb, yb, 0);
+		pieza->ilustrar();
+		glPopMatrix();
+
+		yb -= 8;
+		i++;
+		if (i == 10){
+			xb -= 10;
+			yb = 68;
+		}
+		
     }
 
-    // Piezas negras
+	// Piezas negras
+	int xn = -33;
+	int yn = 68;
+	int c = 0;
+
     for (auto pieza : piezas_negras) {
-        
-    }
+		glPushMatrix();
+		glTranslatef(xn, yn, 0);
+		pieza->ilustrar();
+		glPopMatrix();
 
-	glPopMatrix();
+		yn -= 8;
+		c++;
+		if (c == 10) {
+			xn += 10;
+			yn = 68;
+		}
+    }
 }
 
 void Interfaz_Partida::add_pieza(Pieza* p_pza) {
@@ -53,5 +70,12 @@ void Interfaz_Partida::add_pieza(Pieza* p_pza) {
 	
 }
 
-
+Interfaz_Partida::~Interfaz_Partida() {
+	for (auto p : piezas_blancas) {
+		delete p;
+	}
+	for (auto p : piezas_negras) {
+		delete p;
+	}
+}
 
