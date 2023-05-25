@@ -13,7 +13,7 @@ void Casilla::ilustrar() {
 
 	//Posicion p = getPosicion();
 	//pieza->cargar_sprite();
-	if (pieza != nullptr) pieza->ilustrar(pos);
+	
 	
 	//PINTAR BASE DE ALGUN COLOR ------------------> pendiente!!!
 	//(1) BORDE AMARILLO -- casilla seleccionada
@@ -56,6 +56,14 @@ void Casilla::ilustrar() {
 		glVertex3f(x_lo, y_lo, 0);		            // bottom left
 
 		glEnd();
+
+		glPopMatrix();
+	}
+
+	if (pieza != nullptr) {
+		glPushMatrix();
+		glTranslatef(4.0f + (8 * pos.x), 4.0f + (8 * pos.y), 0.f);
+		pieza->ilustrar();
 
 		glPopMatrix();
 	}

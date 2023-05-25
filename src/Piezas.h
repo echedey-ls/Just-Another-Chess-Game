@@ -37,7 +37,7 @@ public:
 
 	Color get_color() const { return color; };
 	Tipo get_tipo() const { return tipo; };
-	void ilustrar(Posicion p); // En función del tipo, color y estilo_actual
+	void ilustrar(); // En función del tipo, color y estilo_actual
 
 	
 
