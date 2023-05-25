@@ -43,6 +43,7 @@ void Interfaz_Partida::dibujarPiezas() {
 }
 
 void Interfaz_Partida::add_pieza(Pieza* p_pza) {
+	if (!p_pza) return;
 	if (p_pza->get_color() == blanca) {
 		piezas_blancas.push_back(p_pza);
 	}
