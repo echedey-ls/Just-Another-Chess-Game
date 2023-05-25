@@ -246,53 +246,142 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 			}
 		}
 		break; }
-	case alfil:
-	{
-		char i = 0;
-		Posicion v_a_revisar[4] = { { p.x + i, p.y + i },{ p.x - i,p.y - i },{ p.x + i, p.y - i },{ p.x - i,p.y + i } };
-		for (int j = 0; j < 4; j++) {
-			do {
-				i++;
-				if (es_posicion_valida(v_a_revisar[j])) {
-					Pieza* otra_pieza = obtener_pieza_en(v_a_revisar[j]);
-					if (!otra_pieza) { // No existe pieza en la posicion que estamos revisando
-						resultado(v_a_revisar[j]) = si_movible;
-					}
-					else if (pza_p->get_color() != otra_pieza->get_color()) { // Es pieza del equipo contrario
-						resultado(v_a_revisar[j]) = atacable;
-					}
-				}
-			} while ((resultado(v_a_revisar[j]) != atacable)||(i<7));
+	case alfil: {
+		for (char i = 1; i <= 7; i++) { // Hacia X+Y+
+			Posicion a_revisar = { p.x + i, p.y + i};
+			if (!es_posicion_valida(a_revisar)) break; // Fuera del tablero
+			Pieza* otra_pieza = obtener_pieza_en(a_revisar);
+			if (otra_pieza and otra_pieza->get_color() != pza_p->get_color()) { // Existe pieza enemiga en la casilla
+				resultado(a_revisar) = atacable;
+			}
+			if (otra_pieza) break; // Da igual la pieza, salimos del bucle
+			resultado(a_revisar) = si_movible; // Si llega hasta aquí es pq se puede
 		}
-		break; }
-	case reina:
-	{
-		char i = 0;
-		Posicion v_a_revisar[8] = { { p.x + i, p.y},{ p.x - i,p.y },{ p.x, p.y + i },{ p.x,p.y - i }, { p.x + i, p.y + i },{ p.x - i,p.y - i },{ p.x + i, p.y - i },{ p.x - i,p.y + i } };
-		for (int j = 0; j < 8; j++) {
-			do {
-				i++;
-				if (es_posicion_valida(v_a_revisar[j])) {
-					Pieza* otra_pieza = obtener_pieza_en(v_a_revisar[j]);
-					if (!otra_pieza) { // No existe pieza en la posicion que estamos revisando
-						resultado(v_a_revisar[j]) = si_movible;
-					}
-					else if (pza_p->get_color() != otra_pieza->get_color()) { // Es pieza del equipo contrario
-						resultado(v_a_revisar[j]) = atacable;
-					}
-				}
-			} while ((resultado(v_a_revisar[j]) != atacable)||(i<7));
+		for (char i = 1; i <= 7; i++) { // Hacia X-Y+
+			Posicion a_revisar = { p.x - i, p.y + i };
+			if (!es_posicion_valida(a_revisar)) break; // Fuera del tablero
+			Pieza* otra_pieza = obtener_pieza_en(a_revisar);
+			if (otra_pieza and otra_pieza->get_color() != pza_p->get_color()) { // Existe pieza enemiga en la casilla
+				resultado(a_revisar) = atacable;
+			}
+			if (otra_pieza) break; // Da igual la pieza, salimos del bucle
+			resultado(a_revisar) = si_movible; // Si llega hasta aquí es pq se puede
 		}
-		break; }
+		for (char i = 1; i <= 7; i++) { // Hacia X+Y-
+			Posicion a_revisar = { p.x + i, p.y - i };
+			if (!es_posicion_valida(a_revisar)) break; // Fuera del tablero
+			Pieza* otra_pieza = obtener_pieza_en(a_revisar);
+			if (otra_pieza and otra_pieza->get_color() != pza_p->get_color()) { // Existe pieza enemiga en la casilla
+				resultado(a_revisar) = atacable;
+			}
+			if (otra_pieza) break; // Da igual la pieza, salimos del bucle
+			resultado(a_revisar) = si_movible; // Si llega hasta aquí es pq se puede
+		}
+		for (char i = 1; i <= 7; i++) { // Hacia X-Y-
+			Posicion a_revisar = { p.x - i, p.y - i };
+			if (!es_posicion_valida(a_revisar)) break; // Fuera del tablero
+			Pieza* otra_pieza = obtener_pieza_en(a_revisar);
+			if (otra_pieza and otra_pieza->get_color() != pza_p->get_color()) { // Existe pieza enemiga en la casilla
+				resultado(a_revisar) = atacable;
+			}
+			if (otra_pieza) break; // Da igual la pieza, salimos del bucle
+			resultado(a_revisar) = si_movible; // Si llega hasta aquí es pq se puede
+		}
+
+	} break;
+	case reina: {
+		// Torre
+		for (char i = 1; i <= 7; i++) { // Hacia X+
+			Posicion a_revisar = { p.x + i, p.y };
+			if (!es_posicion_valida(a_revisar)) break; // Fuera del tablero
+			Pieza* otra_pieza = obtener_pieza_en(a_revisar);
+			if (otra_pieza and otra_pieza->get_color() != pza_p->get_color()) { // Existe pieza enemiga en la casilla
+				resultado(a_revisar) = atacable;
+			}
+			if (otra_pieza) break; // Da igual la pieza, salimos del bucle
+			resultado(a_revisar) = si_movible; // Si llega hasta aquí es pq se puede
+		}
+		for (char i = 1; i <= 7; i++) { // Hacia X-
+			Posicion a_revisar = { p.x - i, p.y };
+			if (!es_posicion_valida(a_revisar)) break; // Fuera del tablero
+			Pieza* otra_pieza = obtener_pieza_en(a_revisar);
+			if (otra_pieza and otra_pieza->get_color() != pza_p->get_color()) { // Existe pieza enemiga en la casilla
+				resultado(a_revisar) = atacable;
+			}
+			if (otra_pieza) break; // Da igual la pieza, salimos del bucle
+			resultado(a_revisar) = si_movible; // Si llega hasta aquí es pq se puede
+		}
+		for (char i = 1; i <= 7; i++) { // Hacia Y+
+			Posicion a_revisar = { p.x, p.y + i };
+			if (!es_posicion_valida(a_revisar)) break; // Fuera del tablero
+			Pieza* otra_pieza = obtener_pieza_en(a_revisar);
+			if (otra_pieza and otra_pieza->get_color() != pza_p->get_color()) { // Existe pieza enemiga en la casilla
+				resultado(a_revisar) = atacable;
+			}
+			if (otra_pieza) break; // Da igual la pieza, salimos del bucle
+			resultado(a_revisar) = si_movible; // Si llega hasta aquí es pq se puede
+		}
+		for (char i = 1; i <= 7; i++) { // Hacia Y-
+			Posicion a_revisar = { p.x, p.y - i };
+			if (!es_posicion_valida(a_revisar)) break; // Fuera del tablero
+			Pieza* otra_pieza = obtener_pieza_en(a_revisar);
+			if (otra_pieza and otra_pieza->get_color() != pza_p->get_color()) { // Existe pieza enemiga en la casilla
+				resultado(a_revisar) = atacable;
+			}
+			if (otra_pieza) break; // Da igual la pieza, salimos del bucle
+			resultado(a_revisar) = si_movible; // Si llega hasta aquí es pq se puede
+		}
+		// Fin torre
+		// Alfil
+		for (char i = 1; i <= 7; i++) { // Hacia X+Y+
+			Posicion a_revisar = { p.x + i, p.y + i };
+			if (!es_posicion_valida(a_revisar)) break; // Fuera del tablero
+			Pieza* otra_pieza = obtener_pieza_en(a_revisar);
+			if (otra_pieza and otra_pieza->get_color() != pza_p->get_color()) { // Existe pieza enemiga en la casilla
+				resultado(a_revisar) = atacable;
+			}
+			if (otra_pieza) break; // Da igual la pieza, salimos del bucle
+			resultado(a_revisar) = si_movible; // Si llega hasta aquí es pq se puede
+		}
+		for (char i = 1; i <= 7; i++) { // Hacia X-Y+
+			Posicion a_revisar = { p.x - i, p.y + i };
+			if (!es_posicion_valida(a_revisar)) break; // Fuera del tablero
+			Pieza* otra_pieza = obtener_pieza_en(a_revisar);
+			if (otra_pieza and otra_pieza->get_color() != pza_p->get_color()) { // Existe pieza enemiga en la casilla
+				resultado(a_revisar) = atacable;
+			}
+			if (otra_pieza) break; // Da igual la pieza, salimos del bucle
+			resultado(a_revisar) = si_movible; // Si llega hasta aquí es pq se puede
+		}
+		for (char i = 1; i <= 7; i++) { // Hacia X+Y-
+			Posicion a_revisar = { p.x + i, p.y - i };
+			if (!es_posicion_valida(a_revisar)) break; // Fuera del tablero
+			Pieza* otra_pieza = obtener_pieza_en(a_revisar);
+			if (otra_pieza and otra_pieza->get_color() != pza_p->get_color()) { // Existe pieza enemiga en la casilla
+				resultado(a_revisar) = atacable;
+			}
+			if (otra_pieza) break; // Da igual la pieza, salimos del bucle
+			resultado(a_revisar) = si_movible; // Si llega hasta aquí es pq se puede
+		}
+		for (char i = 1; i <= 7; i++) { // Hacia X-Y-
+			Posicion a_revisar = { p.x - i, p.y - i };
+			if (!es_posicion_valida(a_revisar)) break; // Fuera del tablero
+			Pieza* otra_pieza = obtener_pieza_en(a_revisar);
+			if (otra_pieza and otra_pieza->get_color() != pza_p->get_color()) { // Existe pieza enemiga en la casilla
+				resultado(a_revisar) = atacable;
+			}
+			if (otra_pieza) break; // Da igual la pieza, salimos del bucle
+			resultado(a_revisar) = si_movible; // Si llega hasta aquí es pq se puede
+		}
+		// Fin alfil
+	}	break;
 	case rey:
 	{
 		Posicion base = { p.x,p.y };
 		for (char x = -1; x <= 1; x++) {
 			for (char y = -1; y <= 1; y++) {
 				Posicion a_revisar = { p.x + x, p.y + y };
-				if (a_revisar == base) {
-					resultado(a_revisar) = no_movible;
-				}
+				if (a_revisar == base) continue;
 				if (es_posicion_valida(a_revisar)) {
 					Pieza* otra_pieza = obtener_pieza_en(a_revisar);
 					if (!otra_pieza) { // No existe pieza en la posicion que estamos revisando
