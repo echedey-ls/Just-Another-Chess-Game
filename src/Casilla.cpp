@@ -20,14 +20,9 @@ void Casilla::ilustrar() {
 	//(2) RELLENO AMARILLO -- posibles movimientos
 	//(3) BORDE ROJO -- casilla donde comer
 
-	if (seleccionada) {
+	if (seleccionada or estado != sin_calcular) {
 		glPushMatrix();
 		glTranslatef(pos.x, pos.y, 0.f);
-		/*glColor3f(rand() / (float)RAND_MAX, rand() / (float)RAND_MAX,
-			rand() / (float)RAND_MAX);//color aleatorio*/
-		//glutSolidCube(8);
-		
-		//btn_casilla.set_limits(8.f * pos.x, 8.f * pos.y, 8.f * (pos.x + 1), 8.f * (pos.y + 1));
 
 		//Dependiendo del estado en que se encuentre, la casilla iluminado será de color distinto
 		switch (estado)
@@ -46,28 +41,19 @@ void Casilla::ilustrar() {
 			break;
 		}
 		
-		glColor3ub(255, 0, 0);
+		if (seleccionada) glColor3ub(51, 153, 102);
 
 		glBegin(GL_POLYGON);
-		//glVertex3f(-5.0f, -5.0f, 0.1); // top left    
-		//glVertex3f(-5.0f, 5.0f, 0.1);  // top right
-		//glVertex3f(5.0f, 5.0f, 0.1);   // bottom right
-		//glVertex3f(5.0f, -5.0f, 0.1);  // bottom left
-
-		/*glVertex3f(8.f * pos.x, 8.f * pos.y, 0);				// top left 4.f * pos.x
-		glVertex3f(8.f * pos.x, 8.f * (pos.y + 1), 0);        // top right
-		glVertex3f(8.f * (pos.x + 1), 8.f * (pos.y + 1), 0);  // bottom right
-		glVertex3f(8.f * (pos.x+1), 8.f * pos.y, 0);*/
 
 		constexpr float side = 8.f;
 		constexpr float offset = 0.2f;
 		float x_lo = 6.93f * pos.x + offset;
 		float y_lo = 6.93f * pos.y + offset;
 
-		glVertex3f(x_lo, y_lo + side, 0);				// top left
-		glVertex3f(x_lo + side, y_lo + side, 0);        // top right
-		glVertex3f(x_lo + side, y_lo, 0);  // bottom right
-		glVertex3f(x_lo, y_lo, 0);		// bottom left
+		glVertex3f(x_lo, y_lo + side, 0);				  // top left
+		glVertex3f(x_lo + side, y_lo + side, 0);  // top right
+		glVertex3f(x_lo + side, y_lo, 0);         // bottom right
+		glVertex3f(x_lo, y_lo, 0);		            // bottom left
 
 		glEnd();
 

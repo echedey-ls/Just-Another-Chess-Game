@@ -139,6 +139,7 @@ Pieza* Tablero::quitar_pieza(const Posicion& p)
 void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& resultado) {
 	Pieza* pza_p = obtener_pieza_en(p);
 	if (!pza_p) return; // No existe pieza (es puntero nullptr)
+	resultado(p.x + 1, p.y + 1) = si_movible;
 	switch (pza_p->get_tipo())
 	{
 	case peon:
@@ -286,6 +287,13 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 	}
 }
 
+void Tablero::actualizar_casillas_desde_mascara(Mascara_tablero& msk) {
+	for (char x = 0; x < 8; ++x)
+		for (char y = 0; y < 8; ++y) {
+			casilla(x, y).estado = mascara_calculos(x, y);
+		}
+}
+
 
 void Tablero::mouse(int button, int state, GLdouble x, GLdouble y) {
 	for (auto& casilla_fila : casillas)
@@ -302,17 +310,19 @@ void Tablero::clicks(Posicion position)
 	{
 	case NINGUNA_CLICKEADA: {
 		situacion = PRIMERA_CLICKEADA;
-		casilla(position).setSeleccionada(true);
 		primer_clickeada = position;
+		calculadora_movimientos(position, mascara_calculos);
+		casilla(position).setSeleccionada(true);
 	} break;
 
 	case PRIMERA_CLICKEADA: {
 		casilla(primer_clickeada).setSeleccionada(false);
 		mover_pieza(primer_clickeada, position);
 		situacion = NINGUNA_CLICKEADA;
+		mascara_calculos.reset();
 	} break;
 	}
-
+	actualizar_casillas_desde_mascara(mascara_calculos);
 	// se debe iluminar
 	// si es ninguna clickeada, se guarda en posicion la posicion clickeada, si ha sido clikeada, se llamada a la función mover piezas
 }

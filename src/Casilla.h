@@ -19,9 +19,6 @@ class Casilla {
 	bool ilus; 
 	// relacionada con la casilla ilustrar
 
-	Disponibilidad_casilla estado;
-	// se declara el enum como "estado"
-
 public:
 
 	Casilla(void) : pieza{ nullptr }, pos{ -1, -1 }, seleccionada{ false }, ilus{ true }, estado{sin_calcular} {
@@ -59,6 +56,8 @@ public:
 	void mouse_on_click();
 	void register_on_click(std::function<void(Posicion)>func) { click_callback = func; }
 	
+	Disponibilidad_casilla estado;
+	// se declara el enum como "estado"
 
 	//Queda pediente aún
 	//void register_on_callback(std::function<void(Posicion)>func) {btn_casilla.register_on_click(func); }
