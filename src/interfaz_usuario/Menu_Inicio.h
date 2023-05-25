@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ETSIDI.h"
-#include "interfaz_usuario/Boton_generico.h"
+#include "Boton_generico.h"
 
 #include <functional>
 

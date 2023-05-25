@@ -8,7 +8,7 @@
 #include "piezas/Alfil.h"
 #include "piezas/Reina.h"
 #include "piezas/Rey.h"
-#include "letras_tablero.h"
+#include "interfaz_usuario/letras_tablero.h"
 
 #include <iostream>
 #include <functional>

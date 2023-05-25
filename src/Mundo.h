@@ -1,7 +1,7 @@
 #pragma once
 #include "Tablero.h"
-#include "Menu_Inicio.h"
-#include "Interfaz_Partida.h"
+#include "interfaz_usuario/Menu_Inicio.h"
+#include "interfaz_usuario/Interfaz_Partida.h"
 #include "interfaz_usuario/Menu_opciones_prejuego.h"
 
 #include <functional>

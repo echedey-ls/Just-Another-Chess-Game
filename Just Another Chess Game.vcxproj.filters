@@ -20,6 +20,9 @@
     <ClCompile Include="src\interfaz_usuario\Boton_generico.cpp" />
     <ClCompile Include="src\interfaz_usuario\Menu_opciones_prejuego.cpp" />
     <ClCompile Include="src\interfaz_usuario\centrado_botonera.cpp" />
+    <ClCompile Include="src\interfaz_usuario\Interfaz_Partida.cpp" />
+    <ClCompile Include="src\interfaz_usuario\letras_tablero.cpp" />
+    <ClCompile Include="src\interfaz_usuario\Menu_Inicio.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\ETSIDI.h" />
@@ -45,6 +48,9 @@
     <ClInclude Include="src\interfaz_usuario\Boton_generico.h" />
     <ClInclude Include="src\interfaz_usuario\Menu_opciones_prejuego.h" />
     <ClInclude Include="src\interfaz_usuario\centrado_botonera.h" />
+    <ClInclude Include="src\interfaz_usuario\Interfaz_Partida.h" />
+    <ClInclude Include="src\interfaz_usuario\letras_tablero.h" />
+    <ClInclude Include="src\interfaz_usuario\Menu_Inicio.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\ETSIDI.lib" />
