@@ -1,7 +1,7 @@
 #pragma once
 
 #include "BotonUI.h"
-#include "src/Piezas.h"
+#include "../Piezas.h"
 
 #include "freeglut.h"
 
