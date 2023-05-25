@@ -5,5 +5,7 @@ enum Disponibilidad_casilla {
 	no_movible,
 	si_movible,
 	atacable,
-	prohibida
+	prohibida,
+	comible_en_passant,
+	disponible_enroque
 };

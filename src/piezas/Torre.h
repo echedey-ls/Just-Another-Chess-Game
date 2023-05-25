@@ -5,8 +5,6 @@
 
 class Torre : virtual public Pieza
 {
-	bool se_ha_movido = false;
-
 public:
 
 
@@ -14,4 +12,5 @@ public:
 		tipo = torre;
 		cargar_sprite();
 	}
+	bool se_ha_movido = false;
 };
