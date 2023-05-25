@@ -20,7 +20,8 @@
 */
 
 
-Tablero::Tablero(): estilo(clasico), situacion(NINGUNA_CLICKEADA)
+Tablero::Tablero(std::function<void(Pieza*)> callback_pieza_eliminada_)
+	: callback_pieza_eliminada(callback_pieza_eliminada_), estilo(clasico), situacion(NINGUNA_CLICKEADA)
 {
 	inicializa();
 	for (auto& casilla_fila : casillas)
@@ -126,6 +127,7 @@ void Tablero::dibuja()
 
 void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 	Pieza* pza = quitar_pieza(origen);
+	callback_pieza_eliminada(quitar_pieza(destino));
 	if (pza) casilla(destino).setPieza(pza);
 }
 

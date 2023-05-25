@@ -25,9 +25,10 @@ class Tablero
 	
 	Posicion primer_clickeada{ 0,0 };
 
+	std::function<void(Pieza*)> callback_pieza_eliminada = nullptr;
 
 public:
-	Tablero(); // Inicializa tablero con sus piezas distribuidas en un juego normal
+	Tablero(std::function<void(Pieza*)> callback_pieza_eliminada_); // Inicializa tablero con sus piezas distribuidas en un juego normal
 	~Tablero(); // Borra toda la memoria reservada
 
 	void inicializa();

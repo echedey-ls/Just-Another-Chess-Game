@@ -1,5 +1,6 @@
 #include "Interfaz_Partida.h"
 
+
 Interfaz_Partida::Interfaz_Partida(std::function<void()>callback_cambio_graficos/*, std::function<void()>callback_click_tablero*/) {
 	btn_cambio_graficos.register_on_click(callback_cambio_graficos);
 	//tablero_click.register_on_click(callback_click_tablero);
@@ -42,7 +43,6 @@ void Interfaz_Partida::dibujarPiezas() {
 }
 
 void Interfaz_Partida::add_pieza(Pieza* p_pza) {
-	
 	if (p_pza->get_color() == blanca) {
 		piezas_blancas.push_back(p_pza);
 	}
