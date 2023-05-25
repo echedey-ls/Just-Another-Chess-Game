@@ -126,15 +126,24 @@ void Tablero::dibuja()
 }
 
 void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
-	Pieza* pza = quitar_pieza(origen);
+	Pieza* pza_origin = quitar_pieza(origen);  // La que estamos moviendo
 	// Será peon?
-	Peon* pza_as_peon = dynamic_cast<Peon*>(pza);
+	Peon* pza_as_peon = dynamic_cast<Peon*>(pza_origin);
+	// Pieza destino a eliminar
+	Pieza* pza_dest = quitar_pieza(destino);
+
 	if (pza_as_peon) { // Resulta que sí que era un peón
 		if (abs(origen.y - destino.y) == 1) pza_as_peon->estado = Peon::se_ha_movido_normalmente;
 		if (abs(origen.y - destino.y) == 2) pza_as_peon->estado = Peon::movimiento_paso_doble;
+		if (abs(origen.x - destino.x) == 1) { // Ha comido una
+			if (!pza_dest) { // Solo pasa que no se come pieza a donde mueve si es mov. en passant
+				Posicion comida_por_enpassant = { destino.x, origen.y };
+				pza_dest = quitar_pieza(comida_por_enpassant);
+			}
+		}
 	}
-	callback_pieza_eliminada(quitar_pieza(destino));
-	if (pza) casilla(destino).setPieza(pza);
+	if (pza_dest) callback_pieza_eliminada(pza_dest);
+	if (pza_origin) casilla(destino).setPieza(pza_origin);
 }
 
 Pieza* Tablero::quitar_pieza(const Posicion& p)
