@@ -141,7 +141,6 @@ Pieza* Tablero::quitar_pieza(const Posicion& p)
 void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& resultado) {
 	Pieza* pza_p = obtener_pieza_en(p);
 	if (!pza_p) return; // No existe pieza (es puntero nullptr)
-	resultado(p.x + 1, p.y + 1) = si_movible;
 	switch (pza_p->get_tipo())
 	{
 	case peon:
