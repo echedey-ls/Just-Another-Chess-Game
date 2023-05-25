@@ -9,7 +9,7 @@
 #include "piezas/Reina.h"
 #include "piezas/Rey.h"
 #include "interfaz_usuario/letras_tablero.h"
-
+#include "Jugador.h"
 #include <iostream>
 #include <functional>
 
@@ -318,12 +318,42 @@ void Tablero::clicks(Posicion position)
 
 	case PRIMERA_CLICKEADA: {
 		casilla(primer_clickeada).setSeleccionada(false);
-		mover_pieza(primer_clickeada, position);
+		if (mascara_calculos(position) == si_movible)
+		{
+			mover_pieza(primer_clickeada, position);
+		}
+		if (mascara_calculos(position) == atacable)
+		{
+			mover_pieza(primer_clickeada, position);
+			if (turno_actual == &J1) J2.incremento_pzas_comidas();
+			if (turno_actual == &J2) J1.incremento_pzas_comidas();
+		}
 		situacion = NINGUNA_CLICKEADA;
 		mascara_calculos.reset();
+		realizar_jugada();
 	} break;
 	}
 	actualizar_casillas_desde_mascara(mascara_calculos);
 	// se debe iluminar
 	// si es ninguna clickeada, se guarda en posicion la posicion clickeada, si ha sido clikeada, se llamada a la función mover piezas
+}
+
+
+void Tablero::cambiar_turnos() {
+	if (turno_actual == &J1)
+		turno_actual = &J2;
+	else
+		turno_actual = &J2;
+
+	J1.cambiar_turno();
+	J1.cambiar_turno();
+}
+
+void Tablero::realizar_jugada() {
+
+	if (jugada_hecha == true)
+	{
+		cambiar_turnos();
+		jugada_hecha = false;
+	}
 }

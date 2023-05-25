@@ -8,14 +8,11 @@
     <ClCompile Include="src\piezas\Peon.cpp" />
     <ClCompile Include="src\Casilla.cpp" />
     <ClCompile Include="src\Principal.cpp" />
-    <ClCompile Include="src\letras_tablero.cpp" />
     <ClCompile Include="src\piezas\Torre.cpp" />
     <ClCompile Include="src\piezas\Alfil.cpp" />
-    <ClCompile Include="src\Menu_Inicio.cpp" />
     <ClCompile Include="src\piezas\Caballo.cpp" />
     <ClCompile Include="src\piezas\Reina.cpp" />
     <ClCompile Include="src\piezas\Rey.cpp" />
-    <ClCompile Include="src\Interfaz_Partida.cpp" />
     <ClCompile Include="src\interfaz_usuario\BotonUI.cpp" />
     <ClCompile Include="src\interfaz_usuario\Boton_generico.cpp" />
     <ClCompile Include="src\interfaz_usuario\Menu_opciones_prejuego.cpp" />
@@ -23,10 +20,9 @@
     <ClCompile Include="src\interfaz_usuario\Interfaz_Partida.cpp" />
     <ClCompile Include="src\interfaz_usuario\letras_tablero.cpp" />
     <ClCompile Include="src\interfaz_usuario\Menu_Inicio.cpp" />
+    <ClCompile Include="src\Jugador.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="lib\ETSIDI.h" />
-    <ClInclude Include="lib\freeglut.h" />
     <ClInclude Include="src\Piezas.h" />
     <ClInclude Include="src\Mundo.h" />
     <ClInclude Include="src\Tablero.h" />
@@ -34,15 +30,12 @@
     <ClInclude Include="src\Mascara_tablero.h" />
     <ClInclude Include="src\piezas\Peon.h" />
     <ClInclude Include="src\Casilla.h" />
-    <ClInclude Include="src\letras_tablero.h" />
     <ClInclude Include="src\piezas\Torre.h" />
     <ClInclude Include="src\piezas\Alfil.h" />
-    <ClInclude Include="src\Menu_Inicio.h" />
     <ClInclude Include="src\Estilos_graficos.h" />
     <ClInclude Include="src\piezas\Caballo.h" />
     <ClInclude Include="src\piezas\Reina.h" />
     <ClInclude Include="src\piezas\Rey.h" />
-    <ClInclude Include="src\Interfaz_Partida.h" />
     <ClInclude Include="src\interfaz_usuario\BotonUI.h" />
     <ClInclude Include="src\Estado_casilla.h" />
     <ClInclude Include="src\interfaz_usuario\Boton_generico.h" />
@@ -51,6 +44,7 @@
     <ClInclude Include="src\interfaz_usuario\Interfaz_Partida.h" />
     <ClInclude Include="src\interfaz_usuario\letras_tablero.h" />
     <ClInclude Include="src\interfaz_usuario\Menu_Inicio.h" />
+    <ClInclude Include="src\Jugador.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\ETSIDI.lib" />
