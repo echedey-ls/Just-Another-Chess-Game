@@ -126,11 +126,37 @@ void Tablero::dibuja()
 }
 
 void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
-	Pieza* pza_origin = quitar_pieza(origen);  // La que estamos moviendo
-	// Será peon?
+	Pieza* pza_origin = obtener_pieza_en(origen);  // La que estamos moviendo
+
+	/** Casos especiales **/
+	// Posible enroque - requiere prioridad por las piezas quitadas
+	Rey* rey = dynamic_cast<Rey*>(pza_origin);
+	Torre* torre = dynamic_cast<Torre*>(pza_origin);
+	if (mascara_calculos(destino) == disponible_enroque and (rey or torre)) {
+		char y_row = (pza_origin->get_color() == blanca) ? 0 : 7;
+		auto rey = dynamic_cast<Rey*>(quitar_pieza({ 4, y_row })); // Rey
+		auto torre = dynamic_cast<Torre*>(quitar_pieza({ (destino.x < 4) ? 0 : 7, y_row })); // Torre
+		rey->se_ha_movido = true;
+		torre->se_ha_movido = true;
+
+		if (destino.x < 4) { // Enroque entre 2 y 3
+			casilla(2, y_row).setPieza(static_cast<Pieza*>(rey)); // Rey
+			casilla(3, y_row).setPieza(static_cast<Pieza*>(torre)); // Torre
+		}
+		else { // Enroque entre 5 y 6
+			casilla(6, y_row).setPieza(static_cast<Pieza*>(rey)); // Rey
+			casilla(5, y_row).setPieza(static_cast<Pieza*>(torre)); // Torre
+		}
+		// Una vez hecho el enroque el resto nos da igual
+		return;
+	}
+
+	/** Estos casos solo mueven una ficha y pudieran eliminar otra, así que quitamos las fichas **/
+	pza_origin = quitar_pieza(origen);  // La que estamos moviendo
+	Pieza* pza_dest = quitar_pieza(destino);  // Pieza destino a eliminar
+
+	// Posible en passant
 	Peon* pza_as_peon = dynamic_cast<Peon*>(pza_origin);
-	// Pieza destino a eliminar
-	Pieza* pza_dest = quitar_pieza(destino);
 
 	if (pza_as_peon) { // Resulta que sí que era un peón
 		if (abs(origen.y - destino.y) == 1) pza_as_peon->estado = Peon::se_ha_movido_normalmente;
@@ -142,6 +168,8 @@ void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 			}
 		}
 	}
+
+	// Caso generico que excluye el enroque, la unica jugada que mueve dos fichas
 	if (pza_dest) callback_pieza_eliminada(pza_dest);
 	if (pza_origin) casilla(destino).setPieza(pza_origin);
 }
@@ -153,7 +181,7 @@ Pieza* Tablero::quitar_pieza(const Posicion& p)
 	return pza;
 }
 
-void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& resultado) {
+void Tablero::calculadora_movimientos_simple(const Posicion& p, Mascara_tablero& resultado) {
 	Pieza* pza_p = obtener_pieza_en(p);
 	if (!pza_p) return; // No existe pieza (es puntero nullptr)
 	switch (pza_p->get_tipo())
@@ -165,7 +193,7 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 			Posicion a_revisar = { p.x + j, p.y + (pza_p->get_color() == blanca ? 1 : -1) };
 			if (es_posicion_valida(a_revisar)) {
 				Pieza* otra_pieza = obtener_pieza_en(a_revisar);
-				if ((j != 0) && (otra_pieza))
+				if ((j != 0) && (otra_pieza) and otra_pieza->get_color() != pza_p->get_color())
 					resultado(a_revisar) = atacable;
 				if ((j == 0) && (otra_pieza))
 					resultado(a_revisar) = no_movible;
@@ -408,6 +436,22 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 	}
 }
 
+void Tablero::calculadora_movimientos_completo(const Posicion& p, Mascara_tablero& resultado) {
+	Pieza* pza_p = obtener_pieza_en(p);
+	if (!pza_p) return; // No existe pieza (es puntero nullptr)
+	calculadora_movimientos_simple(p, resultado);
+	// Casos especiales
+	switch (pza_p->get_tipo())
+	{
+	case rey:
+	case torre:
+		calculadora_enroque(pza_p->get_color(), resultado);
+		break;
+	default:
+		break;
+	}
+}
+
 void Tablero::calculadora_enroque(Color equipo, Mascara_tablero& msk) {
 	// Las posiciones son constantes para este cálculo, pero no quita verificar que no se hayan movido
 	char y_row = (equipo == blanca) ? 0 : 7;
@@ -421,16 +465,69 @@ void Tablero::calculadora_enroque(Color equipo, Mascara_tablero& msk) {
 		dynamic_cast<Torre*>(obtener_pieza_en(pos_torre2)) };
 	Rey* el_rey = dynamic_cast<Rey*>(obtener_pieza_en(pos_el_rey));
 	// Shortcut logic para terminar pronto
-	if (el_rey and !el_rey->se_ha_movido) return;
+	if (!el_rey or el_rey->se_ha_movido) return;
 
 	for (size_t j = 0; j < 2; ++j) {
 		auto torre = torres[j];
 		// Primera cond -> las piezas no se han movido (y existen)
 		if (torre and !torre->se_ha_movido) {
 			// Segunda cond. -> no hay piezas intermedias
-
+			if (j == 0) { // I.E. entre 0 y 4
+				for (char k = 1; k <= 3; ++k) {
+					if (obtener_pieza_en({ k, y_row })) goto end_loop_enroque_1torre;
+				}
+			}
+			if (j == 1) { // Entre 5 y 6
+				for (char k = 5; k <= 6; ++k) {
+					if (obtener_pieza_en({ k, y_row })) goto end_loop_enroque_1torre;
+				}
+			}
+			// Tercera cond. -> las casillas no las ataca el equipo enemigo
+			// Retrasamos este cálculo lo máx posible
+			Mascara_tablero atacables;
+			obtener_mascara_atacables((equipo == blanca) ? blanca : negra, atacables);
+			if (j == 0) { // I.E. entre 0 y 4
+				for (char k = 1; k <= 3; ++k) {
+					if (atacables( k, y_row ) == atacable) goto end_loop_enroque_1torre;
+				}
+			}
+			if (j == 1) { // Entre 5 y 6
+				for (char k = 5; k <= 6; ++k) {
+					if (atacables(k, y_row) == atacable) goto end_loop_enroque_1torre;
+				}
+			}
+			// Bueno, si has llegado hasta aquí, es que puedes enrocar como un crack.
+			// Maldita sea la lógica del ajedrez, tiene más gracia el tacto con las piezas.
+			if (j == 0) {
+				msk(2, y_row) = disponible_enroque;
+				msk(3, y_row) = disponible_enroque;
+			}
+			if (j == 1) {
+				msk(6, y_row) = disponible_enroque;
+				msk(5, y_row) = disponible_enroque;
+			}
 		}
+	end_loop_enroque_1torre:;
 	}
+}
+
+void Tablero::obtener_mascara_atacables(Color atacante, Mascara_tablero& msk) {
+	Mascara_tablero tmp;
+	for (char x = 0; x < 8; ++x)
+		for (char y = 0; y < 8; ++y) {
+			Pieza* pza = casilla(x, y).getPieza();
+			// Pasamos a la siguiente casilla si no hay pieza o no es del equipo que nos interesa
+			if (!pza or (pza->get_color() != atacante)) continue;
+			calculadora_movimientos_simple({ x, y }, tmp);
+			for (char i = 0; x < 8; ++x)
+				for (char j = 0; y < 8; ++y) {
+					Disponibilidad_casilla& current = msk(x, y), temp = tmp(x, y);
+					if (current != atacable) {
+						msk(x, y) = 
+							(temp == atacable or temp == si_movible) ? atacable : si_movible;
+					}
+				}
+		}
 }
 
 void Tablero::actualizar_casillas_desde_mascara(Mascara_tablero& msk) {
@@ -457,7 +554,7 @@ void Tablero::clicks(Posicion position)
 	case NINGUNA_CLICKEADA: {
 		situacion = PRIMERA_CLICKEADA;
 		primer_clickeada = position;
-		calculadora_movimientos(position, mascara_calculos);
+		calculadora_movimientos_completo(position, mascara_calculos);
 		casilla(position).setSeleccionada(true);
 	} break;
 
