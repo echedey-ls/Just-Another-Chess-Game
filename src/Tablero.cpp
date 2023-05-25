@@ -408,6 +408,31 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 	}
 }
 
+void Tablero::calculadora_enroque(Color equipo, Mascara_tablero& msk) {
+	// Las posiciones son constantes para este cálculo, pero no quita verificar que no se hayan movido
+	char y_row = (equipo == blanca) ? 0 : 7;
+	Posicion
+		pos_torre1 = { 0, y_row },
+		pos_torre2 = { 7, y_row },
+		pos_el_rey = { 4, y_row };
+
+	Torre* torres[2] = {
+		dynamic_cast<Torre*>(obtener_pieza_en(pos_torre1)),
+		dynamic_cast<Torre*>(obtener_pieza_en(pos_torre2)) };
+	Rey* el_rey = dynamic_cast<Rey*>(obtener_pieza_en(pos_el_rey));
+	// Shortcut logic para terminar pronto
+	if (el_rey and !el_rey->se_ha_movido) return;
+
+	for (size_t j = 0; j < 2; ++j) {
+		auto torre = torres[j];
+		// Primera cond -> las piezas no se han movido (y existen)
+		if (torre and !torre->se_ha_movido) {
+			// Segunda cond. -> no hay piezas intermedias
+
+		}
+	}
+}
+
 void Tablero::actualizar_casillas_desde_mascara(Mascara_tablero& msk) {
 	for (char x = 0; x < 8; ++x)
 		for (char y = 0; y < 8; ++y) {

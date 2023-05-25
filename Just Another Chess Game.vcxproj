@@ -64,7 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\ETSIDI.lib" />
-    <Library Include="lib\freeglut.lib" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitattributes" />

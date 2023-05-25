@@ -49,6 +49,7 @@ public:
 
 	// Lo que realmente calcula los movimientos
 	void calculadora_movimientos(const Posicion& p, Mascara_tablero& resultado);
+	void calculadora_enroque(Color equipo, Mascara_tablero& msk);
 	void actualizar_casillas_desde_mascara(Mascara_tablero& msk);
 
 	//void ilumina(); 
