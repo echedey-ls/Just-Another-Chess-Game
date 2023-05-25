@@ -8,6 +8,8 @@
 class Menu_Inicio {
 	
 	ETSIDI::Sprite *inicio;
+	ETSIDI::Sprite *jugar;
+	ETSIDI::Sprite *salir;
 
 	//Botonera menu inicio
 	//JUGAR-> xmin=23.5, xmax=39, ymin=15.5, ymax=20
@@ -28,12 +30,17 @@ public:
 
 	Menu_Inicio(std::function<void(bool)> callback_mundo_) {
 		inicio = new ETSIDI::Sprite("imagenes/pantalla_inicio.png", 30.0f, 30.0f, 90, 90);
+		jugar= new ETSIDI::Sprite("imagenes/jugar.png", 30.0f, 30.0f, 90, 90);
+		salir = new ETSIDI::Sprite("imagenes/salir.png", 30.0f, 30.0f, 90, 90);
+
 		btn_jugar.register_on_click(std::bind(callback_mundo_, true));
 		btn_salir.register_on_click(std::bind(callback_mundo_, false));
 	};
 
 	~Menu_Inicio() {
 		delete inicio;
+		delete jugar;
+		delete salir;
 	};
 	/** Dibujar el menú
 	* El parámetro opción indica qué texto debe ser resaltado,
