@@ -29,14 +29,19 @@ void Casilla::ilustrar() {
 		{
 		case sin_calcular:
 			glColor3ub(255, 255, 255); //blanco
+			break;
 		case no_movible:
 			glColor3ub(0, 0, 0);    //negro
+			break;
 		case si_movible:
 			glColor3ub(0, 255,  0);  //verde
+			break;
 		case atacable:
 			glColor3ub(255, 255, 0);  //amarillo
+			break;
 		case prohibida:
 			glColor3ub(255, 0, 0); //rojo
+			break;
 		default:
 			break;
 		}

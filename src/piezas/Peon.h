@@ -4,14 +4,16 @@
 
 class Peon : virtual public Pieza
 {
-	bool se_ha_movido = false;
-
 public:
 
 	Peon(Color c, Estilo_grafico s) : Pieza(c, s) {
 		tipo = peon;
 		cargar_sprite();
 	}
-
+	enum Estado {
+		sin_moverse,
+		movimiento_paso_doble,
+		se_ha_movido_normalmente
+	} estado = sin_moverse;
 };
 

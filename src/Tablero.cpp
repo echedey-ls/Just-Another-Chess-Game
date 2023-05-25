@@ -127,6 +127,12 @@ void Tablero::dibuja()
 
 void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 	Pieza* pza = quitar_pieza(origen);
+	// Será peon?
+	Peon* pza_as_peon = dynamic_cast<Peon*>(pza);
+	if (pza_as_peon) { // Resulta que sí que era un peón
+		if (abs(origen.y - destino.y) == 1) pza_as_peon->estado == Peon::se_ha_movido_normalmente;
+		if (abs(origen.y - destino.y) == 2) pza_as_peon->estado == Peon::movimiento_paso_doble;
+	}
 	callback_pieza_eliminada(quitar_pieza(destino));
 	if (pza) casilla(destino).setPieza(pza);
 }
@@ -143,51 +149,33 @@ void Tablero::calculadora_movimientos(const Posicion& p, Mascara_tablero& result
 	if (!pza_p) return; // No existe pieza (es puntero nullptr)
 	switch (pza_p->get_tipo())
 	{
-	case peon:
-	{
-		if (casilla(p).get_primer_mov()) { //si es el primer movimiento del peon
-			char i=0, j=0;
-			Posicion a_revisar1 = { p.x, p.y + (pza_p->get_color() == blanca ? i : -i) };
-			Posicion a_revisar2 = { p.x+j, p.y + (pza_p->get_color() == blanca ? 1 : -1) };
-			do {
-				i++;
-				if (es_posicion_valida(a_revisar1)) {
-					Pieza* otra_pieza = obtener_pieza_en(a_revisar1);
-					if (!otra_pieza) { // No existe pieza en la posicion que estamos revisando
-						resultado(a_revisar1) = si_movible;
+	case peon: {
+		Peon* peon = dynamic_cast<Peon*>(pza_p);
+		for (char j = -1; j <= 1; j++) {
+			Posicion a_revisar = { p.x + j, p.y + (pza_p->get_color() == blanca ? 1 : -1) };
+			if (es_posicion_valida(a_revisar)) {
+				Pieza* otra_pieza = obtener_pieza_en(a_revisar);
+				if ((j != 0) && (otra_pieza))
+					resultado(a_revisar) = atacable;
+				if ((j == 0) && (otra_pieza))
+					resultado(a_revisar) = no_movible;
+				if ((j == 0) && (!otra_pieza)) { // No hay pieza justo delante
+					resultado(a_revisar) = si_movible;
+					if (peon->estado == Peon::sin_moverse) { // Primer movimiento de dos casillas
+						Posicion a_revisar = { p.x, p.y + (pza_p->get_color() == blanca ? 2 : -2) };
+						if (es_posicion_valida(a_revisar)) {
+							Pieza* otra_pieza = obtener_pieza_en(a_revisar);
+							if (otra_pieza)
+								resultado(a_revisar) = no_movible;
+							else // No hay pieza dos delante
+								resultado(a_revisar) = si_movible;
+						}
 					}
-					else
-						resultado(a_revisar1) = no_movible;
-				}
-			}while ((resultado(a_revisar1) != no_movible)||(i<2));
-
-			for (j = -1; j <= 1; j++) {
-				if (es_posicion_valida(a_revisar2)) {
-					Pieza* otra_pieza = obtener_pieza_en(a_revisar2);
-					if ((j != 0) && (otra_pieza))
-						resultado(a_revisar2) = atacable;
-					if ((j == 0) && (!otra_pieza))
-						resultado(a_revisar2) = si_movible;
-				}
-			}
-			casilla(p).primer_mov_hecho();
-		}
-		else
-		{
-			char j=0;
-			Posicion a_revisar2 = { p.x + j, p.y + (pza_p->get_color() == blanca ? 1 : -1) };
-			for (j = -1; j <= 1; j++) {
-				if (es_posicion_valida(a_revisar2)) {
-					Pieza* otra_pieza = obtener_pieza_en(a_revisar2);
-					if ((j != 0) && (otra_pieza))
-						resultado(a_revisar2) = atacable;
-					if ((j == 0) && (!otra_pieza))
-						resultado(a_revisar2) = si_movible;
 				}
 			}
 		}
 			/** TODO: check atacable en passant y primer movimiento de dos casillas **/
-		break; }
+	} break;
 	case torre:
 	{
 		char i = 0;
