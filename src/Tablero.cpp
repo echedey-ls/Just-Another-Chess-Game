@@ -130,8 +130,8 @@ void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 	// Será peon?
 	Peon* pza_as_peon = dynamic_cast<Peon*>(pza);
 	if (pza_as_peon) { // Resulta que sí que era un peón
-		if (abs(origen.y - destino.y) == 1) pza_as_peon->estado == Peon::se_ha_movido_normalmente;
-		if (abs(origen.y - destino.y) == 2) pza_as_peon->estado == Peon::movimiento_paso_doble;
+		if (abs(origen.y - destino.y) == 1) pza_as_peon->estado = Peon::se_ha_movido_normalmente;
+		if (abs(origen.y - destino.y) == 2) pza_as_peon->estado = Peon::movimiento_paso_doble;
 	}
 	callback_pieza_eliminada(quitar_pieza(destino));
 	if (pza) casilla(destino).setPieza(pza);
