@@ -193,7 +193,7 @@ void Tablero::calculadora_movimientos_simple(const Posicion& p, Mascara_tablero&
 			Posicion a_revisar = { p.x + j, p.y + (pza_p->get_color() == blanca ? 1 : -1) };
 			if (es_posicion_valida(a_revisar)) {
 				Pieza* otra_pieza = obtener_pieza_en(a_revisar);
-				if ((j != 0) && (otra_pieza))
+				if ((j != 0) && (otra_pieza) and otra_pieza->get_color() != pza_p->get_color())
 					resultado(a_revisar) = atacable;
 				if ((j == 0) && (otra_pieza))
 					resultado(a_revisar) = no_movible;
