@@ -4,16 +4,20 @@
 Interfaz_Partida::Interfaz_Partida(std::function<void()>callback_cambio_graficos/*, std::function<void()>callback_click_tablero*/) {
 	btn_cambio_graficos.register_on_click(callback_cambio_graficos);
 	//tablero_click.register_on_click(callback_click_tablero);
+	
+	//btn_guia_juego.register_on_click();
 }
 
 void Interfaz_Partida::dibuja() {
 	btn_cambio_graficos.ilustra();
+	btn_guia_juego.ilustra();
 	dibujarPiezas();
 }
 
 void Interfaz_Partida::mouse(int button, int state, GLdouble x, GLdouble y) {
 	btn_cambio_graficos.mouse(button, state, x, y);
 	//tablero_click.mouse(button, state, x, y);
+	btn_guia_juego.mouse(button, state, x, y);
 	
 }
 

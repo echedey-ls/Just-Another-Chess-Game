@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\ETSIDI.lib" />
-    <Library Include="lib\freeglut.lib" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitattributes" />
@@ -87,6 +86,9 @@
     <Image Include="bin\imagenes\sw_torre_n.png" />
     <Image Include="bin\imagenes\tablero.png" />
     <Image Include="bin\imagenes\Logo.png" />
+    <Image Include="bin\imagenes\jugar.png" />
+    <Image Include="bin\imagenes\pantalla_inicio.png" />
+    <Image Include="bin\imagenes\salir.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="bin\fuentes\Bitwise.ttf" />

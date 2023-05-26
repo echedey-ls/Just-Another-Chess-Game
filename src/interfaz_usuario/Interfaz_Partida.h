@@ -13,6 +13,9 @@ class Interfaz_Partida {
 		69.f, 10.f, 0.02f, 68.5f, 2.7f, 79.5f, 13.f};
 	//BotonUI tablero_click{ 0.0f,0.0f,64.0f,64.0f };
 
+	//Boton ¿como jugar?
+	BotonUI btn_guia_juego{ (unsigned char*)"COMO\nJUGAR?",
+		-15.f, 6.f, 0.02f, -15.5f, 0.8f, -4.5f, 9.5f };
 	//vector piezas eliminadas
 	std::vector<Pieza*> piezas_blancas;
 	std::vector<Pieza*> piezas_negras;
