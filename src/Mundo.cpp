@@ -97,14 +97,8 @@ void Mundo::mouse(int button, int state, int x, int y) {
 }
 
 void Mundo::callback_menu_inicio(bool jugar) {
-	if (jugar) {
-		estado = pantalla_seleccion_team;
-		ETSIDI::play("sonidos/Sonido_game_start.mp3");
-	}
-	else {
-		exit(0);
-	}
-
+	if (jugar) estado = pantalla_seleccion_team;
+	else exit(0);
 }
 
 void Mundo::callback_menu_prejuego(bool color_blanco) {
