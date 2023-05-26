@@ -3,7 +3,6 @@
 #include "interfaz_usuario/Menu_Inicio.h"
 #include "interfaz_usuario/Interfaz_Partida.h"
 #include "interfaz_usuario/Menu_opciones_prejuego.h"
-#include "interfaz_usuario/Pantalla_guia.h"
 
 #include <functional>
 

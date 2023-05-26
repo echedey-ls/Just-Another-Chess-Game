@@ -12,6 +12,18 @@ void Interfaz_Partida::dibuja() {
 	dibujarPiezas();
 }
 
+void Interfaz_Partida::dibuja_guia() {
+	glPushMatrix();
+	glColor3ub(0, 0, 0);
+	glBegin(GL_QUADS);  
+	glVertex2f(0.0f, 0.0f);  
+	glVertex2f(0.0f, 64.f);  
+	glVertex2f(64.f, 64.f);  // Esquina inferior derecha
+	glVertex2f(64.f, 0.0f);  // Esquina superior derecha
+	glEnd();  
+	glPopMatrix();
+}
+
 void Interfaz_Partida::mouse(int button, int state, GLdouble x, GLdouble y) {
 	btn_cambio_graficos.mouse(button, state, x, y);
 	btn_guia_juego.mouse(button, state, x, y);
