@@ -4,6 +4,7 @@
 Interfaz_Partida::Interfaz_Partida(std::function<void()>callback_cambio_graficos, std::function<void()>callback_guia_juego) {
 	btn_cambio_graficos.register_on_click(callback_cambio_graficos);
 	btn_guia_juego.register_on_click(callback_guia_juego);
+	btn_vuelta_juego.register_on_click(callback_guia_juego);
 }
 
 void Interfaz_Partida::dibuja() {
@@ -42,6 +43,8 @@ void Interfaz_Partida::dibuja_guia() {
 	ETSIDI::printxy("Seleccionada", 10, 20);
 
 	glPopMatrix();
+
+	btn_vuelta_juego.ilustra();
 	
 }
 

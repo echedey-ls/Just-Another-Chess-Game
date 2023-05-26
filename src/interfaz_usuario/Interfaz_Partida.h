@@ -17,6 +17,8 @@ class Interfaz_Partida {
 	BotonUI btn_guia_juego{ (unsigned char*)"JEDI,\nNECESITAS\nAYUDA?",
 		-19.f, 10.f, 0.02f, -19.5f, 2.7f, -4.5f, 13.f };
 
+	BotonUI btn_vuelta_juego{ (unsigned char*)"ENTENDIDO",
+		-19.f, 7.f, 0.02f, -19.5f, 2.7f, -4.5f, 13.f };
 
 	//vector piezas eliminadas
 	std::vector<Pieza*> piezas_blancas;
