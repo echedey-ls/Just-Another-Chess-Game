@@ -76,6 +76,7 @@ public:
 		J1.set_color(c1);
 		J2.set_color(c2);
 	}
+	Posicion obtener_pos_rey(Color equipo);
 };
 
 
