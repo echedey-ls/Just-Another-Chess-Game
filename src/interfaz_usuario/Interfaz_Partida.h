@@ -32,28 +32,16 @@ public:
 	void add_pieza(Pieza* p_pieza);
 
 	//es como get_posicion, obtiene el valor del dominio privado
-	void ultimos_movimientos(Posicion orgn, Posicion dest);
-	//void ultimos_movimientos(Posicion);
-	//void ultimos_movimientoss(Posicion);
+	void ultimos_movimientos(Posicion, Posicion);
 
-	//
-	/*void ultimos_movimientos_origen(Posicion o) {
-		original = o;
-		/*std::ostringstream oss;
-		oss << convertirCoordenadasAMatriz(o.x, o.y);
-		std::cout << "Nombre de casilla: " << oss.str() << std::endl;
-	}*/
 
 	//Realiza la conversión de la posición (x,y) a casilla(letra, numero)
-	
-
 	std::string convertirCoordenadasAMatriz(int x, int y) {
 
-		//ultimos_movimientos(a); //a son las cogidas con el tablero
-		//ultimos_movimientos(b);
-
-		//a.x     a.y
-
+		//El tablero va de {0,0} a {7,7}
+		//El {0,0} está en la esquina inferior izquierda, y {7,7} esquina superior derecha
+		//De izquierda a derecha, cada columna +x, de abajo hacia arriba, cada fila +y
+		//El tablero va de izquierda a derecha, desde A hasta H; desde abajo hacia arriba, desde 1 hasta 8
 		std::ostringstream nombreCasilla;
 		char columna = 'A' + x; 
 		int fila = y + 1;

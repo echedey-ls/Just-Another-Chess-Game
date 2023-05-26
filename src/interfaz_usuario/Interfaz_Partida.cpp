@@ -11,10 +11,9 @@ void Interfaz_Partida::dibuja() {
 	btn_cambio_graficos.ilustra();
 	dibujarPiezas();
 
-//	Posicion po{ 1,2 };
 
 	glPushMatrix();
-	glTranslatef(-29.0f, 22.0f, 1.f);
+	glTranslatef(-30.0f, 22.0f, 1.f);
 	glScalef(0.02f, 0.02f, 1);
 	
 	/*unsigned char*text = (unsigned char*)"ULTIMOS\nMOVIMIENTOS\n";
@@ -25,15 +24,13 @@ void Interfaz_Partida::dibuja() {
 	glutStrokeString(GLUT_STROKE_ROMAN, text); */
 
 	std::ostringstream oss;
-	oss << "ULTIMOS\nMOVIMIENTOS\n\n";
-	oss << convertirCoordenadasAMatriz(original.x,original.y) << " -> " << convertirCoordenadasAMatriz(5,1);
+	oss << "EL ULTIMO\nMOVIMIENTO\n\n";
+	oss << convertirCoordenadasAMatriz(original.x, original.y) << " -> " << convertirCoordenadasAMatriz(destino.x,destino.y);
 	std::string text = oss.str();
 
 	unsigned char* c = reinterpret_cast<unsigned char*>(const_cast<char*>(text.c_str()));
 	glutStrokeString(GLUT_STROKE_ROMAN, c);
 
-	//std::string nombreCasilla = convertirCoordenadasAMatriz(x, y);
-	//std::cout << "Coordenadas de matriz (" << x << ", " << y << ") = " << nombreCasilla << std::endl;
 
 	glPopMatrix();
 }
@@ -111,19 +108,3 @@ void Interfaz_Partida::ultimos_movimientos(Posicion o, Posicion d) {
 	destino = d;
 }
 
-/*void Interfaz_Partida::ultimos_movimientos(Posicion o) {
-	//o: origen
-	original = o;
-}*/
-
-/*void Interfaz_Partida::ultimos_movimientos(Posicion o) {
-	original = o;
-	std::ostringstream oss;
-	oss << convertirCoordenadasAMatriz(original.x, original.y);
-	std::cout << "Nombre de casilla: " << oss.str() << std::endl;
-}*/
-
-/*void Interfaz_Partida::ultimos_movimientoss(Posicion d) {
-	//d:destino
-	destino = d;
-}*/

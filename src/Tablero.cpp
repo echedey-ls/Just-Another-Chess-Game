@@ -9,7 +9,6 @@
 #include "piezas/Reina.h"
 #include "piezas/Rey.h"
 #include "interfaz_usuario/Letras_tablero.h"
-#include "interfaz_usuario/Interfaz_Partida.h"
 
 
 #include <iostream>
@@ -511,19 +510,11 @@ void Tablero::mouse(int button, int state, GLdouble x, GLdouble y) {
 
 void Tablero::clicks(Posicion position)
 {
-	Interfaz_Partida inter;
 	switch (situacion)
 	{
 	case NINGUNA_CLICKEADA: {
 		situacion = PRIMERA_CLICKEADA;
 		primer_clickeada = position;
-		glPushMatrix();
-		glTranslatef(-158.0f, 22.0f, 1.f);
-		glScalef(0.02f, 0.02f, 1);
-		string cad1 =inter.convertirCoordenadasAMatriz((primer_clickeada.x), (primer_clickeada.y));
-		std::ostringstream oss;
-		oss << cad1;
-		glPopMatrix();
 		calculadora_movimientos_completo(position, mascara_calculos);
 		casilla(position).setSeleccionada(true);
 	} break;
@@ -531,13 +522,6 @@ void Tablero::clicks(Posicion position)
 	case PRIMERA_CLICKEADA: {
 		casilla(primer_clickeada).setSeleccionada(false);
 		mover_pieza(primer_clickeada, position);
-		glPushMatrix();
-		glTranslatef(-158.0f, 22.0f, 1.f);
-		glScalef(0.02f, 0.02f, 1);
-		string cad2 = inter.convertirCoordenadasAMatriz((position.x), (position.y));
-		std::ostringstream oss;
-		oss << " -> " << cad2;
-		glPopMatrix();
 		situacion = NINGUNA_CLICKEADA;
 		mascara_calculos.reset();
 	} break;
