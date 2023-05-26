@@ -25,12 +25,9 @@ class Tablero
 	enum Situacion {NINGUNA_CLICKEADA, PRIMERA_CLICKEADA} situacion;
 	
 	Posicion primer_clickeada{ 0,0 };
-
 	std::function<void(Pieza*)> callback_pieza_eliminada = nullptr;
 
-	Jugador J1, J2;
-	Jugador* turno_actual;
-	bool jugada_hecha;
+	Jugador* j_turno_actual, * j_sin_turno;
 
 public:
 	Tablero(std::function<void(Pieza*)> callback_pieza_eliminada_); // Inicializa tablero con sus piezas distribuidas en un juego normal
@@ -67,11 +64,12 @@ public:
 	
 	//Gestión de clicks en función de la Posición que estás
 	void clicks(Posicion);
+
+	//Gestión de turnos
 	void cambiar_turnos();
-	void realizar_jugada();
-	void set_color_jugadores(int c1, int c2) {
-		J1.set_color(c1);
-		J2.set_color(c2);
+	void set_jugadores(Jugador& j_blancas, Jugador& j_negras, Color quien_empieza) {
+		j_turno_actual = (quien_empieza == blanca) ? &j_blancas : &j_negras;
+		j_sin_turno = (quien_empieza == negra) ? &j_blancas : &j_negras;
 	}
 };
 

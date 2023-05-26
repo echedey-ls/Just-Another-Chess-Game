@@ -2,16 +2,9 @@
 
 #include "Posicion.h"
 #include "Estilos_graficos.h"
+#include "Colores_tipos.h"
 
 #include "ETSIDI.h"
-
-// Par de enumeraciones con los valores que pueden tomar las piezas
-enum Color {
-	blanca,
-	negra
-};
-
-enum Tipo { desconocido, rey, reina, alfil, torre, caballo, peon };
 
 class Pieza {
 protected:

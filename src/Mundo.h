@@ -12,6 +12,9 @@ class Mundo {
 	float x_ojo = 0.f;
 	float y_ojo = 0.f;
 	float z_ojo = 0.f;
+
+	Jugador jBlancas{ blanca }, jNegras{ negra };
+
 public:
 	Mundo();
 	void inicializa();
@@ -36,6 +39,4 @@ public:
 	Tablero tablero{ std::bind(&Interfaz_Partida::add_pieza, &gui_partida, std::placeholders::_1) };
 	Interfaz_Partida gui_partida{ std::bind(&Tablero::siguiente_estilo, &tablero) };
 	Menu_opciones_prejuego menu_opts_prejuego{ std::bind(&Mundo::callback_menu_prejuego, this, std::placeholders::_1) };
-	Pantalla_guia guia_juego{ std::bind(&Mundo::callback_guia_juego, this, std::placeholders::_1) };
-
 };
