@@ -236,8 +236,7 @@ void Tablero::calculadora_movimientos_simple(const Posicion& p, Mascara_tablero&
 				Pieza* otra_pieza = obtener_pieza_en(a_revisar);
 				if ((j != 0) && (otra_pieza) and otra_pieza->get_color() != pza_p->get_color())
 					resultado(a_revisar) = atacable;
-				if ((j == 0) && (otra_pieza))
-					resultado(a_revisar) = no_movible;
+				if ((j == 0) && (otra_pieza)) continue;
 				if ((j == 0) && (!otra_pieza)) { // No hay pieza justo delante
 					resultado(a_revisar) = si_movible;
 					if (peon->estado == Peon::sin_moverse) { // Se puede primer movimiento de dos casillas
