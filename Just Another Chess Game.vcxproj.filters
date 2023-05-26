@@ -20,7 +20,6 @@
     <ClCompile Include="src\interfaz_usuario\Interfaz_Partida.cpp" />
     <ClCompile Include="src\interfaz_usuario\Letras_tablero.cpp" />
     <ClCompile Include="src\interfaz_usuario\Menu_Inicio.cpp" />
-    <ClCompile Include="src\interfaz_usuario\Pantalla_guia.cpp" />
     <ClCompile Include="src\Jugador.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -45,7 +44,6 @@
     <ClInclude Include="src\interfaz_usuario\Interfaz_Partida.h" />
     <ClInclude Include="src\interfaz_usuario\Letras_tablero.h" />
     <ClInclude Include="src\interfaz_usuario\Menu_Inicio.h" />
-    <ClInclude Include="src\interfaz_usuario\Pantalla_guia.h" />
     <ClInclude Include="src\Jugador.h" />
   </ItemGroup>
   <ItemGroup>

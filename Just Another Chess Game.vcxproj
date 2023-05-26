@@ -30,7 +30,6 @@
     <ClCompile Include="src\Jugador.cpp" />
     <ClCompile Include="src\Mascara_tablero.cpp" />
     <ClCompile Include="src\Mundo.cpp" />
-    <ClCompile Include="src\interfaz_usuario\Pantalla_guia.cpp" />
     <ClCompile Include="src\Piezas.cpp" />
     <ClCompile Include="src\piezas\Alfil.cpp" />
     <ClCompile Include="src\piezas\Caballo.cpp" />
@@ -55,7 +54,6 @@
     <ClInclude Include="src\Jugador.h" />
     <ClInclude Include="src\Mascara_tablero.h" />
     <ClInclude Include="src\Mundo.h" />
-    <ClInclude Include="src\interfaz_usuario\Pantalla_guia.h" />
     <ClInclude Include="src\Piezas.h" />
     <ClInclude Include="src\piezas\Alfil.h" />
     <ClInclude Include="src\piezas\Caballo.h" />

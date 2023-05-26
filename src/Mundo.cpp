@@ -49,6 +49,9 @@ void Mundo::dibuja()
 		tablero.dibuja();
 		gui_partida.dibuja();
 		break;
+	case Mundo::pantalla_guia:
+		gui_partida.dibuja_guia();
+		break;
 	case Mundo::fin_partida:
 		break;
 	default:
@@ -96,8 +99,9 @@ void Mundo::mouse(int button, int state, int x, int y) {
 		menu_opts_prejuego.mouse(button, state, posX, posY);
 		break;
 	case Mundo::juego:
-		gui_partida.mouse(button, state, posX, posY);
 		tablero.mouse(button, state, posX, posY);
+	case Mundo::pantalla_guia:
+		gui_partida.mouse(button, state, posX, posY);
 		break;
 	case Mundo::fin_partida:
 		break;
@@ -122,6 +126,7 @@ void Mundo::callback_menu_prejuego(bool color_blanco) {
 	else estado = juego;
 }
 
-void Mundo::callback_guia_juego(bool guia) {
-
+void Mundo::callback_guia_juego() {
+	if (estado == juego) estado = pantalla_guia;
+	else if (estado == pantalla_guia) estado = juego;
 }
