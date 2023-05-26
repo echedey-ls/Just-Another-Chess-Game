@@ -6,6 +6,7 @@
 
 #include <functional>
 #include "ETSIDI.h"
+
 using namespace ETSIDI;
 
 class Tablero
