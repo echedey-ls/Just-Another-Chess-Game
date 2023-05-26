@@ -17,6 +17,7 @@ class Interfaz_Partida {
 	std::vector<Pieza*> piezas_blancas;
 	std::vector<Pieza*> piezas_negras;
 
+	Posicion original{ 0,0 }, destino{0,0};
 
 public:
 	Interfaz_Partida(std::function<void()>callback_cambio_graficos/*, std::function<void()>callback_click_tablero*/);
@@ -26,5 +27,6 @@ public:
 	void dibujarPiezas();
 	void add_pieza(Pieza* p_pieza);
 
+	void ultimos_movimientos(Posicion, Posicion);
 };
 
