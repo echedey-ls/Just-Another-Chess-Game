@@ -127,6 +127,9 @@ void Tablero::dibuja()
 
 void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 	Pieza* pza_origin = obtener_pieza_en(origen);  // La que estamos moviendo
+	//Condiciones simplificables
+	if (pza_origin == nullptr or (origen == destino))
+		return;
 
 	/** Casos especiales **/
 	// Posible enroque - requiere prioridad por las piezas quitadas
@@ -155,6 +158,9 @@ void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 	Pieza* pza_dest = quitar_pieza(destino);  // Pieza destino a eliminar
 
 	// Posible en passant
+	pza_origin = quitar_pieza(origen);  // La que estamos moviendo
+	
+	// Será peon?
 	Peon* pza_as_peon = dynamic_cast<Peon*>(pza_origin);
 
 	if (pza_as_peon) { // Resulta que sí que era un peón
@@ -168,8 +174,6 @@ void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 		}
 	}
 
-	// Caso generico que excluye el enroque, la unica jugada que mueve dos fichas
-	if (pza_dest) callback_pieza_eliminada(pza_dest);
 	if (pza_origin) {
 		casilla(destino).setPieza(pza_origin);
 		switch (pza_origin->get_tipo()) {
@@ -178,6 +182,34 @@ void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 			break;
 		case rey:
 			dynamic_cast<Rey*>(pza_origin)->se_ha_movido = true;
+			break;
+		}
+	}
+
+	// Caso generico que excluye el enroque, la unica jugada que mueve dos fichas
+	if (pza_dest) {
+		callback_pieza_eliminada(pza_dest);
+		// El sonido de que se "coma" una pieza
+		ETSIDI::play("sonidos/Sonido_capture.mp3");
+	}
+	else {
+
+		// Si no va a "comer" una pieza, será un simple movimiento 
+		// Se le implementa otro sonido
+
+		//Se distingue entre el sonido del caballo, alfil, y el resto de piezas
+		//if (pza_origin) pza_origin->get_tipo();
+		
+		//Tipo tipo;
+		switch (pza_origin->get_tipo())
+		{
+		case caballo:
+			ETSIDI::play("sonidos/Sound_caballo.mp3");
+			break;
+		case alfil:
+			ETSIDI::play("sonidos/Sound_alfil.mp3");
+			break;
+		default:ETSIDI::play("sonidos/Sonido_move.mp3");
 			break;
 		}
 	}
