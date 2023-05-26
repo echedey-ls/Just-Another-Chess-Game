@@ -82,12 +82,21 @@ void Interfaz_Partida::mouse(int button, int state, GLdouble x, GLdouble y) {
 }
 
 void Interfaz_Partida::callback_local_cambio_grafico() {
+
 	Estilo_grafico estilo = callback_cambio_graficos_tablero();
+	
 	for (auto& pieza : piezas_blancas) {
 		pieza->cambiar_estilo(estilo);
 	}
 	for (auto& pieza : piezas_negras) {
 		pieza->cambiar_estilo(estilo);
+	}
+
+	if (estilo == stars_wars) {
+		ETSIDI::playMusica("sonidos/Darth _Vader.mp3");
+	}
+	else {
+		ETSIDI::stopMusica();
 	}
 }
 

@@ -65,7 +65,7 @@ void Mundo::mouse(int button, int state, int x, int y) {
 	winX = (float)x;
 	winY = (float)viewport[3] - (float)y;
 	// Queremos la coordenada del plano con z = 0.0
-	// As� que obviamos obtener la profundidad de renderizado, y dejamos la que nos devolver�a
+	// Asi que obviamos obtener la profundidad de renderizado, y dejamos la que nos devolver�a
 	//glReadPixels(x, int(winY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &winZ);
 	gluUnProject(winX, winY, 1.0, modelview, projection, viewport, &posX, &posY, &posZ);
 
@@ -112,8 +112,8 @@ void Mundo::callback_menu_inicio(bool jugar) {
 }
 
 void Mundo::callback_menu_prejuego(bool color_blanco) {
-	if (color_blanco)	ETSIDI::play("sonidos/Click.mp3");
-	else ETSIDI::play("sonidos/Click.mp3");
+	if (color_blanco)	ETSIDI::play("sonidos/Click .mp3");
+	else ETSIDI::play("sonidos/Click .mp3");
 	if (color_blanco) tablero.set_jugadores(jBlancas, jNegras, blanca);
 	else tablero.set_jugadores(jBlancas, jNegras, negra);;
 	estado = juego;
