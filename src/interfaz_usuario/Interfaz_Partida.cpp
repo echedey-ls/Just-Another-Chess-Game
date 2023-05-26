@@ -7,6 +7,10 @@ Interfaz_Partida::Interfaz_Partida(std::function<void()>callback_cambio_graficos
 	
 }
 
+Interfaz_Partida::Interfaz_Partida(std::function<void()> callback_guia_juego) {
+	btn_guia_juego.register_on_click(callback_guia_juego);
+}
+
 void Interfaz_Partida::dibuja() {
 	btn_cambio_graficos.ilustra();
 	btn_guia_juego.ilustra();

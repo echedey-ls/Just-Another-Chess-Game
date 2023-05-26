@@ -25,9 +25,7 @@ class Interfaz_Partida {
 
 public:
 	Interfaz_Partida(std::function<void()>callback_cambio_graficos/*, std::function<void()>callback_click_tablero*/);
-	Interfaz_Partida(std::function<void()> callback_guia_juego) {
-		btn_guia_juego.register_on_click(callback_guia_juego);
-	};
+	Interfaz_Partida(std::function<void()> callback_guia_juego);
 	~Interfaz_Partida();
 	void dibuja();
 	void mouse(int button, int state, GLdouble x, GLdouble y);

@@ -89,6 +89,7 @@ void Mundo::mouse(int button, int state, int x, int y) {
 	case Mundo::juego:
 		gui_partida.mouse(button, state, posX, posY);
 		tablero.mouse(button, state, posX, posY);
+		guia_juego.mouse(button, state, posX, posY);
 		break;
 	case Mundo::fin_partida:
 		break;
@@ -113,6 +114,6 @@ void Mundo::callback_menu_prejuego(bool color_blanco) {
 	else estado = juego;
 }
 
-void Mundo::callback_guia_juego(bool guia) {
-
+void Mundo::callback_guia_juego() {
+	estado = pantalla_guia;
 }

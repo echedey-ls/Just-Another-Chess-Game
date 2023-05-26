@@ -23,19 +23,20 @@ public:
 		pantalla_inicio,
 		pantalla_seleccion_team,
 		juego,
-		fin_partida
+		fin_partida,
+		pantalla_guia
 	} estado;
 
 	// Callbacks para cambiar los estados desde los atributos
 	void callback_menu_inicio(bool jugar);
 	void callback_menu_prejuego(bool color_blanco);
-	void callback_guia_juego(bool guia);
+	void callback_guia_juego();
 
 	// Clases del juego
 	Menu_Inicio menu_inicio{ std::bind(&Mundo::callback_menu_inicio, this, std::placeholders::_1) };
 	Tablero tablero{ std::bind(&Interfaz_Partida::add_pieza, &gui_partida, std::placeholders::_1) };
 	Interfaz_Partida gui_partida{ std::bind(&Tablero::siguiente_estilo, &tablero) };
 	Menu_opciones_prejuego menu_opts_prejuego{ std::bind(&Mundo::callback_menu_prejuego, this, std::placeholders::_1) };
-	Pantalla_guia guia_juego{ std::bind(&Mundo::callback_guia_juego, this, std::placeholders::_1) };
+	Interfaz_Partida guia_juego{ std::bind(&Pantalla_guia::callback_guia_juego,this, std::placeholders::_1 };
 
 };
