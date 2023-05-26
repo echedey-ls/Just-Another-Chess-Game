@@ -8,71 +8,85 @@
 using namespace ETSIDI;
 
 void Pieza::ilustrar() {
-	 
-	sprite_ptr->draw();
+	// Dibuja según estilo del atributo
+	switch (estilo_actual)
+	{
+	case no_definido:
+		break;
+	case clasico:
+		sprite_ptr_cl->draw();
+		break;
+	case stars_wars:
+		sprite_ptr_sw->draw();
+		break;
+	default:
+		break;
+	}
+	
 }
 
 void Pieza::cambiar_estilo(Estilo_grafico estilo) {
-	// *elimina* y vuelve a cargar el sprite, con el nuevo tema gráfico (si es distinto del anterior)
-	// y actualiza el estilo de la instancia
-	if (estilo_actual != estilo) {
-		estilo_actual = estilo;
-		cargar_sprite();
-	}
+  // Actualiza el estilo como atributo
+	estilo_actual = estilo;
 }
 
 void Pieza::cargar_sprite() {
 	// Carga el sprite (aquí se obtiene el path a la imagen y se añade un "new" objeto sprite al puntero)
 	// Atención: revisar si había uno cargado ya
 
-	auto png_path = std::string("imagenes/");
+	auto png_path_cl = std::string("imagenes/");
+	auto png_path_sw = std::string("imagenes/");
 
 	// Prefijo estilo
-	if (estilo_actual == clasico or estilo_actual == no_definido) png_path += "c";
-	else if (estilo_actual == stars_wars) png_path += "sw";
-	png_path += "_";
+	png_path_cl += "c_";
+	png_path_sw += "sw_";
 
 	// Tipo pieza
 	switch (tipo)
 	{
 	case rey:
-		png_path += "rey";
+		png_path_cl += "rey";
+		png_path_sw += "rey";
 		break;
 	case reina:
-		png_path += "reina";
+		png_path_cl += "reina";
+		png_path_sw += "reina";
 		break;
 	case alfil:
-		png_path += "alfil";
+		png_path_cl += "alfil";
+		png_path_sw += "alfil";
 		break;
 	case torre:
-		png_path += "torre";
+		png_path_cl += "torre";
+		png_path_sw += "torre";
 		break;
 	case caballo:
-		png_path += "caballo";
+		png_path_cl += "caballo";
+		png_path_sw += "caballo";
 		break;
 	case peon:
-		png_path += "peon";
+		png_path_cl += "peon";
+		png_path_sw += "peon";
 		break;
 	case desconocido:
 	default:
-		png_path += "unknown";
+		png_path_cl += "unknown";
+		png_path_sw += "unknown";
 		break;
 	}
-	png_path += "_";
+	png_path_cl += "_";
+	png_path_sw += "_";
 
 	// Sufijo color
-	if (color == blanca) png_path += "b";
-	else if (color == negra) png_path += "n";
+	if (color == blanca) png_path_cl += "b", png_path_sw += "b";
+	else if (color == negra) png_path_cl += "n", png_path_sw += "n";
 
 	// Extension archivo
-	png_path += ".png";
+	png_path_cl += ".png";
+	png_path_sw += ".png";
 
-	// Si hay que actualizar sprite
-	if (sprite_ptr != nullptr) {
-		delete sprite_ptr; //BORRAR SPRITE ANTERIOR 
-	}
-
-	sprite_ptr = new ETSIDI::Sprite(png_path.c_str(), 0, 0, 8, 8);
+	sprite_ptr_cl = new ETSIDI::Sprite(png_path_cl.c_str(), 0, 0, 8, 8);
+	sprite_ptr_sw = new ETSIDI::Sprite(png_path_sw.c_str(), 0, 0, 8, 8);
 }
 
 

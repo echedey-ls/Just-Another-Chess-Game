@@ -12,13 +12,12 @@ protected:
 	Tipo tipo = desconocido; // Es redundante si se crean clases especializadas, pero lo usamos en esta para cargar gráficos homogéneamente
 	Estilo_grafico estilo_actual;
 
-	ETSIDI::Sprite* sprite_ptr = nullptr;
-
+	ETSIDI::Sprite* sprite_ptr_cl = nullptr, *sprite_ptr_sw = nullptr;
 
 public:
 	Pieza(Color c, Estilo_grafico s) : color{ c }, estilo_actual{ s } {};
 	Pieza(const Pieza& other) : color{ other.color }, estilo_actual{ other.estilo_actual } {};
-	virtual ~Pieza() { delete sprite_ptr; };
+	virtual ~Pieza() { delete sprite_ptr_cl; delete sprite_ptr_sw; };
 
 	/** No hay forma de cambiar el archivo que representa un sprite, así que para
 	* cambiarlo, habrá que eliminarlo y crearlo de nuevo.
