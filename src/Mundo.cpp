@@ -122,8 +122,14 @@ void Mundo::callback_menu_inicio(bool jugar) {
 }
 
 void Mundo::callback_menu_prejuego(bool color_blanco) {
-	if (color_blanco) estado = juego;
-	else estado = juego;
+	if (color_blanco) {
+		estado = juego;
+		ETSIDI::play("sonidos/Click.mp3");
+	}
+	else {
+		estado = juego;
+		ETSIDI::play("sonidos/Click.mp3");
+	}
 }
 
 void Mundo::callback_guia_juego() {
