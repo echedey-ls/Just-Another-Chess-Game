@@ -221,7 +221,28 @@ void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 			break;
 		}
 	}
+
+	//Implementando JAQUE
+	//Saber que estas en jaque --> si la pieza que acaba de ser movida por el oponente,
+	//							   en la jugada siguiente tiene la posicion actual del rey como casilla atacable
+	//Limitar movimiento --> Por lo tanto, en esta jugada solo puedo mover al rey a una casilla que no sea atacable
+	//						 por el oponente en el turno siguiente
+
+
 }
+
+Posicion Tablero::obtener_pos_rey(Color equipo) {
+	for (char x = 0; x < 8; ++x)
+		for (char y = 0; y < 8; ++y) {
+			Pieza* pza = casilla(x, y).getPieza();
+			if ((pza->get_tipo() == rey)&&(pza->get_color()==equipo))
+			{
+				Posicion pos_rey(x, y);
+				return pos_rey;
+			}
+		}
+}
+
 
 Pieza* Tablero::quitar_pieza(const Posicion& p)
 {
