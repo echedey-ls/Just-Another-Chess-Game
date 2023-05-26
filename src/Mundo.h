@@ -11,6 +11,9 @@ class Mundo {
 	float x_ojo = 0.f;
 	float y_ojo = 0.f;
 	float z_ojo = 0.f;
+
+	Jugador jBlancas{ blanca }, jNegras{ negra };
+
 public:
 	Mundo();
 	void inicializa();

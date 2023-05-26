@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Casilla.h" />
+    <ClInclude Include="src\Colores_tipos.h" />
     <ClInclude Include="src\Estado_casilla.h" />
     <ClInclude Include="src\Estilos_graficos.h" />
     <ClInclude Include="src\interfaz_usuario\BotonUI.h" />

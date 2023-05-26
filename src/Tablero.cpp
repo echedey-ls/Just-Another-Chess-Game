@@ -24,7 +24,7 @@
 
 
 Tablero::Tablero(std::function<void(Pieza*)> callback_pieza_eliminada_,
-	               std::function<void(Posicion, Posicion)> callback_ultimo_movimiento_)
+				 std::function<void(Posicion, Posicion)> callback_ultimo_movimiento_)
 	: callback_pieza_eliminada(callback_pieza_eliminada_), callback_ultimo_movimiento(callback_ultimo_movimiento_),
 	  estilo(clasico), situacion(NINGUNA_CLICKEADA)
 {
@@ -39,10 +39,6 @@ Tablero::~Tablero() {
 	// Eliminar resto de cosas manualmente
 }
 
-/**
-* Devuelve puntero a la pieza en determinada posicion
-* Si no hay, devuelve nullptr
-*/
 Estilo_grafico Tablero::siguiente_estilo() {
 	switch (estilo)
 	{
@@ -70,9 +66,14 @@ void Tablero::actualizar_estilo_piezas() {
 		}
 }
 
+/**
+* Devuelve puntero a la pieza en determinada posicion
+* Si no hay, devuelve nullptr
+*/
 inline
 Pieza* Tablero::obtener_pieza_en(const Posicion& p) {
-	return casilla(p).getPieza();
+	if (es_posicion_valida(p)) return casilla(p).getPieza();
+	else return nullptr;
 }
 
 void Tablero::inicializa() {
@@ -135,6 +136,10 @@ void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 	//Condiciones simplificables
 	if (pza_origin == nullptr or (origen == destino))
 		return;
+	// Es el turno de quien mueve
+	Color turno_color = j_turno_actual->get_color();
+	Color color_pza = pza_origin->get_color();
+	if (turno_color != color_pza) return;
 
 	// Actualizar último movimiento en la interfaz
 	callback_ultimo_movimiento(origen, destino);
@@ -143,7 +148,7 @@ void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 	// Posible enroque - requiere prioridad por las piezas quitadas
 	Rey* pza_as_rey = dynamic_cast<Rey*>(pza_origin);
 	if (mascara_calculos(destino) == disponible_enroque and rey) {
-		char y_row = (pza_origin->get_color() == blanca) ? 0 : 7;
+		char y_row = (color_pza == blanca) ? 0 : 7;
 		auto pza_as_rey = dynamic_cast<Rey*>(quitar_pieza({ 4, y_row })); // Rey
 		auto torre = dynamic_cast<Torre*>(quitar_pieza({ (destino.x < 4) ? 0 : 7, y_row })); // Torre
 		pza_as_rey->se_ha_movido = true;
@@ -179,6 +184,13 @@ void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 				Posicion comida_por_enpassant = { destino.x, origen.y };
 				pza_dest = quitar_pieza(comida_por_enpassant);
 			}
+			// Y hay que resetear si el ult. mov de los peones laterales fue paso doble
+			// Pues si no en el siguiente turno creerá que se los puede comer
+			for (char k = -1; k <= 1; k += 2) {
+				Peon* peoncito_lateral = dynamic_cast<Peon*>(obtener_pieza_en({ destino.x + k , destino.y }));
+				if (peoncito_lateral and peoncito_lateral->estado == Peon::movimiento_paso_doble)
+					peoncito_lateral->estado = Peon::se_ha_movido_normalmente;
+			}
 		}
 	}
 
@@ -199,26 +211,14 @@ void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 		callback_pieza_eliminada(pza_dest);
 		// El sonido de que se "coma" una pieza
 		ETSIDI::play("sonidos/Sonido_capture.mp3");
-	}
-	else {
-
+	} else {
 		// Si no va a "comer" una pieza, será un simple movimiento 
 		// Se le implementa otro sonido
-
 		//Se distingue entre el sonido del caballo, alfil, y el resto de piezas
-		//if (pza_origin) pza_origin->get_tipo();
-		
-		//Tipo tipo;
-		switch (pza_origin->get_tipo())
-		{
-		case caballo:
-			ETSIDI::play("sonidos/Sound_caballo.mp3");
-			break;
-		case alfil:
-			ETSIDI::play("sonidos/Sound_alfil.mp3");
-			break;
-		default:ETSIDI::play("sonidos/Sonido_move.mp3");
-			break;
+		switch (pza_origin->get_tipo()) {
+		case caballo: ETSIDI::play("sonidos/Sound_caballo.mp3"); break;
+		case alfil: ETSIDI::play("sonidos/Sound_alfil.mp3"); break;
+		default: ETSIDI::play("sonidos/Sonido_move.mp3"); break;
 		}
 	}
 
@@ -265,8 +265,7 @@ void Tablero::calculadora_movimientos_simple(const Posicion& p, Mascara_tablero&
 				Pieza* otra_pieza = obtener_pieza_en(a_revisar);
 				if ((j != 0) && (otra_pieza) and otra_pieza->get_color() != pza_p->get_color())
 					resultado(a_revisar) = atacable;
-				if ((j == 0) && (otra_pieza))
-					resultado(a_revisar) = no_movible;
+				if ((j == 0) && (otra_pieza)) continue;
 				if ((j == 0) && (!otra_pieza)) { // No hay pieza justo delante
 					resultado(a_revisar) = si_movible;
 					if (peon->estado == Peon::sin_moverse) { // Se puede primer movimiento de dos casillas
@@ -521,7 +520,6 @@ void Tablero::actualizar_casillas_desde_mascara(Mascara_tablero& msk) {
 		}
 }
 
-
 void Tablero::mouse(int button, int state, GLdouble x, GLdouble y) {
 	for (auto& casilla_fila : casillas)
 		for (auto& casilla : casilla_fila)
@@ -533,9 +531,10 @@ void Tablero::mouse(int button, int state, GLdouble x, GLdouble y) {
 
 void Tablero::clicks(Posicion position)
 {
-	switch (situacion)
-	{
+	switch (situacion) {
 	case NINGUNA_CLICKEADA: {
+		Pieza* pza_clicked = obtener_pieza_en(position);
+		if (pza_clicked and j_turno_actual->get_color() != pza_clicked->get_color()) return;
 		situacion = PRIMERA_CLICKEADA;
 		primer_clickeada = position;
 		calculadora_movimientos_completo(position, mascara_calculos);
@@ -544,19 +543,20 @@ void Tablero::clicks(Posicion position)
 
 	case PRIMERA_CLICKEADA: {
 		casilla(primer_clickeada).setSeleccionada(false);
-		if (mascara_calculos(position) == si_movible)
+		Disponibilidad_casilla disp_destino = mascara_calculos(position);
+		if (disp_destino == si_movible or disp_destino == disponible_enroque)
 		{
 			mover_pieza(primer_clickeada, position);
+			cambiar_turnos();
 		}
-		if (mascara_calculos(position) == atacable)
+		if (disp_destino == atacable or disp_destino == comible_en_passant)
 		{
 			mover_pieza(primer_clickeada, position);
-			if (turno_actual == &J1) J2.incremento_pzas_comidas();
-			if (turno_actual == &J2) J1.incremento_pzas_comidas();
+			j_turno_actual->incremento_pzas_comidas();
+			cambiar_turnos();
 		}
 		situacion = NINGUNA_CLICKEADA;
 		mascara_calculos.reset();
-		realizar_jugada();
 	} break;
 	}
 	actualizar_casillas_desde_mascara(mascara_calculos);
@@ -566,20 +566,5 @@ void Tablero::clicks(Posicion position)
 
 
 void Tablero::cambiar_turnos() {
-	if (turno_actual == &J1)
-		turno_actual = &J2;
-	else
-		turno_actual = &J2;
-
-	J1.cambiar_turno();
-	J1.cambiar_turno();
-}
-
-void Tablero::realizar_jugada() {
-
-	if (jugada_hecha == true)
-	{
-		cambiar_turnos();
-		jugada_hecha = false;
-	}
+	std::swap(j_turno_actual, j_sin_turno);
 }
