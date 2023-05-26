@@ -1,13 +1,8 @@
 #include "Interfaz_Partida.h"
 
 
-Interfaz_Partida::Interfaz_Partida(std::function<void()>callback_cambio_graficos/*, std::function<void()>callback_click_tablero*/) {
+Interfaz_Partida::Interfaz_Partida(std::function<void()>callback_cambio_graficos, std::function<void()>callback_guia_juego) {
 	btn_cambio_graficos.register_on_click(callback_cambio_graficos);
-	//tablero_click.register_on_click(callback_click_tablero);
-	
-}
-
-Interfaz_Partida::Interfaz_Partida(std::function<void()> callback_guia_juego) {
 	btn_guia_juego.register_on_click(callback_guia_juego);
 }
 

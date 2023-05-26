@@ -24,10 +24,10 @@ class Interfaz_Partida {
 	Posicion original{ 0,0 }, destino{0,0};
 
 public:
-	Interfaz_Partida(std::function<void()>callback_cambio_graficos/*, std::function<void()>callback_click_tablero*/);
-	Interfaz_Partida(std::function<void()> callback_guia_juego);
+	Interfaz_Partida(std::function<void()>callback_cambio_graficos, std::function<void()>callback_guia_juego);
 	~Interfaz_Partida();
 	void dibuja();
+	void dibuja_guia();
 	void mouse(int button, int state, GLdouble x, GLdouble y);
 	void dibujarPiezas();
 	void add_pieza(Pieza* p_pieza);

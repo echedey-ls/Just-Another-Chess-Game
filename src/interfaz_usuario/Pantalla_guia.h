@@ -4,17 +4,10 @@
 
 #include "freeglut.h"
 
-#include <functional>
-#include <vector>
-
 class Pantalla_guia
 {
 public:
 	
 	void dibuja();
-	void mouse(int button, int state, GLdouble x, GLdouble y);
-
-	void callback_guia_juego();
-
 };
 
