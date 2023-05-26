@@ -39,4 +39,5 @@ public:
 	Tipo get_tipo() const { return tipo; };
 	void ilustrar(); // En función del tipo, color y estilo_actual
 
+	Estilo_grafico get_estilo() const { return estilo_actual; };
 };

@@ -178,7 +178,15 @@ void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 			if (!pza_dest) { // Solo pasa que no se come pieza a donde mueve si es mov. en passant
 				Posicion comida_por_enpassant = { destino.x, origen.y };
 				pza_dest = quitar_pieza(comida_por_enpassant);
+
 			}
+		}
+		//El promoción en el ajedrez
+		//Pieza* pieza_as_peon = casilla(destino).getPieza();
+		if (destino.y == (pza_as_peon->get_color() == blanca ? 7 : 0)) {
+			pza_origin = new Reina(pza_as_peon->get_color(), pza_as_peon->get_estilo());
+			casilla(destino).setPieza(pza_origin);
+			delete pza_as_peon;
 		}
 	}
 
@@ -546,7 +554,7 @@ void Tablero::clicks(Posicion position)
 		casilla(primer_clickeada).setSeleccionada(false);
 		if (mascara_calculos(position) == si_movible)
 		{
-			mover_pieza(primer_clickeada, position);
+			mover_pieza(primer_clickeada, position); 
 		}
 		if (mascara_calculos(position) == atacable)
 		{
