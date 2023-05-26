@@ -37,6 +37,11 @@ void Menu_opciones_prejuego::mouse(int button, int state, double x, double y) {
 	if (estado == NO_VISIBLE) return;
 	btn_blancas.mouse(button, state, x, y);
 	btn_negras.mouse(button, state, x, y);
-	if (btn_blancas.is_hovered()) estado = HIGHLIGHT_BLANCAS;
-	else if (btn_negras.is_hovered()) estado = HIGHLIGHT_NEGRAS;
+	if (btn_blancas.is_hovered()) {
+		estado = HIGHLIGHT_BLANCAS;
+		
+	}
+	else if (btn_negras.is_hovered()) {
+		estado = HIGHLIGHT_NEGRAS;
+	}
 }
