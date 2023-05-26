@@ -15,8 +15,8 @@ void Interfaz_Partida::dibuja() {
 
 
 	glPushMatrix();
-	glTranslatef(-30.0f, 12.0f, 1.f);
-	glScalef(0.02f, 0.02f, 1);
+	glTranslatef(-18.0f, 27.0f, 1.f);
+	glScalef(0.016f, 0.016f, 1);
 	
 	/*unsigned char*text = (unsigned char*)"ULTIMOS\nMOVIMIENTOS\n";
 	std::string vectorText =  std::to_string(Posicion.x) + "-> " + std::to_string(Posicion.y);

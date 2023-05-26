@@ -183,6 +183,7 @@ void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 			if (!pza_dest) { // Solo pasa que no se come pieza a donde mueve si es mov. en passant
 				Posicion comida_por_enpassant = { destino.x, origen.y };
 				pza_dest = quitar_pieza(comida_por_enpassant);
+
 			}
 			// Y hay que resetear si el ult. mov de los peones laterales fue paso doble
 			// Pues si no en el siguiente turno creerá que se los puede comer
@@ -191,6 +192,13 @@ void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 				if (peoncito_lateral and peoncito_lateral->estado == Peon::movimiento_paso_doble)
 					peoncito_lateral->estado = Peon::se_ha_movido_normalmente;
 			}
+		}
+		//El promoción en el ajedrez
+		//Pieza* pieza_as_peon = casilla(destino).getPieza();
+		if (destino.y == (pza_as_peon->get_color() == blanca ? 7 : 0)) {
+			pza_origin = new Reina(pza_as_peon->get_color(), pza_as_peon->get_estilo());
+			casilla(destino).setPieza(pza_origin);
+			delete pza_as_peon;
 		}
 	}
 

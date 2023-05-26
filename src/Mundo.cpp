@@ -50,7 +50,7 @@ void Mundo::dibuja()
 }
 
 void Mundo::mouse(int button, int state, int x, int y) {
-	// Usamos gluUnProject para trabajar con coordenadas del mundo en vez de gráficas
+	// Usamos gluUnProject para trabajar con coordenadas del mundo en vez de grï¿½ficas
 	// Copia sin remordimientos de http://nehe.gamedev.net/article/using_gluunproject/16013/index.html
 	GLint viewport[4];
 	GLdouble modelview[16];
@@ -65,7 +65,7 @@ void Mundo::mouse(int button, int state, int x, int y) {
 	winX = (float)x;
 	winY = (float)viewport[3] - (float)y;
 	// Queremos la coordenada del plano con z = 0.0
-	// Así que obviamos obtener la profundidad de renderizado, y dejamos la que nos devolvería
+	// Asï¿½ que obviamos obtener la profundidad de renderizado, y dejamos la que nos devolverï¿½a
 	//glReadPixels(x, int(winY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &winZ);
 	gluUnProject(winX, winY, 1.0, modelview, projection, viewport, &posX, &posY, &posZ);
 
@@ -112,9 +112,14 @@ void Mundo::callback_menu_inicio(bool jugar) {
 }
 
 void Mundo::callback_menu_prejuego(bool color_blanco) {
-	if (color_blanco) tablero.set_jugadores(jBlancas, jNegras, blanca);
-	else tablero.set_jugadores(jBlancas, jNegras, negra);;
-	estado = juego;
+	if (color_blanco) {
+		estado = juego;
+		ETSIDI::play("sonidos/Click.mp3");
+	}
+	else {
+		estado = juego;
+		ETSIDI::play("sonidos/Click.mp3");
+	}
 }
 
 void Mundo::callback_guia_juego() {
