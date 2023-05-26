@@ -38,7 +38,9 @@ void Mundo::dibuja()
 	case Mundo::juego:
 		tablero.dibuja();
 		gui_partida.dibuja();
-		//gui_partida.dibuja_guia();
+		break;
+	case Mundo::pantalla_guia:
+		gui_partida.dibuja_guia();
 		break;
 	case Mundo::fin_partida:
 		break;
