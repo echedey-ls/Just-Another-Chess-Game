@@ -126,8 +126,10 @@ void Tablero::dibuja()
 }
 
 void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
-
 	Pieza* pza_origin = obtener_pieza_en(origen);  // La que estamos moviendo
+	//Condiciones simplificables
+	if (pza_origin == nullptr or (origen == destino))
+		return;
 
 	/** Casos especiales **/
 	// Posible enroque - requiere prioridad por las piezas quitadas
@@ -153,13 +155,11 @@ void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 
 	/** Estos casos solo mueven una ficha y pudieran eliminar otra, así que quitamos las fichas **/
 	pza_origin = quitar_pieza(origen);  // La que estamos moviendo
+	if (!pza_origin) return; // Este check se podría obviar
 	Pieza* pza_dest = quitar_pieza(destino);  // Pieza destino a eliminar
 
 	// Posible en passant
-	Pieza* pza_origin = quitar_pieza(origen);  // La que estamos moviendo
-	//Condiciones simplificables
-	if (pza_origin == nullptr or (origen == destino))
-		return;
+	
 	// Será peon?
 	Peon* pza_as_peon = dynamic_cast<Peon*>(pza_origin);
 
@@ -174,12 +174,21 @@ void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 		}
 	}
 
-	// Caso generico que excluye el enroque, la unica jugada que mueve dos fichas
+	if (pza_origin) {
+		casilla(destino).setPieza(pza_origin);
+		switch (pza_origin->get_tipo()) {
+		case torre:
+			dynamic_cast<Torre*>(pza_origin)->se_ha_movido = true;
+			break;
+		case rey:
+			dynamic_cast<Rey*>(pza_origin)->se_ha_movido = true;
+			break;
+		}
+	}
 
+	// Caso generico que excluye el enroque, la unica jugada que mueve dos fichas
 	if (pza_dest) {
-		
 		callback_pieza_eliminada(pza_dest);
-		
 		// El sonido de que se "coma" una pieza
 		ETSIDI::play("sonidos/Sonido_capture.mp3");
 	}
@@ -201,24 +210,6 @@ void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 			ETSIDI::play("sonidos/Sound_alfil.mp3");
 			break;
 		default:ETSIDI::play("sonidos/Sonido_move.mp3");
-			break;
-		}
-	}
-	
-	// pza_origin->get_tipo();
-	// tipo es lo que te dice qué tipo de pieza es
-	// con un switch case, NO OLVIDAR EL BREAK
-
-
-	if (pza_dest) callback_pieza_eliminada(pza_dest);
-	if (pza_origin) {
-		casilla(destino).setPieza(pza_origin);
-		switch (pza_origin->get_tipo()) {
-		case peon:
-			dynamic_cast<Torre*>(pza_origin)->se_ha_movido = true;
-			break;
-		case rey:
-			dynamic_cast<Rey*>(pza_origin)->se_ha_movido = true;
 			break;
 		}
 	}
