@@ -38,6 +38,7 @@ void Mundo::dibuja()
 	case Mundo::juego:
 		tablero.dibuja();
 		gui_partida.dibuja();
+		guia_juego.dibuja(); //necesario??
 		break;
 	case Mundo::fin_partida:
 		break;
