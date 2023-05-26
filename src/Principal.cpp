@@ -5,6 +5,8 @@
 #include "ETSIDI.h"
 #include "Posicion.h"
 
+static constexpr int init_width = 1200, init_height = 700;
+
 Mundo mundo;
 bool mouse_si_no = false;
 
@@ -25,7 +27,7 @@ void initGL() {
 	glMatrixMode(GL_PROJECTION);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClearDepth(1.0f);
-	gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
+	gluPerspective(40.0, static_cast<float>(init_width) / init_height, 0.1, 150);
 	glDepthFunc(GL_LEQUAL);    // Set the type of depth-test
 	glShadeModel(GL_SMOOTH);   // Enable smooth shading
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);  // Nice perspective corrections
@@ -36,7 +38,7 @@ int main(int argc, char* argv[])
 	//Inicializar el gestor de ventanas GLUT
 	//y crear la ventana
 	glutInit(&argc, argv);
-	glutInitWindowSize(800, 600);
+	glutInitWindowSize(init_width, init_height);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutCreateWindow("Just Another Chess Game");
 
