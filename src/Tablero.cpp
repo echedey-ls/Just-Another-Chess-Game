@@ -176,6 +176,13 @@ void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 				Posicion comida_por_enpassant = { destino.x, origen.y };
 				pza_dest = quitar_pieza(comida_por_enpassant);
 			}
+			// Y hay que resetear si el ult. mov de los peones laterales fue paso doble
+			// Pues si no en el siguiente turno creerá que se los puede comer
+			for (char k = -1; k <= 1; k += 2) {
+				Peon* peoncito_lateral = dynamic_cast<Peon*>(obtener_pieza_en({ destino.x + k , destino.y }));
+				if (peoncito_lateral and peoncito_lateral->estado == Peon::movimiento_paso_doble)
+					peoncito_lateral->estado = Peon::se_ha_movido_normalmente;
+			}
 		}
 	}
 
