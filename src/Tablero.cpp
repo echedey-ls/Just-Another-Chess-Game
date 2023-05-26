@@ -127,6 +127,9 @@ void Tablero::dibuja()
 
 void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 	Pieza* pza_origin = quitar_pieza(origen);  // La que estamos moviendo
+	//Condiciones simplificables
+	if (pza_origin == nullptr or (origen == destino))
+		return;
 	// Será peon?
 	Peon* pza_as_peon = dynamic_cast<Peon*>(pza_origin);
 	// Pieza destino a eliminar
@@ -142,7 +145,40 @@ void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 			}
 		}
 	}
-	if (pza_dest) callback_pieza_eliminada(pza_dest);
+	if (pza_dest) {
+		
+		callback_pieza_eliminada(pza_dest);
+		
+		// El sonido de que se "coma" una pieza
+		ETSIDI::play("sonidos/Sonido_capture.mp3");
+	}
+	else {
+
+		// Si no va a "comer" una pieza, será un simple movimiento 
+		// Se le implementa otro sonido
+
+		//Se distingue entre el sonido del caballo, alfil, y el resto de piezas
+		//if (pza_origin) pza_origin->get_tipo();
+		
+		//Tipo tipo;
+		switch (pza_origin->get_tipo())
+		{
+		case caballo:
+			ETSIDI::play("sonidos/Sound_caballo.mp3");
+			break;
+		case alfil:
+			ETSIDI::play("sonidos/Sound_alfil.mp3");
+			break;
+		default:ETSIDI::play("sonidos/Sonido_move.mp3");
+			break;
+		}
+	}
+	
+	// pza_origin->get_tipo();
+	// tipo es lo que te dice qué tipo de pieza es
+	// con un switch case, NO OLVIDAR EL BREAK
+
+	if (pza_origin) casilla(destino).setPieza(pza_origin);
 	if (pza_origin) casilla(destino).setPieza(pza_origin);
 }
 
