@@ -88,10 +88,8 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 	//poner aqui el código de teclado
 
 	if (key == '1')
-		ETSIDI::play("sonidos/Bala.mp3");
-	if (key == '2')
 		ETSIDI::playMusica("sonidos/JasonMraz93Milles.mp3");
-	if (key == '3')
+	if (key == '2')
 		ETSIDI::stopMusica();
 
 	if (key == 'e')
