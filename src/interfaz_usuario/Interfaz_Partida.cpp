@@ -1,10 +1,9 @@
 #include "Interfaz_Partida.h"
 
 
-Interfaz_Partida::Interfaz_Partida(std::function<void()>callback_cambio_graficos/*, std::function<void()>callback_click_tablero*/) {
-	btn_cambio_graficos.register_on_click(callback_cambio_graficos);
-	//tablero_click.register_on_click(callback_click_tablero);
-	
+Interfaz_Partida::Interfaz_Partida(std::function<Estilo_grafico()>callback_cambio_graficos/*, std::function<void()>callback_click_tablero*/) {
+	callback_cambio_graficos_tablero = callback_cambio_graficos;
+	btn_cambio_graficos.register_on_click(std::bind(&Interfaz_Partida::callback_local_cambio_grafico, this));
 }
 
 void Interfaz_Partida::dibuja() {
@@ -15,6 +14,16 @@ void Interfaz_Partida::dibuja() {
 void Interfaz_Partida::mouse(int button, int state, GLdouble x, GLdouble y) {
 	btn_cambio_graficos.mouse(button, state, x, y);
 	//tablero_click.mouse(button, state, x, y);
+}
+
+void Interfaz_Partida::callback_local_cambio_grafico() {
+	Estilo_grafico estilo = callback_cambio_graficos_tablero();
+	for (auto& pieza : piezas_blancas) {
+		pieza->cambiar_estilo(estilo);
+	}
+	for (auto& pieza : piezas_negras) {
+		pieza->cambiar_estilo(estilo);
+	}
 }
 
 void Interfaz_Partida::dibujarPiezas() {

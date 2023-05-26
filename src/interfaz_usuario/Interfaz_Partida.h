@@ -19,13 +19,17 @@ class Interfaz_Partida {
 
 	Posicion original{ 0,0 }, destino{0,0};
 
+	std::function<Estilo_grafico()> callback_cambio_graficos_tablero = nullptr;
+
 public:
-	Interfaz_Partida(std::function<void()>callback_cambio_graficos/*, std::function<void()>callback_click_tablero*/);
+	Interfaz_Partida(std::function<Estilo_grafico()>callback_cambio_graficos/*, std::function<void()>callback_click_tablero*/);
 	~Interfaz_Partida();
 	void dibuja();
 	void mouse(int button, int state, GLdouble x, GLdouble y);
 	void dibujarPiezas();
 	void add_pieza(Pieza* p_pieza);
+
+	void callback_local_cambio_grafico();
 
 	void ultimos_movimientos(Posicion, Posicion);
 };
