@@ -12,7 +12,7 @@ void Interfaz_Partida::dibuja() {
 
 
 	glPushMatrix();
-	glTranslatef(-30.0f, 22.0f, 1.f);
+	glTranslatef(-30.0f, 12.0f, 1.f);
 	glScalef(0.02f, 0.02f, 1);
 	
 	/*unsigned char*text = (unsigned char*)"ULTIMOS\nMOVIMIENTOS\n";
@@ -24,7 +24,10 @@ void Interfaz_Partida::dibuja() {
 
 	std::ostringstream oss;
 	oss << "EL ULTIMO\nMOVIMIENTO\n\n";
-	oss << convertirCoordenadasAMatriz(original.x, original.y) << " -> " << convertirCoordenadasAMatriz(destino.x,destino.y);
+	if (original == destino) {
+		oss <<"   ";
+	}
+	else oss << convertirCoordenadasAMatriz(original.x, original.y) << " -> " << convertirCoordenadasAMatriz(destino.x,destino.y);
 	std::string text = oss.str();
 
 	unsigned char* c = reinterpret_cast<unsigned char*>(const_cast<char*>(text.c_str()));

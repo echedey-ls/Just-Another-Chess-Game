@@ -20,7 +20,7 @@ class Interfaz_Partida {
 	std::vector<Pieza*> piezas_blancas;
 	std::vector<Pieza*> piezas_negras;
 
-	Posicion original{ 0,0 }, destino{0,0};
+	Posicion original{ -1,-1 }, destino{-1,-1};
 
 	std::function<Estilo_grafico()> callback_cambio_graficos_tablero = nullptr;
 
