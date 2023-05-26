@@ -90,10 +90,10 @@
     <Image Include="bin\imagenes\c_rey_n.png" />
     <Image Include="bin\imagenes\c_torre_b.png" />
     <Image Include="bin\imagenes\c_torre_n.png" />
-    <Image Include="bin\imagenes\jugar.png" />
-    <Image Include="bin\imagenes\Logo.png" />
-    <Image Include="bin\imagenes\pantalla_inicio.png" />
-    <Image Include="bin\imagenes\salir.png" />
+    <Image Include="bin\imagenes\menu_inicio\jugar.png" />
+    <Image Include="bin\imagenes\menu_inicio\Logo.png" />
+    <Image Include="bin\imagenes\menu_inicio\pantalla_inicio.png" />
+    <Image Include="bin\imagenes\menu_inicio\salir.png" />
     <Image Include="bin\imagenes\sw_alfil_b.png" />
     <Image Include="bin\imagenes\sw_alfil_n.png" />
     <Image Include="bin\imagenes\sw_caballo_b.png" />
