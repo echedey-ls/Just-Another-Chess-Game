@@ -219,7 +219,8 @@ void Tablero::calculadora_movimientos_simple(const Posicion& p, Mascara_tablero&
 			if (es_posicion_valida(a_revisar)) {
 				Pieza* otra_pieza = obtener_pieza_en(a_revisar);
 				Peon* otra_pieza_as_peon = dynamic_cast<Peon*>(otra_pieza);
-				if (otra_pieza_as_peon and otra_pieza_as_peon->estado == Peon::movimiento_paso_doble) {
+				if (otra_pieza_as_peon and otra_pieza_as_peon->get_color() != pza_p->get_color()
+					  and otra_pieza_as_peon->estado == Peon::movimiento_paso_doble) {
 					resultado(a_revisar) = atacable;
 					resultado(a_revisar.x, a_revisar.y + (pza_p->get_color() == blanca ? 1 : -1) ) = comible_en_passant;
 				}
