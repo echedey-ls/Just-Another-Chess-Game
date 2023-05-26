@@ -105,3 +105,7 @@ void Mundo::callback_menu_prejuego(bool color_blanco) {
 	if (color_blanco) estado = juego;
 	else estado = juego;
 }
+
+void Mundo::callback_guia_juego(bool guia) {
+
+}
