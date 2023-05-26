@@ -34,6 +34,16 @@ void Mundo::dibuja()
 		break;
 	case Mundo::pantalla_seleccion_team:
 		menu_opts_prejuego.dibuja();
+		if (Menu_opciones_prejuego::Estado::HIGHLIGHT_BLANCAS) {
+			int c1 = 0;
+			int c2 = 1;
+			tablero.set_color_jugadores(c1, c2);
+		}
+		if (Menu_opciones_prejuego::Estado::HIGHLIGHT_NEGRAS) {
+			int c1 = 1;
+			int c2 = 0;
+			tablero.set_color_jugadores(c1, c2);
+		}
 		break;
 	case Mundo::juego:
 		tablero.dibuja();

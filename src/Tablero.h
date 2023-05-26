@@ -6,6 +6,7 @@
 
 #include <functional>
 #include "ETSIDI.h"
+#include"Jugador.h"
 using namespace ETSIDI;
 
 class Tablero
@@ -26,6 +27,10 @@ class Tablero
 	Posicion primer_clickeada{ 0,0 };
 
 	std::function<void(Pieza*)> callback_pieza_eliminada = nullptr;
+
+	Jugador J1, J2;
+	Jugador* turno_actual;
+	bool jugada_hecha;
 
 public:
 	Tablero(std::function<void(Pieza*)> callback_pieza_eliminada_); // Inicializa tablero con sus piezas distribuidas en un juego normal
@@ -62,6 +67,12 @@ public:
 	
 	//Gestión de clicks en función de la Posición que estás
 	void clicks(Posicion);
+	void cambiar_turnos();
+	void realizar_jugada();
+	void set_color_jugadores(int c1, int c2) {
+		J1.set_color(c1);
+		J2.set_color(c2);
+	}
 };
 
 

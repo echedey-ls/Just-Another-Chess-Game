@@ -27,6 +27,7 @@
     <ClCompile Include="src\interfaz_usuario\Letras_tablero.cpp" />
     <ClCompile Include="src\interfaz_usuario\Menu_Inicio.cpp" />
     <ClCompile Include="src\interfaz_usuario\Menu_opciones_prejuego.cpp" />
+    <ClCompile Include="src\Jugador.cpp" />
     <ClCompile Include="src\Mascara_tablero.cpp" />
     <ClCompile Include="src\Mundo.cpp" />
     <ClCompile Include="src\interfaz_usuario\Pantalla_guia.cpp" />
@@ -51,6 +52,7 @@
     <ClInclude Include="src\interfaz_usuario\Letras_tablero.h" />
     <ClInclude Include="src\interfaz_usuario\Menu_Inicio.h" />
     <ClInclude Include="src\interfaz_usuario\Menu_opciones_prejuego.h" />
+    <ClInclude Include="src\Jugador.h" />
     <ClInclude Include="src\Mascara_tablero.h" />
     <ClInclude Include="src\Mundo.h" />
     <ClInclude Include="src\interfaz_usuario\Pantalla_guia.h" />
