@@ -22,9 +22,9 @@ void Interfaz_Partida::dibuja_guia() {
 	for (int i = 1; i <= 5; i++) {
 		if (i == 1) r = 0, g = 255, b = 0;
 		else if (i == 2)r = 255;
-		else if (i == 3)g = 0;
-		else if (i == 4)g = 102, b = 255;
-		else r = 0, g = 92, b = 230;
+		else if (i == 3)g = 102, b = 255;
+		else if (i == 4)r = 0, g = 92, b = 230;
+		else r = 51, g = 153, b = 102; 
 		glColor3ub(r, g, b);
 		glBegin(GL_QUADS);
 		glVertex2f(0.0f, y_l - d);
