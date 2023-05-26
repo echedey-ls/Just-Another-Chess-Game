@@ -1,5 +1,5 @@
 #include "Interfaz_Partida.h"
-
+#include <sstream>
 
 Interfaz_Partida::Interfaz_Partida(std::function<Estilo_grafico()>callback_cambio_graficos/*, std::function<void()>callback_click_tablero*/) {
 	callback_cambio_graficos_tablero = callback_cambio_graficos;
@@ -9,6 +9,29 @@ Interfaz_Partida::Interfaz_Partida(std::function<Estilo_grafico()>callback_cambi
 void Interfaz_Partida::dibuja() {
 	btn_cambio_graficos.ilustra();
 	dibujarPiezas();
+
+
+	glPushMatrix();
+	glTranslatef(-30.0f, 22.0f, 1.f);
+	glScalef(0.02f, 0.02f, 1);
+	
+	/*unsigned char*text = (unsigned char*)"ULTIMOS\nMOVIMIENTOS\n";
+	std::string vectorText =  std::to_string(Posicion.x) + "-> " + std::to_string(Posicion.y);
+	text += vectorText;
+
+	unsigned char* c = reinterpret_cast<unsigned char*>(const_cast<char*>(text.c_str()));
+	glutStrokeString(GLUT_STROKE_ROMAN, text); */
+
+	std::ostringstream oss;
+	oss << "EL ULTIMO\nMOVIMIENTO\n\n";
+	oss << convertirCoordenadasAMatriz(original.x, original.y) << " -> " << convertirCoordenadasAMatriz(destino.x,destino.y);
+	std::string text = oss.str();
+
+	unsigned char* c = reinterpret_cast<unsigned char*>(const_cast<char*>(text.c_str()));
+	glutStrokeString(GLUT_STROKE_ROMAN, c);
+
+
+	glPopMatrix();
 }
 
 void Interfaz_Partida::mouse(int button, int state, GLdouble x, GLdouble y) {
@@ -86,5 +109,11 @@ Interfaz_Partida::~Interfaz_Partida() {
 	for (auto p : piezas_negras) {
 		delete p;
 	}
+}
+
+void Interfaz_Partida::ultimos_movimientos(Posicion o, Posicion d) {
+	//o: origen        d:destino
+	original = o;
+	destino = d;
 }
 
