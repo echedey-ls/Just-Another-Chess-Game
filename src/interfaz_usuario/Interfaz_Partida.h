@@ -32,8 +32,8 @@ public:
 	void add_pieza(Pieza* p_pieza);
 
 	//es como get_posicion, obtiene el valor del dominio privado
-	//void ultimos_movimientos(Posicion, Posicion);
-	void ultimos_movimientos(Posicion);
+	void ultimos_movimientos(Posicion orgn, Posicion dest);
+	//void ultimos_movimientos(Posicion);
 	//void ultimos_movimientoss(Posicion);
 
 	//

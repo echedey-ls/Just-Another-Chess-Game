@@ -22,8 +22,10 @@
 */
 
 
-Tablero::Tablero(std::function<void(Pieza*)> callback_pieza_eliminada_)
-	: callback_pieza_eliminada(callback_pieza_eliminada_), estilo(clasico), situacion(NINGUNA_CLICKEADA)
+Tablero::Tablero(std::function<void(Pieza*)> callback_pieza_eliminada_,
+	               std::function<void(Posicion, Posicion)> callback_ultimo_movimiento_)
+	: callback_pieza_eliminada(callback_pieza_eliminada_), callback_ultimo_movimiento(callback_ultimo_movimiento_),
+	  estilo(clasico), situacion(NINGUNA_CLICKEADA)
 {
 	inicializa();
 	for (auto& casilla_fila : casillas)
@@ -132,6 +134,9 @@ void Tablero::mover_pieza(const Posicion& origen, const Posicion& destino) {
 	//Condiciones simplificables
 	if (pza_origin == nullptr or (origen == destino))
 		return;
+
+	// Actualizar último movimiento en la interfaz
+	callback_ultimo_movimiento(origen, destino);
 
 	/** Casos especiales **/
 	// Posible enroque - requiere prioridad por las piezas quitadas

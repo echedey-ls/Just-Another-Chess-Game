@@ -26,7 +26,7 @@ void Interfaz_Partida::dibuja() {
 
 	std::ostringstream oss;
 	oss << "ULTIMOS\nMOVIMIENTOS\n\n";
-	oss << convertirCoordenadasAMatriz(3,4) << " -> " << convertirCoordenadasAMatriz(5,1);
+	oss << convertirCoordenadasAMatriz(original.x,original.y) << " -> " << convertirCoordenadasAMatriz(5,1);
 	std::string text = oss.str();
 
 	unsigned char* c = reinterpret_cast<unsigned char*>(const_cast<char*>(text.c_str()));
@@ -105,16 +105,16 @@ Interfaz_Partida::~Interfaz_Partida() {
 	}
 }
 
-/*void Interfaz_Partida::ultimos_movimientos(Posicion o, Posicion d) {
+void Interfaz_Partida::ultimos_movimientos(Posicion o, Posicion d) {
 	//o: origen        d:destino
 	original = o;
 	destino = d;
-}*/
+}
 
-void Interfaz_Partida::ultimos_movimientos(Posicion o) {
+/*void Interfaz_Partida::ultimos_movimientos(Posicion o) {
 	//o: origen
 	original = o;
-}
+}*/
 
 /*void Interfaz_Partida::ultimos_movimientos(Posicion o) {
 	original = o;
